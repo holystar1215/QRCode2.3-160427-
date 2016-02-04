@@ -13,7 +13,6 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
 
 @interface CLoginViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *contentTableView;
-@property (nonatomic, strong) NSArray *itemsArray;
 
 @end
 
@@ -22,7 +21,8 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.itemsArray = @[@"", @"", @""];
+    
+    [self.contentTableView registerNib:[UINib nibWithNibName:@"CLoginViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -45,14 +45,29 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.itemsArray count];
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CLoginViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     
     // Configure the cell...
-    cell.imageView.image = [UIImage imageNamed:self.itemsArray[indexPath.row]];
+    switch (indexPath.row) {
+        case 0: {
+            cell.textField
+            break;
+        }
+        case 1: {
+            cell.textField.placeholder = @"用户";
+            break;
+        }
+        case 2: {
+            break;
+        }
+        default:
+            break;
+    }
+    cell.textField.placeholder
     
     return cell;
 }

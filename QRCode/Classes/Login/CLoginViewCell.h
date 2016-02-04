@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface CLoginViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property (weak, nonatomic) IBOutlet UIImageView *imgView;
+@property (weak, nonatomic) IBOutlet UIView *lineView;
 
 @end
