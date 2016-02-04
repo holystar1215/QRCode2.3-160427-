@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>dbVersion</key>
+	<string>1</string>
+	<key>dbFileName</key>
+	<string>QRCode.sqlite</string>
+	<key>serverUrl</key>
+	<string>http://xxx/App</string>
+	<key>fontName</key>
+	<string>Avenir Next</string>
+</dict>
+</plist>
