@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "CLoginViewController.h"
 #import "CHomeViewController.h"
 #import "DSNavigationBar.h"
 
@@ -23,8 +24,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
 
-//    [self setupSignInViewController];
-    [self setupHomeViewController];
+    [self setupSignInViewController];
     
     return YES;
 }
@@ -53,7 +53,9 @@
 
 #pragma mark - Setup ViewController Method
 - (void)setupSignInViewController {
-    
+    CLoginViewController *loginViewController = [[CLoginViewController alloc] initWithNibName:@"CLoginViewController" bundle:nil];
+    self.window.rootViewController = loginViewController;
+    [self.window makeKeyAndVisible];
 }
 
 - (void)setupHomeViewController {

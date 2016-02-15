@@ -3,10 +3,12 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CLoginViewController">
             <connections>
+                <outlet property="contentTableView" destination="kgR-ab-DuE" id="MVQ-aw-80E"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,25 +17,62 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q06-3Q-snb">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_background" translatesAutoresizingMaskIntoConstraints="NO" id="Q06-3Q-snb">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </imageView>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kgR-ab-DuE">
-                    <rect key="frame" x="0.0" y="236" width="600" height="132"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kgR-ab-DuE">
+                    <rect key="frame" x="18" y="240" width="563" height="132"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="132" id="Km2-gU-GkH"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="6Wl-9e-1FH"/>
+                        <outlet property="delegate" destination="-1" id="CPg-qp-6F8"/>
+                    </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jDH-1W-8Vy">
-                    <rect key="frame" x="18" y="428" width="46" height="30"/>
-                    <state key="normal" title="Button"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jDH-1W-8Vy">
+                    <rect key="frame" x="18" y="384" width="563" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="IXW-uR-A05"/>
+                    </constraints>
+                    <state key="normal" title="记住密码" image="unselected_image"/>
+                    <state key="selected" image="selected_image"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FM6-8i-ct4">
+                    <rect key="frame" x="18" y="421" width="563" height="46"/>
+                    <color key="backgroundColor" red="0.042359190179672934" green="0.81173124917709016" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="46" id="qYY-md-NS1"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                    <state key="normal" title="登  录">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Q06-3Q-snb" secondAttribute="trailing" id="3ui-4q-8FH"/>
+                <constraint firstItem="jDH-1W-8Vy" firstAttribute="top" secondItem="kgR-ab-DuE" secondAttribute="bottom" constant="12" id="Bcm-RP-Gyv"/>
+                <constraint firstItem="FM6-8i-ct4" firstAttribute="top" secondItem="jDH-1W-8Vy" secondAttribute="bottom" constant="15" id="Gij-97-4zh"/>
+                <constraint firstItem="jDH-1W-8Vy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="18" id="Iza-ec-U5V"/>
+                <constraint firstItem="kgR-ab-DuE" firstAttribute="top" secondItem="Q06-3Q-snb" secondAttribute="centerY" multiplier="0.8" id="Kt4-ts-oIf"/>
+                <constraint firstItem="kgR-ab-DuE" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="MyK-Uc-nYh"/>
                 <constraint firstAttribute="bottom" secondItem="Q06-3Q-snb" secondAttribute="bottom" id="ONN-nO-lLq"/>
                 <constraint firstItem="Q06-3Q-snb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ORB-RT-Ygw"/>
+                <constraint firstAttribute="trailing" secondItem="kgR-ab-DuE" secondAttribute="trailing" constant="19" id="fH4-4b-Gh1"/>
+                <constraint firstAttribute="trailing" secondItem="FM6-8i-ct4" secondAttribute="trailing" constant="19" id="ovE-zZ-0EH"/>
+                <constraint firstAttribute="trailing" secondItem="jDH-1W-8Vy" secondAttribute="trailing" constant="19" id="p3G-Hn-Elb"/>
+                <constraint firstItem="FM6-8i-ct4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="18" id="tCM-g3-GWM"/>
+                <constraint firstItem="kgR-ab-DuE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="18" id="tNd-2I-XZV"/>
                 <constraint firstItem="Q06-3Q-snb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="w8M-A6-jDl"/>
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="login_background" width="360" height="615"/>
+        <image name="selected_image" width="15" height="15"/>
+        <image name="unselected_image" width="15" height="15"/>
+    </resources>
 </document>
