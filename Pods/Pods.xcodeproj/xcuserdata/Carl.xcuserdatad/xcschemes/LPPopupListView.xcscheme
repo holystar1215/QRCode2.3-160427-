@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'F8E0021B37E685B826866982'
-               BlueprintName = 'BEMCheckBox'
+               BlueprintIdentifier = 'DE93CCD7031B31C44A656FBE'
+               BlueprintName = 'LPPopupListView'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libBEMCheckBox.a'>
+               BuildableName = 'libLPPopupListView.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

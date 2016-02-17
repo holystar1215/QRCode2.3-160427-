@@ -20,7 +20,6 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - BEMCheckBox (1.2.0)
   - BFKit (1.8.0)
   - BlocksKit (2.2.5):
     - BlocksKit/All (= 2.2.5)
@@ -40,7 +39,8 @@ PODS:
   - FMDB (2.6):
     - FMDB/standard (= 2.6)
   - FMDB/standard (2.6)
-  - IQKeyboardManager (3.3.6)
+  - IQKeyboardManager (3.3.7)
+  - LPPopupListView (1.0.3)
   - Mantle (2.0.6):
     - Mantle/extobjc (= 2.0.6)
   - Mantle/extobjc (2.0.6)
@@ -52,11 +52,11 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.6.1)
-  - BEMCheckBox
   - BFKit (~> 1.8.0)
   - BlocksKit (~> 2.2)
   - FMDB (~> 2.5)
   - IQKeyboardManager (~> 3.3)
+  - LPPopupListView (~> 1.0.3)
   - Mantle (~> 2.0)
   - MBProgressHUD (~> 0.9.2)
   - QRCodeReaderViewController (~> 4.0.1)
@@ -64,11 +64,11 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
-  BEMCheckBox: fcfbbf42cf23d38fbb605c72f63db9ae82d6acd3
   BFKit: f9edb431d57bcd01568a5aebbfae2cd9976f03c2
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   FMDB: c1968bab3ab0aed38f66cb778ae1e7fa9a652b6e
-  IQKeyboardManager: 037cf3aec1d0a045108859a47818714eb1bfc149
+  IQKeyboardManager: 249c3946acf61345c18b038eb50863fe2793e3a8
+  LPPopupListView: 34e8b9e7f3468e415e193cfbf14ed5f46d805ae0
   Mantle: 299966b00759634931699f69cb6a30b9239b944d
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   QRCodeReaderViewController: 6538745c8f4ffa9407a26bd7f9489ea01739e7b0

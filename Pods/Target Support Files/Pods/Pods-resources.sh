@@ -67,6 +67,10 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "BFKit/Source/Languages/zh-Hans.lproj"
   install_resource "BFKit/Source/Languages/zh-Hant.lproj"
   install_resource "IQKeyboardManager/IQKeyBoardManager/Resources/IQKeyboardManager.bundle"
+  install_resource "LPPopupListView/LPPopupListView/Images/checkMark.png"
+  install_resource "LPPopupListView/LPPopupListView/Images/checkMark@2x.png"
+  install_resource "LPPopupListView/LPPopupListView/Images/closeButton.png"
+  install_resource "LPPopupListView/LPPopupListView/Images/closeButton@2x.png"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "BFKit/Source/Languages/en.lproj"
@@ -78,6 +82,10 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "BFKit/Source/Languages/zh-Hans.lproj"
   install_resource "BFKit/Source/Languages/zh-Hant.lproj"
   install_resource "IQKeyboardManager/IQKeyBoardManager/Resources/IQKeyboardManager.bundle"
+  install_resource "LPPopupListView/LPPopupListView/Images/checkMark.png"
+  install_resource "LPPopupListView/LPPopupListView/Images/checkMark@2x.png"
+  install_resource "LPPopupListView/LPPopupListView/Images/closeButton.png"
+  install_resource "LPPopupListView/LPPopupListView/Images/closeButton@2x.png"
 fi
 
 mkdir -p "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

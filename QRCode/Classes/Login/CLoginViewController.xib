@@ -9,6 +9,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CLoginViewController">
             <connections>
                 <outlet property="contentTableView" destination="kgR-ab-DuE" id="MVQ-aw-80E"/>
+                <outlet property="savePasswordButton" destination="jDH-1W-8Vy" id="4fF-cp-aQv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,7 +21,7 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_background" translatesAutoresizingMaskIntoConstraints="NO" id="Q06-3Q-snb">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </imageView>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kgR-ab-DuE">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kgR-ab-DuE">
                     <rect key="frame" x="18" y="240" width="563" height="132"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -31,13 +32,17 @@
                         <outlet property="delegate" destination="-1" id="CPg-qp-6F8"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jDH-1W-8Vy">
+                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jDH-1W-8Vy">
                     <rect key="frame" x="18" y="384" width="563" height="22"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="22" id="IXW-uR-A05"/>
                     </constraints>
                     <state key="normal" title="记住密码" image="unselected_image"/>
                     <state key="selected" image="selected_image"/>
+                    <state key="focused" image="selected_image"/>
+                    <connections>
+                        <action selector="onSavePassword:" destination="-1" eventType="touchUpInside" id="Rxf-6K-era"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FM6-8i-ct4">
                     <rect key="frame" x="18" y="421" width="563" height="46"/>
