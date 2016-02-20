@@ -40,12 +40,8 @@ DEFINE_SINGLETON_FOR_CLASS(Configuration)
 	return [[[self.class sharedInstance] info] objectForKey:@"serverUrl"];
 }
 
-- (NSString *)fontName {
-    return [[[self.class sharedInstance] info] objectForKey:@"fontName"];
-}
-
-- (UIFont *)fontWithSize:(CGFloat)fontSize {
-    return [UIFont fontWithName:[[self.class sharedInstance] fontName] size:fontSize];
+- (NSString *)totalUrl {
+    return [[[self.class sharedInstance] info] objectForKey:@"totalUrl"];
 }
 
 @end

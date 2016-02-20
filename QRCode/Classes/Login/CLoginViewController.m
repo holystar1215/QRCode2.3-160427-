@@ -8,16 +8,20 @@
 
 #import "CLoginViewController.h"
 #import "CLoginViewCell.h"
-#import <LPPopupListView.h>
+#import "CListPopoverView.h"
+#import "CShoolModel.h"
+
 #import <UIView+BlocksKit.h>
 
 static NSString * const reuseIdentifier = @"CLoginViewCell";
 
-@interface CLoginViewController () <UITableViewDelegate, UITableViewDataSource, LPPopupListViewDelegate>
+@interface CLoginViewController () <UITableViewDelegate, UITableViewDataSource, CListPopoverViewDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *savePasswordButton;
 @property (weak, nonatomic) IBOutlet UITableView *contentTableView;
 
-@property (strong, nonatomic) LPPopupListView *popupListView;
+@property (strong, nonatomic) CListPopoverView *popupListView;
+@property (strong, nonatomic) NSArray *schoolArray;
+@property (strong, nonatomic) NSArray *resultArray;
 
 @end
 
@@ -30,8 +34,15 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
     [self.contentTableView registerNib:[UINib nibWithNibName:@"CLoginViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
     [self.contentTableView createBordersWithColor:[UIColor whiteColor] withCornerRadius:6 andWidth:1];
     
-    self.popupListView = [[LPPopupListView alloc] initWithTitle:@"选择院校" list:nil selectedIndexes:nil point:CGPointMake(self.contentTableView.frame.origin.x, self.contentTableView.frame.origin.y) size:CGSizeMake(self.contentTableView.frame.size.width, self.contentTableView.frame.size.height) multipleSelection:NO];
-    self.popupListView.delegate = self;
+    [[CWebService sharedInstance] school_list_success:^(NSArray *models) {
+        NSError *jsonError;
+        self.schoolArray = [MTLJSONAdapter modelsOfClass:[CShoolModel class] fromJSONArray:models error:&jsonError];
+        self.resultArray = [NSArray arrayWithArray:self.schoolArray];
+        self.popupListView = [[CListPopoverView alloc] initWithFrame:CGRectZero andTarget:self];
+    } failure:^(CWebServiceError *error) {
+        
+    } animated:YES message:@""];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -66,6 +77,7 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
     CLoginViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     
     // Configure the cell...
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     switch (indexPath.row) {
         case 0: {
             cell.imageView.image = [UIImage imageNamed:@"shcool_image"];
@@ -99,17 +111,32 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        [self.popupListView showInView:self.view animated:YES];
+        [self.popupListView showPopoverView];
     }
 }
 
-#pragma mark - <LPPopupListViewDelegate>
-- (void)popupListView:(LPPopupListView *)popupListView didSelectIndex:(NSInteger)index {
-    
+#pragma mark - <CListPopoverViewDelegate>
+- (NSInteger)numberOfItems {
+    return [self.resultArray count];
 }
 
-- (void)popupListViewDidHide:(LPPopupListView *)popupListView selectedIndexes:(NSIndexSet *)selectedIndexes {
+- (NSString *)itemAtIndexPath:(NSIndexPath *)indexPath {
+    CShoolModel *school = self.resultArray[indexPath.row];
+    return school.schoolName;
+}
+
+- (void)didSelectedItemIndex:(NSInteger)index {
+    CLoginViewCell *cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 0)];
+    CShoolModel *school = self.resultArray[index];
+    cell.textField.text = school.schoolName;
+}
+
+- (void)didChangeSearchText:(NSString *)searchText {
+    NSString *match = [NSString stringWithFormat:@"*%@*", searchText];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"schoolName like[cd] %@", match];
+    self.resultArray = [self.schoolArray filteredArrayUsingPredicate:predicate];
     
+    [self.popupListView reloadData];
 }
 
 @end

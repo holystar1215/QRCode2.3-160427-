@@ -21,7 +21,7 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_background" translatesAutoresizingMaskIntoConstraints="NO" id="Q06-3Q-snb">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </imageView>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kgR-ab-DuE">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kgR-ab-DuE">
                     <rect key="frame" x="18" y="240" width="563" height="132"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -63,7 +63,6 @@
                 <constraint firstItem="FM6-8i-ct4" firstAttribute="top" secondItem="jDH-1W-8Vy" secondAttribute="bottom" constant="15" id="Gij-97-4zh"/>
                 <constraint firstItem="jDH-1W-8Vy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="18" id="Iza-ec-U5V"/>
                 <constraint firstItem="kgR-ab-DuE" firstAttribute="top" secondItem="Q06-3Q-snb" secondAttribute="centerY" multiplier="0.8" id="Kt4-ts-oIf"/>
-                <constraint firstItem="kgR-ab-DuE" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="MyK-Uc-nYh"/>
                 <constraint firstAttribute="bottom" secondItem="Q06-3Q-snb" secondAttribute="bottom" id="ONN-nO-lLq"/>
                 <constraint firstItem="Q06-3Q-snb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ORB-RT-Ygw"/>
                 <constraint firstAttribute="trailing" secondItem="kgR-ab-DuE" secondAttribute="trailing" constant="19" id="fH4-4b-Gh1"/>

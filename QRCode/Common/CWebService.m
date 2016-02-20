@@ -12,27 +12,44 @@
 
 @implementation CWebServiceError
 
-- (instancetype)initWithType:(ppWebServiceError)type andMessage:(NSString *)message {
+- (instancetype)initWithCode:(NSInteger)code andMessage:(NSString *)message {
     if (self = [super init]) {
-        self.errorType = type;
+        self.errorCode = code;
         self.errorMessage = message;
-        return self;
+        [self checkErrorType];
     }
-    return nil;
+    return self;
 }
 
-+ (instancetype)type:(ppWebServiceError)type message:(NSString *)message {
-    return [[self alloc] initWithType:type andMessage:message];
++ (instancetype)checkRespondDict:(NSDictionary *)dict {
+    NSInteger codeValue = [[dict objectForKey:@"code"] integerValue];
+    NSString *msgValue = [dict objectForKey:@"msg"];
+    
+    return [[CWebServiceError alloc] initWithCode:codeValue andMessage:msgValue];
 }
 
-+ (instancetype)error:(NSError *)error {
-    switch (error.code) {
-        case -1001:
-            return [[self alloc] initWithType:eWebServiceErrorTimeout andMessage:error.description];
-        case -1004:
-            return [[self alloc] initWithType:eWebServiceErrorConnectFailed andMessage:error.description];
-        default:
-            return [[self alloc] initWithType:eWebServiceErrorFailed andMessage:error.description];
++ (instancetype)checkRespondWithError:(NSError *)error {
+    return [[CWebServiceError alloc] initWithCode:error.code andMessage:error.localizedDescription];
+}
+
+- (void)checkErrorType {
+    switch (self.errorCode) {
+        case 2000: {
+            self.errorType = eWebServiceErrorSuccess;
+            break;
+        }
+        case -10001: {
+            self.errorType = eWebServiceErrorTimeout;
+            break;
+        }
+        case -1004: {
+            self.errorType = eWebServiceErrorConnectFailed;
+            break;
+        }
+        default: {
+            self.errorType = eWebServiceErrorFailed;
+            break;
+        }
     }
 }
 
@@ -82,38 +99,37 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
     return msg;
 }
 
-- (CWebServiceError *)checkForResponseStatus:(NSDictionary *)dictionary {
-    NSDictionary *statusDict = dictionary[@"status"];
-    NSString *msg = [self responseMessage:statusDict];
-    ppWebServiceError status = [statusDict[@"code"] integerValue];
-    
-    switch (status) {
-        case eWebServiceErrorSuccess: {
-            
-            break;
-        }
-        case eWebServiceErrorFailed: {
-            
-            break;
-        }
-        case eWebServiceErrorTimeout: {
-            
-            break;
-        }
-        case eWebServiceErrorAuthentication_Failure: {
-            
-            break;
-        }
-        default: {
-            status = eWebServiceErrorFailed;
-            break;
-        }
-    }
-    CWebServiceError *error = [CWebServiceError type:status message:msg];
-    return error;
-}
-
 #pragma mark - API
+- (AFHTTPRequestOperation *)school_list_success:(void (^)(NSArray *models))success
+                                        failure:(WebServiceErrorRespondBlock)failure
+                                       animated:(BOOL)animated
+                                        message:(NSString *)message {
+    NSString *uri = @"netcx-config/api/configController/securi_config";
+    self.client.baseURL = [NSURL URLWithString:[[Configuration sharedInstance] totalUrl]];
+    return [self.client postHttpRequestWithURI:uri
+                                    parameters:nil
+                                       success:^(NSData *responseObject) {
+                                           NSError *jsonError = nil;
+                                           NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:&jsonError];
+                                           if (!jsonError) {
+                                               CWebServiceError *webError = [CWebServiceError checkRespondDict:resultDic];
+                                               if (webError.errorType == eWebServiceErrorSuccess) {
+                                                   success(resultDic[@"obj"]);
+                                               } else {
+                                                   failure(webError);
+                                               }
+                                           } else {
+                                               failure([CWebServiceError checkRespondWithError:jsonError]);
+                                           }
+                                       }
+                                       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                           CWebServiceError *serviceError = [CWebServiceError checkRespondWithError:error];
+                                           serviceError.errorMessage = [operation responseObject];
+                                           failure(serviceError);
+                                       }
+                                      animated:animated
+                                       message:message];
+}
 
 
 @end

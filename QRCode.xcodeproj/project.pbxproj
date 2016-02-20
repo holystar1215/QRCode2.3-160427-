@@ -28,11 +28,13 @@
 		C30236511C5D028600684957 /* CHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C302364F1C5D028600684957 /* CHomeTableViewCell.m */; };
 		C30236521C5D028600684957 /* CHomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C30236501C5D028600684957 /* CHomeTableViewCell.xib */; };
 		C30236561C5D147500684957 /* DSNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C30236551C5D147500684957 /* DSNavigationBar.m */; };
+		C3104A741C787AFF00115149 /* CShoolModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3104A731C787AFF00115149 /* CShoolModel.m */; };
 		C3488B191C5A79860035776B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C3488B181C5A79860035776B /* main.m */; };
 		C3488B1C1C5A79860035776B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C3488B1B1C5A79860035776B /* AppDelegate.m */; };
 		C3488B241C5A79860035776B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3488B231C5A79860035776B /* Assets.xcassets */; };
 		C3488B271C5A79860035776B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3488B251C5A79860035776B /* LaunchScreen.storyboard */; };
 		C3488B301C5A7BF70035776B /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3488B2E1C5A7BF70035776B /* Configuration.plist */; };
+		C3512D511C77797300153C6C /* CListPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3512D501C77797300153C6C /* CListPopoverView.m */; };
 		C3B7F95A1C74D2A100F95D8A /* CPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B7F9591C74D2A100F95D8A /* CPopoverView.m */; };
 		C3C767A01C5F261900C8B83A /* CLoginViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C7679F1C5F261900C8B83A /* CLoginViewCell.m */; };
 		C3C767A21C5F2A0B00C8B83A /* CLoginViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3C767A11C5F2A0B00C8B83A /* CLoginViewCell.xib */; };
@@ -79,6 +81,8 @@
 		C30236501C5D028600684957 /* CHomeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CHomeTableViewCell.xib; sourceTree = "<group>"; };
 		C30236541C5D147500684957 /* DSNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSNavigationBar.h; sourceTree = "<group>"; };
 		C30236551C5D147500684957 /* DSNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSNavigationBar.m; sourceTree = "<group>"; };
+		C3104A721C787AFF00115149 /* CShoolModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CShoolModel.h; sourceTree = "<group>"; };
+		C3104A731C787AFF00115149 /* CShoolModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CShoolModel.m; sourceTree = "<group>"; };
 		C3488B141C5A79860035776B /* QRCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QRCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3488B181C5A79860035776B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C3488B1A1C5A79860035776B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -88,6 +92,8 @@
 		C3488B281C5A79860035776B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C3488B2E1C5A7BF70035776B /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
 		C3488B2F1C5A7BF70035776B /* QRCode-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QRCode-Prefix.pch"; sourceTree = "<group>"; };
+		C3512D4F1C77797300153C6C /* CListPopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CListPopoverView.h; sourceTree = "<group>"; };
+		C3512D501C77797300153C6C /* CListPopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CListPopoverView.m; sourceTree = "<group>"; };
 		C3B7F9581C74D2A100F95D8A /* CPopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPopoverView.h; sourceTree = "<group>"; };
 		C3B7F9591C74D2A100F95D8A /* CPopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPopoverView.m; sourceTree = "<group>"; };
 		C3C7679E1C5F261900C8B83A /* CLoginViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLoginViewCell.h; sourceTree = "<group>"; };
@@ -259,6 +265,8 @@
 				C3C7679E1C5F261900C8B83A /* CLoginViewCell.h */,
 				C3C7679F1C5F261900C8B83A /* CLoginViewCell.m */,
 				C3C767A11C5F2A0B00C8B83A /* CLoginViewCell.xib */,
+				C3512D4F1C77797300153C6C /* CListPopoverView.h */,
+				C3512D501C77797300153C6C /* CListPopoverView.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -266,6 +274,8 @@
 		C3488B331C5A7C8F0035776B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C3104A721C787AFF00115149 /* CShoolModel.h */,
+				C3104A731C787AFF00115149 /* CShoolModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -422,10 +432,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3512D511C77797300153C6C /* CListPopoverView.m in Sources */,
 				C30236381C5C648A00684957 /* CStatusBarView.m in Sources */,
 				C302364D1C5D026800684957 /* CHeaderView.m in Sources */,
 				C30236511C5D028600684957 /* CHomeTableViewCell.m in Sources */,
 				C302362B1C5C5D0800684957 /* Configuration.m in Sources */,
+				C3104A741C787AFF00115149 /* CShoolModel.m in Sources */,
 				C302362A1C5C5D0800684957 /* CDataSource.m in Sources */,
 				C302362C1C5C5D0800684957 /* CPublicModule.m in Sources */,
 				C3488B1C1C5A79860035776B /* AppDelegate.m in Sources */,

@@ -34,8 +34,6 @@ DEFINE_SINGLETON_FOR_HEADER(Configuration)
 - (NSString *)dbFileName;
 
 - (NSString *)serverUrl;
-
-- (NSString *)fontName;
-- (UIFont *)fontWithSize:(CGFloat)fontSize;
+- (NSString *)totalUrl;
 
 @end

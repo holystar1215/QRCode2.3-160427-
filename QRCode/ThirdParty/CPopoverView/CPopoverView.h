@@ -12,28 +12,22 @@ typedef void(^dismiss_block)();
 
 @interface CPopoverView : UIView
 @property (nonatomic, copy) dismiss_block block;
-/**
- *  初始化
- *
- *  @param customView 通过自定义view初始化
- *
- *  @return 初始化后的对象
- */
-- (instancetype)initWithCustomView:(UIView *)customView width:(CGFloat)width height:(CGFloat)height;
 
 /**
  *  背景点击自动收起
  */
 @property (nonatomic, assign, setter=setAutoHidden:) BOOL autoHidden;
+
+- (void)setupContentView:(UIView *)contentView andHeaderView:(UIView *)headerView;
 /**
  *  展示
  */
-- (void)show;
+- (void)showPopoverView;
 
 /**
  *  收起
  */
--(void)dismiss;
+- (void)dismissPopoverView;
 
 
 @end
