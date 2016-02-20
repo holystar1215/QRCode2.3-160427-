@@ -131,5 +131,41 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                        message:message];
 }
 
+- (AFHTTPRequestOperation *)login_username:(NSString *)username
+                                  password:(NSString *)password
+                                   success:(void (^)(NSArray *models))success
+                                   failure:(WebServiceErrorRespondBlock)failure
+                                  animated:(BOOL)animated
+                                   message:(NSString *)message {
+    NSString *uri = @"liquidation/api/liquidata/securi_login?sign=";
+    self.client.baseURL = [NSURL URLWithString:[[Configuration sharedInstance] serverUrl]];
+    NSDictionary *dict = @{
+                     @"Username" : username,//12000001
+                     @"Password" : [password encodeToBase64]//wuwen929
+                     };
+    return [self.client postHttpRequestWithURI:uri
+                                    parameters:dict
+                                       success:^(NSData *responseObject) {
+                                           NSError *jsonError = nil;
+                                           NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:&jsonError];
+                                           if (!jsonError) {
+                                               CWebServiceError *webError = [CWebServiceError checkRespondDict:resultDic];
+                                               if (webError.errorType == eWebServiceErrorSuccess) {
+                                                   success(resultDic[@"obj"]);
+                                               } else {
+                                                   failure(webError);
+                                               }
+                                           } else {
+                                               failure([CWebServiceError checkRespondWithError:jsonError]);
+                                           }
+                                       }
+                                       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                           CWebServiceError *serviceError = [CWebServiceError checkRespondWithError:error];
+                                           serviceError.errorMessage = [operation responseObject];
+                                           failure(serviceError);
+                                       }
+                                      animated:animated
+                                       message:message];
+}
 
 @end

@@ -24,7 +24,8 @@
 
 
 // User Default
-
+#define kUserNameDefault @"kUserNameDefault"
+#define kPasswordDefault @"kPasswordDefault"
 
 @interface Configuration : NSObject
 

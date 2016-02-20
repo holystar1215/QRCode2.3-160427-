@@ -22,6 +22,7 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
 @property (strong, nonatomic) CListPopoverView *popupListView;
 @property (strong, nonatomic) NSArray *schoolArray;
 @property (strong, nonatomic) NSArray *resultArray;
+@property (assign, nonatomic) NSInteger currentSchool;
 
 @end
 
@@ -62,6 +63,40 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
 - (IBAction)onSavePassword:(id)sender {
     UIButton *aButton = sender;
     [self.savePasswordButton setSelected:!aButton.selected];
+    
+    if (!self.savePasswordButton) {
+        [USER_DEFAULT removeObjectForKey:kUserNameDefault];
+        [USER_DEFAULT removeObjectForKey:kPasswordDefault];
+    }
+}
+
+- (IBAction)onLogin:(id)sender {
+    CLoginViewCell *cell;
+    
+    cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 0)];
+    NSString *schoolName = cell.textField.text;
+    
+    cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 1)];
+    NSString *userName = cell.textField.text;
+    
+    cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 2)];
+    NSString *passWord = cell.textField.text;
+    
+    if ([userName isEqualToString:@""] || [passWord isEqualToString:@""] || [schoolName isEqualToString:@""]) {
+        return;
+    }
+    
+    if (self.savePasswordButton.isSelected) {
+        [USER_DEFAULT setObject:userName forKey:kUserNameDefault];
+        [USER_DEFAULT setObject:passWord forKey:kPasswordDefault];
+        [USER_DEFAULT synchronize];
+    }
+    
+    [[CWebService sharedInstance] login_username:userName password:passWord success:^(NSArray *models) {
+        
+    } failure:^(CWebServiceError *error) {
+        
+    } animated:YES message:@""];
 }
 
 #pragma mark - <UITableViewDataSource>
@@ -88,12 +123,20 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
         case 1: {
             cell.imageView.image = [UIImage imageNamed:@"password_image"];
             cell.textField.placeholder = @"用户";
+            NSString *userName = [USER_DEFAULT objectForKey:kUserNameDefault];
+            if (userName) {
+                cell.textField.text = userName;
+            }
             break;
         }
         case 2: {
             cell.imageView.image = [UIImage imageNamed:@"username_image"];
             cell.textField.placeholder = @"密码";
             cell.textField.secureTextEntry = YES;
+            NSString *passWord = [USER_DEFAULT objectForKey:kPasswordDefault];
+            if (passWord) {
+                cell.textField.text = passWord;
+            }
             cell.lineView.hidden = YES;
             break;
         }
@@ -126,8 +169,9 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
 }
 
 - (void)didSelectedItemIndex:(NSInteger)index {
+    self.currentSchool = index;
     CLoginViewCell *cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 0)];
-    CShoolModel *school = self.resultArray[index];
+    CShoolModel *school = self.resultArray[self.currentSchool];
     cell.textField.text = school.schoolName;
 }
 
