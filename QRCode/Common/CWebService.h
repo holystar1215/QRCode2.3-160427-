@@ -53,4 +53,84 @@ DEFINE_SINGLETON_FOR_HEADER(CWebService);
                                   animated:(BOOL)animated
                                    message:(NSString *)message;
 
+//- (AFHTTPRequestOperation *)check_update:(NSString *)update
+//                                 success:(void (^)(NSArray *models))success
+//                                 failure:(WebServiceErrorRespondBlock)failure
+//                                animated:(BOOL)animated
+//                                 message:(NSString *)message;
+//
+//- (AFHTTPRequestOperation *)record_log_schoolno:(NSString *)code
+//                                        logname:(NSString *)logname
+//                                        success:(void (^)(NSArray *models))success
+//                                        failure:(WebServiceErrorRespondBlock)failure
+//                                       animated:(BOOL)animated
+//                                        message:(NSString *)message;
+//
+//- (AFHTTPRequestOperation *)search_log_currentpage:(NSInteger)page
+//                                            company:(NSString *)company
+//                                               type:(NSInteger)type
+//                                            success:(void (^)(NSArray *models))success
+//                                            failure:(WebServiceErrorRespondBlock)failure
+//                                           animated:(BOOL)animated
+//                                            message:(NSString *)message;
+//
+//- (AFHTTPRequestOperation *)asset_info_number:(NSString *)number
+//                                      company:(NSString *)company
+//                                      success:(void (^)(NSArray *models))success
+//                                      failure:(WebServiceErrorRespondBlock)failure
+//                                     animated:(BOOL)animated
+//                                      message:(NSString *)message;
+//
+//- (AFHTTPRequestOperation *)manual_info_number:(NSString *)number
+//                                       company:(NSString *)company
+//                                       success:(void (^)(NSArray *models))success
+//                                       failure:(WebServiceErrorRespondBlock)failure
+//                                      animated:(BOOL)animated
+//                                       message:(NSString *)message;
+//
+//- (AFHTTPRequestOperation *)modify_data
+//
+//- (AFHTTPRequestOperation *)latest_modify_data
+//
+//- (AFHTTPRequestOperation *)
+//
+//- (AFHTTPRequestOperation *)add_room_list
+//
+//- (AFHTTPRequestOperation *)confirm_asset_number:(NSString *)number
+//                                           user:(NSString *)user
+//                                        company:(NSString *)company
+//                              has_dimension_code:(BOOL)has_dimension_code
+//                                        success:(void (^)(NSArray *models))success
+//                                        failure:(WebServiceErrorRespondBlock)failure
+//                                       animated:(BOOL)animated
+//                                        message:(NSString *)message;
+//
+//- (AFHTTPRequestOperation *)confirm_asset_number:(NSString *)number
+//                                           user:(NSString *)user
+//                                        company:(NSString *)company
+//                                          manual:(NSString *)manual
+//                                        success:(void (^)(NSArray *models))success
+//                                        failure:(WebServiceErrorRespondBlock)failure
+//                                       animated:(BOOL)animated
+//                                        message:(NSString *)message;
+//
+//- (AFHTTPRequestOperation *)update_asset_number:(NSString *)number
+//                                           user:(NSString *)user
+//                                        company:(NSString *)company
+//                             has_dimension_code:(BOOL)has_dimension_code
+//                                        success:(void (^)(NSArray *models))success
+//                                        failure:(WebServiceErrorRespondBlock)failure
+//                                       animated:(BOOL)animated
+//                                        message:(NSString *)message;
+//
+//- (AFHTTPRequestOperation *)update_asset_number:(NSString *)number
+//                                           user:(NSString *)user
+//                                        company:(NSString *)company
+//                                         manual:(NSString *)manual
+//                                        success:(void (^)(NSArray *models))success
+//                                        failure:(WebServiceErrorRespondBlock)failure
+//                                       animated:(BOOL)animated
+//                                        message:(NSString *)message;
+
+
 @end

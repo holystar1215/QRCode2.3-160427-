@@ -168,4 +168,76 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                        message:message];
 }
 
+//- (AFHTTPRequestOperation *)check_update:(NSString *)update
+//                                 success:(void (^)(NSArray *models))success
+//                                 failure:(WebServiceErrorRespondBlock)failure
+//                                animated:(BOOL)animated
+//                                 message:(NSString *)message {
+//    NSString *uri = @"netcx-config/autoUpdateController/securi_update?sign=";
+//    self.client.baseURL = [NSURL URLWithString:[[Configuration sharedInstance] totalUrl]];
+//    NSDictionary *dict = @{
+//                           @"Update" : update
+//                           };
+//    return [self.client postHttpRequestWithURI:uri
+//                                    parameters:dict
+//                                       success:^(NSData *responseObject) {
+//                                           NSError *jsonError = nil;
+//                                           NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:&jsonError];
+//                                           if (!jsonError) {
+//                                               CWebServiceError *webError = [CWebServiceError checkRespondDict:resultDic];
+//                                               if (webError.errorType == eWebServiceErrorSuccess) {
+//                                                   success(resultDic[@"obj"]);
+//                                               } else {
+//                                                   failure(webError);
+//                                               }
+//                                           } else {
+//                                               failure([CWebServiceError checkRespondWithError:jsonError]);
+//                                           }
+//                                       }
+//                                       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                                           CWebServiceError *serviceError = [CWebServiceError checkRespondWithError:error];
+//                                           serviceError.errorMessage = [operation responseObject];
+//                                           failure(serviceError);
+//                                       }
+//                                      animated:animated
+//                                       message:message];
+//}
+//
+//- (AFHTTPRequestOperation *)record_log_school_code:(NSString *)code
+//                                           logname:(NSString *)logname
+//                                           success:(void (^)(NSArray *models))success
+//                                           failure:(WebServiceErrorRespondBlock)failure
+//                                          animated:(BOOL)animated
+//                                           message:(NSString *)message {
+//    NSString *uri = @"netcx-config/api/configController/securi_logLogin?sign=";
+//    self.client.baseURL = [NSURL URLWithString:[[Configuration sharedInstance] totalUrl]];
+//    NSDictionary *dict = @{
+//                           @"SchoolNo" : code,
+//                           @"LogName" : logname
+//                           };
+//    return [self.client postHttpRequestWithURI:uri
+//                                    parameters:dict
+//                                       success:^(NSData *responseObject) {
+//                                           NSError *jsonError = nil;
+//                                           NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:&jsonError];
+//                                           if (!jsonError) {
+//                                               CWebServiceError *webError = [CWebServiceError checkRespondDict:resultDic];
+//                                               if (webError.errorType == eWebServiceErrorSuccess) {
+//                                                   success(resultDic[@"obj"]);
+//                                               } else {
+//                                                   failure(webError);
+//                                               }
+//                                           } else {
+//                                               failure([CWebServiceError checkRespondWithError:jsonError]);
+//                                           }
+//                                       }
+//                                       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//                                           CWebServiceError *serviceError = [CWebServiceError checkRespondWithError:error];
+//                                           serviceError.errorMessage = [operation responseObject];
+//                                           failure(serviceError);
+//                                       }
+//                                      animated:animated
+//                                       message:message];
+//}
+
 @end

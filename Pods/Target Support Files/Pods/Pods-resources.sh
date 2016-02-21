@@ -67,6 +67,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "BFKit/Source/Languages/zh-Hans.lproj"
   install_resource "BFKit/Source/Languages/zh-Hant.lproj"
   install_resource "IQKeyboardManager/IQKeyBoardManager/Resources/IQKeyboardManager.bundle"
+  install_resource "MJRefresh/MJRefresh/MJRefresh.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "BFKit/Source/Languages/en.lproj"
@@ -78,6 +79,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "BFKit/Source/Languages/zh-Hans.lproj"
   install_resource "BFKit/Source/Languages/zh-Hant.lproj"
   install_resource "IQKeyboardManager/IQKeyBoardManager/Resources/IQKeyboardManager.bundle"
+  install_resource "MJRefresh/MJRefresh/MJRefresh.bundle"
 fi
 
 mkdir -p "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

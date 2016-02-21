@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MJRefresh.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Mantle.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -45,11 +50,6 @@
 			<false/>
 		</dict>
 		<key>QRCodeReaderViewController.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>QuickDialog.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -77,22 +77,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5B6A09C5E66E188AD910FF68116DFEEE</key>
+		<key>63D7EABEF21F2E766B3B6DBFE0FDF44A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>76CED3A78DE02E10D9CE5BDFE167F2D5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9C8AD2BDE82F18C0571A40D5FF36AC37</key>
+		<key>8F74D9EA91F4C43190670066BAC37D44</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>9F12FB4A63E20F601CFB2E64A65B57C1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AD4E71272FCDCBFCC49EBB5A7B470F48</key>
 		<dict>
 			<key>primary</key>
 			<true/>

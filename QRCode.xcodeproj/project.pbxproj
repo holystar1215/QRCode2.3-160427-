@@ -38,6 +38,18 @@
 		C3B7F95A1C74D2A100F95D8A /* CPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B7F9591C74D2A100F95D8A /* CPopoverView.m */; };
 		C3C767A01C5F261900C8B83A /* CLoginViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C7679F1C5F261900C8B83A /* CLoginViewCell.m */; };
 		C3C767A21C5F2A0B00C8B83A /* CLoginViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3C767A11C5F2A0B00C8B83A /* CLoginViewCell.xib */; };
+		C3CA26F81C7A1AA500E6696E /* CBarCodeInventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA26F61C7A1AA500E6696E /* CBarCodeInventoryViewController.m */; };
+		C3CA26F91C7A1AA500E6696E /* CBarCodeInventoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CA26F71C7A1AA500E6696E /* CBarCodeInventoryViewController.xib */; };
+		C3CA26FD1C7A1AB800E6696E /* CCheckedRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA26FB1C7A1AB800E6696E /* CCheckedRecordViewController.m */; };
+		C3CA26FE1C7A1AB800E6696E /* CCheckedRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CA26FC1C7A1AB800E6696E /* CCheckedRecordViewController.xib */; };
+		C3CA27021C7A1ACE00E6696E /* C CustomCodeInventory ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA27001C7A1ACE00E6696E /* C CustomCodeInventory ViewController.m */; };
+		C3CA27031C7A1ACE00E6696E /* C CustomCodeInventory ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CA27011C7A1ACE00E6696E /* C CustomCodeInventory ViewController.xib */; };
+		C3CA27071C7A1AE100E6696E /* CQRCodeInventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA27051C7A1AE100E6696E /* CQRCodeInventoryViewController.m */; };
+		C3CA27081C7A1AE100E6696E /* CQRCodeInventoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CA27061C7A1AE100E6696E /* CQRCodeInventoryViewController.xib */; };
+		C3CA270C1C7A1AF200E6696E /* CSearchRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA270A1C7A1AF200E6696E /* CSearchRecordViewController.m */; };
+		C3CA270D1C7A1AF200E6696E /* CSearchRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CA270B1C7A1AF200E6696E /* CSearchRecordViewController.xib */; };
+		C3CA27111C7A1B0500E6696E /* CUnCheckedRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA270F1C7A1B0500E6696E /* CUnCheckedRecordViewController.m */; };
+		C3CA27121C7A1B0500E6696E /* CUnCheckedRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CA27101C7A1B0500E6696E /* CUnCheckedRecordViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +111,24 @@
 		C3C7679E1C5F261900C8B83A /* CLoginViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLoginViewCell.h; sourceTree = "<group>"; };
 		C3C7679F1C5F261900C8B83A /* CLoginViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLoginViewCell.m; sourceTree = "<group>"; };
 		C3C767A11C5F2A0B00C8B83A /* CLoginViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CLoginViewCell.xib; sourceTree = "<group>"; };
+		C3CA26F51C7A1AA500E6696E /* CBarCodeInventoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBarCodeInventoryViewController.h; sourceTree = "<group>"; };
+		C3CA26F61C7A1AA500E6696E /* CBarCodeInventoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBarCodeInventoryViewController.m; sourceTree = "<group>"; };
+		C3CA26F71C7A1AA500E6696E /* CBarCodeInventoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBarCodeInventoryViewController.xib; sourceTree = "<group>"; };
+		C3CA26FA1C7A1AB800E6696E /* CCheckedRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCheckedRecordViewController.h; sourceTree = "<group>"; };
+		C3CA26FB1C7A1AB800E6696E /* CCheckedRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCheckedRecordViewController.m; sourceTree = "<group>"; };
+		C3CA26FC1C7A1AB800E6696E /* CCheckedRecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCheckedRecordViewController.xib; sourceTree = "<group>"; };
+		C3CA26FF1C7A1ACE00E6696E /* C CustomCodeInventory ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C CustomCodeInventory ViewController.h"; sourceTree = "<group>"; };
+		C3CA27001C7A1ACE00E6696E /* C CustomCodeInventory ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C CustomCodeInventory ViewController.m"; sourceTree = "<group>"; };
+		C3CA27011C7A1ACE00E6696E /* C CustomCodeInventory ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "C CustomCodeInventory ViewController.xib"; sourceTree = "<group>"; };
+		C3CA27041C7A1AE100E6696E /* CQRCodeInventoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQRCodeInventoryViewController.h; sourceTree = "<group>"; };
+		C3CA27051C7A1AE100E6696E /* CQRCodeInventoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQRCodeInventoryViewController.m; sourceTree = "<group>"; };
+		C3CA27061C7A1AE100E6696E /* CQRCodeInventoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CQRCodeInventoryViewController.xib; sourceTree = "<group>"; };
+		C3CA27091C7A1AF200E6696E /* CSearchRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSearchRecordViewController.h; sourceTree = "<group>"; };
+		C3CA270A1C7A1AF200E6696E /* CSearchRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSearchRecordViewController.m; sourceTree = "<group>"; };
+		C3CA270B1C7A1AF200E6696E /* CSearchRecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CSearchRecordViewController.xib; sourceTree = "<group>"; };
+		C3CA270E1C7A1B0500E6696E /* CUnCheckedRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CUnCheckedRecordViewController.h; sourceTree = "<group>"; };
+		C3CA270F1C7A1B0500E6696E /* CUnCheckedRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CUnCheckedRecordViewController.m; sourceTree = "<group>"; };
+		C3CA27101C7A1B0500E6696E /* CUnCheckedRecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CUnCheckedRecordViewController.xib; sourceTree = "<group>"; };
 		F21582C66C4A32303EB79BE6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -246,6 +276,12 @@
 		C3488B311C5A7C8F0035776B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C3CA26EF1C7A1A8100E6696E /* BarCodeInventory */,
+				C3CA26F01C7A1A8100E6696E /* CheckedRecord */,
+				C3CA26F11C7A1A8100E6696E /* CustomCodeInventory */,
+				C3CA26F21C7A1A8100E6696E /* QRCodeInventory */,
+				C3CA26F31C7A1A8100E6696E /* SearchRecord */,
+				C3CA26F41C7A1A8100E6696E /* UnCheckedRecord */,
 				C30236361C5C648A00684957 /* CStatusBarView.h */,
 				C30236371C5C648A00684957 /* CStatusBarView.m */,
 				C30236101C5C5C5600684957 /* CBaseViewController.h */,
@@ -305,6 +341,66 @@
 				C3B7F9591C74D2A100F95D8A /* CPopoverView.m */,
 			);
 			path = CPopoverView;
+			sourceTree = "<group>";
+		};
+		C3CA26EF1C7A1A8100E6696E /* BarCodeInventory */ = {
+			isa = PBXGroup;
+			children = (
+				C3CA26F51C7A1AA500E6696E /* CBarCodeInventoryViewController.h */,
+				C3CA26F61C7A1AA500E6696E /* CBarCodeInventoryViewController.m */,
+				C3CA26F71C7A1AA500E6696E /* CBarCodeInventoryViewController.xib */,
+			);
+			path = BarCodeInventory;
+			sourceTree = "<group>";
+		};
+		C3CA26F01C7A1A8100E6696E /* CheckedRecord */ = {
+			isa = PBXGroup;
+			children = (
+				C3CA26FA1C7A1AB800E6696E /* CCheckedRecordViewController.h */,
+				C3CA26FB1C7A1AB800E6696E /* CCheckedRecordViewController.m */,
+				C3CA26FC1C7A1AB800E6696E /* CCheckedRecordViewController.xib */,
+			);
+			path = CheckedRecord;
+			sourceTree = "<group>";
+		};
+		C3CA26F11C7A1A8100E6696E /* CustomCodeInventory */ = {
+			isa = PBXGroup;
+			children = (
+				C3CA26FF1C7A1ACE00E6696E /* C CustomCodeInventory ViewController.h */,
+				C3CA27001C7A1ACE00E6696E /* C CustomCodeInventory ViewController.m */,
+				C3CA27011C7A1ACE00E6696E /* C CustomCodeInventory ViewController.xib */,
+			);
+			path = CustomCodeInventory;
+			sourceTree = "<group>";
+		};
+		C3CA26F21C7A1A8100E6696E /* QRCodeInventory */ = {
+			isa = PBXGroup;
+			children = (
+				C3CA27041C7A1AE100E6696E /* CQRCodeInventoryViewController.h */,
+				C3CA27051C7A1AE100E6696E /* CQRCodeInventoryViewController.m */,
+				C3CA27061C7A1AE100E6696E /* CQRCodeInventoryViewController.xib */,
+			);
+			path = QRCodeInventory;
+			sourceTree = "<group>";
+		};
+		C3CA26F31C7A1A8100E6696E /* SearchRecord */ = {
+			isa = PBXGroup;
+			children = (
+				C3CA27091C7A1AF200E6696E /* CSearchRecordViewController.h */,
+				C3CA270A1C7A1AF200E6696E /* CSearchRecordViewController.m */,
+				C3CA270B1C7A1AF200E6696E /* CSearchRecordViewController.xib */,
+			);
+			path = SearchRecord;
+			sourceTree = "<group>";
+		};
+		C3CA26F41C7A1A8100E6696E /* UnCheckedRecord */ = {
+			isa = PBXGroup;
+			children = (
+				C3CA270E1C7A1B0500E6696E /* CUnCheckedRecordViewController.h */,
+				C3CA270F1C7A1B0500E6696E /* CUnCheckedRecordViewController.m */,
+				C3CA27101C7A1B0500E6696E /* CUnCheckedRecordViewController.xib */,
+			);
+			path = UnCheckedRecord;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -370,8 +466,14 @@
 				C30236441C5CFF6C00684957 /* CLoginViewController.xib in Resources */,
 				C3C767A21C5F2A0B00C8B83A /* CLoginViewCell.xib in Resources */,
 				C302364A1C5CFFD000684957 /* CHomeViewController.xib in Resources */,
+				C3CA27121C7A1B0500E6696E /* CUnCheckedRecordViewController.xib in Resources */,
 				C30236521C5D028600684957 /* CHomeTableViewCell.xib in Resources */,
+				C3CA26F91C7A1AA500E6696E /* CBarCodeInventoryViewController.xib in Resources */,
+				C3CA27081C7A1AE100E6696E /* CQRCodeInventoryViewController.xib in Resources */,
 				C3488B301C5A7BF70035776B /* Configuration.plist in Resources */,
+				C3CA270D1C7A1AF200E6696E /* CSearchRecordViewController.xib in Resources */,
+				C3CA26FE1C7A1AB800E6696E /* CCheckedRecordViewController.xib in Resources */,
+				C3CA27031C7A1ACE00E6696E /* C CustomCodeInventory ViewController.xib in Resources */,
 				C3488B271C5A79860035776B /* LaunchScreen.storyboard in Resources */,
 				C3488B241C5A79860035776B /* Assets.xcassets in Resources */,
 			);
@@ -436,6 +538,8 @@
 				C30236381C5C648A00684957 /* CStatusBarView.m in Sources */,
 				C302364D1C5D026800684957 /* CHeaderView.m in Sources */,
 				C30236511C5D028600684957 /* CHomeTableViewCell.m in Sources */,
+				C3CA26F81C7A1AA500E6696E /* CBarCodeInventoryViewController.m in Sources */,
+				C3CA26FD1C7A1AB800E6696E /* CCheckedRecordViewController.m in Sources */,
 				C302362B1C5C5D0800684957 /* Configuration.m in Sources */,
 				C3104A741C787AFF00115149 /* CShoolModel.m in Sources */,
 				C302362A1C5C5D0800684957 /* CDataSource.m in Sources */,
@@ -444,13 +548,17 @@
 				C302362E1C5C5D0800684957 /* MBProgressHUD+UIView.m in Sources */,
 				C30236351C5C643F00684957 /* UIView+AutoLayout.m in Sources */,
 				C302363D1C5C670A00684957 /* GTMBase64.m in Sources */,
+				C3CA27111C7A1B0500E6696E /* CUnCheckedRecordViewController.m in Sources */,
 				C302362D1C5C5D0800684957 /* CWebService.m in Sources */,
+				C3CA270C1C7A1AF200E6696E /* CSearchRecordViewController.m in Sources */,
 				C30236291C5C5D0800684957 /* CDatabaseHelper.m in Sources */,
 				C3488B191C5A79860035776B /* main.m in Sources */,
 				C30236491C5CFFD000684957 /* CHomeViewController.m in Sources */,
 				C30236561C5D147500684957 /* DSNavigationBar.m in Sources */,
 				C30236121C5C5C5600684957 /* CBaseViewController.m in Sources */,
 				C302362F1C5C5D0800684957 /* NSString+AppPath.m in Sources */,
+				C3CA27021C7A1ACE00E6696E /* C CustomCodeInventory ViewController.m in Sources */,
+				C3CA27071C7A1AE100E6696E /* CQRCodeInventoryViewController.m in Sources */,
 				C30236281C5C5D0800684957 /* CAPIClient.m in Sources */,
 				C3B7F95A1C74D2A100F95D8A /* CPopoverView.m in Sources */,
 				C3C767A01C5F261900C8B83A /* CLoginViewCell.m in Sources */,
