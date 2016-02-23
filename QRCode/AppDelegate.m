@@ -64,7 +64,7 @@
     homeViewController.title = @"资产盘点系统";
     self.navigationController = [[UINavigationController alloc] initWithNavigationBarClass:[DSNavigationBar class] toolbarClass:nil];
     self.navigationController.viewControllers = @[homeViewController];
-    [[DSNavigationBar appearance] setNavigationBarWithColor:RGBA(252, 115, 10, 0.9)];
+//    [[DSNavigationBar appearance] setNavigationBarWithColor:RGBA(252, 115, 10, 0.9)];
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
 }

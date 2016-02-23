@@ -1,5 +1,5 @@
 //
-//  C CustomCodeInventory ViewController.h
+//  CCustomCodeInventoryViewController.h
 //  QRCode
 //
 //  Created by CarlLiu on 16/2/22.
@@ -8,6 +8,6 @@
 
 #import "CBaseViewController.h"
 
-@interface C_CustomCodeInventory_ViewController : CBaseViewController
+@interface CCustomCodeInventoryViewController : CBaseViewController
 
 @end

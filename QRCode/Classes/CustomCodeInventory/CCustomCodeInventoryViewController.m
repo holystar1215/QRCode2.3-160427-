@@ -1,18 +1,18 @@
 //
-//  C CustomCodeInventory ViewController.m
+//  CCustomCodeInventoryViewController.m
 //  QRCode
 //
 //  Created by CarlLiu on 16/2/22.
 //  Copyright © 2016年 Carl. All rights reserved.
 //
 
-#import "C CustomCodeInventory ViewController.h"
+#import "CCustomCodeInventoryViewController.h"
 
-@interface C_CustomCodeInventory_ViewController ()
+@interface CCustomCodeInventoryViewController ()
 
 @end
 
-@implementation C_CustomCodeInventory_ViewController
+@implementation CCustomCodeInventoryViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

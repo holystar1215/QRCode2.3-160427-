@@ -66,7 +66,7 @@
                     </connections>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="egR-T9-xst">
-                    <rect key="frame" x="0.0" y="160" width="600" height="280"/>
+                    <rect key="frame" x="1" y="160" width="598" height="280"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="280" id="kvx-gt-yZl"/>
@@ -100,9 +100,9 @@
                 <constraint firstAttribute="bottom" secondItem="HPQ-jP-lNv" secondAttribute="bottom" constant="48" id="4fS-yo-G7T"/>
                 <constraint firstItem="mDz-hN-IqS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="GoL-rk-wxP"/>
                 <constraint firstItem="HPQ-jP-lNv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="LIB-2f-4df"/>
-                <constraint firstItem="egR-T9-xst" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="RJV-cN-lrI"/>
+                <constraint firstItem="egR-T9-xst" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="1" id="RJV-cN-lrI"/>
                 <constraint firstItem="mDz-hN-IqS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="72" id="TdM-uD-ysE"/>
-                <constraint firstAttribute="trailing" secondItem="egR-T9-xst" secondAttribute="trailing" id="ZEu-8l-aO7"/>
+                <constraint firstAttribute="trailing" secondItem="egR-T9-xst" secondAttribute="trailing" constant="1" id="ZEu-8l-aO7"/>
                 <constraint firstAttribute="trailing" secondItem="HPQ-jP-lNv" secondAttribute="trailing" constant="8" id="hSG-BV-gHl"/>
                 <constraint firstItem="egR-T9-xst" firstAttribute="top" secondItem="mDz-hN-IqS" secondAttribute="bottom" constant="8" id="i7o-na-taQ"/>
                 <constraint firstAttribute="trailing" secondItem="mDz-hN-IqS" secondAttribute="trailing" id="uOY-2n-t0x"/>

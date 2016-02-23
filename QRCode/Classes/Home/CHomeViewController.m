@@ -10,6 +10,12 @@
 #import "CHeaderView.h"
 #import "CStatusBarView.h"
 #import "CHomeViewCollectionViewCell.h"
+#import "CSearchRecordViewController.h"
+#import "CBarCodeInventoryViewController.h"
+#import "CQRCodeInventoryViewController.h"
+#import "CUnCheckedRecordViewController.h"
+#import "CCheckedRecordViewController.h"
+#import "CCustomCodeInventoryViewController.h"
 
 static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
 
@@ -48,7 +54,7 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
 
 #pragma mark - Activity Method
 - (IBAction)onLogout:(id)sender {
-    
+    [APP_DELEGATE setupSignInViewController];
 }
 
 #pragma mark - <UICollectionViewDataSource>
@@ -64,6 +70,7 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
     CHomeViewCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+    [cell createBordersWithColor:[UIColor lightGrayColor] withCornerRadius:0 andWidth:0.5];
     NSDictionary *dict = self.itemsArray[indexPath.section][indexPath.row];
     cell.titleLabel.text = dict[@"kItemName"];
     cell.iconImageView.image = [UIImage imageNamed:dict[@"kIconName"]];
@@ -73,13 +80,62 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
 
 #pragma mark - <UICollectionViewDelegate>
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell * cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-    cell.backgroundColor = [UIColor whiteColor];
+//    UICollectionViewCell * cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+//    cell.backgroundColor = [UIColor whiteColor];
+    NSDictionary *dict = self.itemsArray[indexPath.section][indexPath.row];
+    switch (indexPath.row) {
+        case 0: {
+            CBarCodeInventoryViewController *vc = [[CBarCodeInventoryViewController alloc] initWithNibName:@"CBarCodeInventoryViewController" bundle:nil];
+            vc.title = dict[@"kItemName"];
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 1: {
+            CQRCodeInventoryViewController *vc = [[CQRCodeInventoryViewController alloc] initWithNibName:@"CQRCodeInventoryViewController" bundle:nil];
+            vc.title = dict[@"kItemName"];
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 2: {
+            CCustomCodeInventoryViewController *vc = [[CCustomCodeInventoryViewController alloc] initWithNibName:@"CCustomCodeInventoryViewController" bundle:nil];
+            vc.title = dict[@"kItemName"];
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 3: {
+            CCheckedRecordViewController *vc = [[CCheckedRecordViewController alloc] initWithNibName:@"CCheckedRecordViewController" bundle:nil];
+            vc.title = dict[@"kItemName"];
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 4: {
+            CSearchRecordViewController *vc = [[CSearchRecordViewController alloc] initWithNibName:@"CSearchRecordViewController" bundle:nil];
+            vc.title = dict[@"kItemName"];
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 5: {
+            CUnCheckedRecordViewController *vc = [[CUnCheckedRecordViewController alloc] initWithNibName:@"CUnCheckedRecordViewController" bundle:nil];
+            vc.title = dict[@"kItemName"];
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 #pragma mark - <UICollectionViewDelegateFlowLayout>
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(106, 70);
+    return CGSizeMake(318 / 3, 70);
+}
+
+- (CGFloat )collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 0;
 }
 
 @end

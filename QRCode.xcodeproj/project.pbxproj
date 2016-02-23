@@ -38,8 +38,8 @@
 		C3C767A21C5F2A0B00C8B83A /* CLoginViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3C767A11C5F2A0B00C8B83A /* CLoginViewCell.xib */; };
 		C3CA26F81C7A1AA500E6696E /* CBarCodeInventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA26F61C7A1AA500E6696E /* CBarCodeInventoryViewController.m */; };
 		C3CA26F91C7A1AA500E6696E /* CBarCodeInventoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CA26F71C7A1AA500E6696E /* CBarCodeInventoryViewController.xib */; };
-		C3CA27021C7A1ACE00E6696E /* C CustomCodeInventory ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA27001C7A1ACE00E6696E /* C CustomCodeInventory ViewController.m */; };
-		C3CA27031C7A1ACE00E6696E /* C CustomCodeInventory ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CA27011C7A1ACE00E6696E /* C CustomCodeInventory ViewController.xib */; };
+		C3CA27021C7A1ACE00E6696E /* CCustomCodeInventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA27001C7A1ACE00E6696E /* CCustomCodeInventoryViewController.m */; };
+		C3CA27031C7A1ACE00E6696E /* CCustomCodeInventoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CA27011C7A1ACE00E6696E /* CCustomCodeInventoryViewController.xib */; };
 		C3CA27071C7A1AE100E6696E /* CQRCodeInventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA27051C7A1AE100E6696E /* CQRCodeInventoryViewController.m */; };
 		C3CA27081C7A1AE100E6696E /* CQRCodeInventoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CA27061C7A1AE100E6696E /* CQRCodeInventoryViewController.xib */; };
 		C3CA27201C7A215F00E6696E /* CCheckedRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA27161C7A215F00E6696E /* CCheckedRecordViewController.m */; };
@@ -114,9 +114,9 @@
 		C3CA26F51C7A1AA500E6696E /* CBarCodeInventoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CBarCodeInventoryViewController.h; sourceTree = "<group>"; };
 		C3CA26F61C7A1AA500E6696E /* CBarCodeInventoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CBarCodeInventoryViewController.m; sourceTree = "<group>"; };
 		C3CA26F71C7A1AA500E6696E /* CBarCodeInventoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CBarCodeInventoryViewController.xib; sourceTree = "<group>"; };
-		C3CA26FF1C7A1ACE00E6696E /* C CustomCodeInventory ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "C CustomCodeInventory ViewController.h"; sourceTree = "<group>"; };
-		C3CA27001C7A1ACE00E6696E /* C CustomCodeInventory ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "C CustomCodeInventory ViewController.m"; sourceTree = "<group>"; };
-		C3CA27011C7A1ACE00E6696E /* C CustomCodeInventory ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "C CustomCodeInventory ViewController.xib"; sourceTree = "<group>"; };
+		C3CA26FF1C7A1ACE00E6696E /* CCustomCodeInventoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCustomCodeInventoryViewController.h; sourceTree = "<group>"; };
+		C3CA27001C7A1ACE00E6696E /* CCustomCodeInventoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCustomCodeInventoryViewController.m; sourceTree = "<group>"; };
+		C3CA27011C7A1ACE00E6696E /* CCustomCodeInventoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCustomCodeInventoryViewController.xib; sourceTree = "<group>"; };
 		C3CA27041C7A1AE100E6696E /* CQRCodeInventoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CQRCodeInventoryViewController.h; sourceTree = "<group>"; };
 		C3CA27051C7A1AE100E6696E /* CQRCodeInventoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CQRCodeInventoryViewController.m; sourceTree = "<group>"; };
 		C3CA27061C7A1AE100E6696E /* CQRCodeInventoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CQRCodeInventoryViewController.xib; sourceTree = "<group>"; };
@@ -364,9 +364,9 @@
 		C3CA26F11C7A1A8100E6696E /* CustomCodeInventory */ = {
 			isa = PBXGroup;
 			children = (
-				C3CA26FF1C7A1ACE00E6696E /* C CustomCodeInventory ViewController.h */,
-				C3CA27001C7A1ACE00E6696E /* C CustomCodeInventory ViewController.m */,
-				C3CA27011C7A1ACE00E6696E /* C CustomCodeInventory ViewController.xib */,
+				C3CA26FF1C7A1ACE00E6696E /* CCustomCodeInventoryViewController.h */,
+				C3CA27001C7A1ACE00E6696E /* CCustomCodeInventoryViewController.m */,
+				C3CA27011C7A1ACE00E6696E /* CCustomCodeInventoryViewController.xib */,
 			);
 			path = CustomCodeInventory;
 			sourceTree = "<group>";
@@ -495,7 +495,7 @@
 				C3CA272A1C7A218400E6696E /* CRecordTableViewCell.xib in Resources */,
 				C3CA27231C7A215F00E6696E /* CSearchRecordViewController.xib in Resources */,
 				C3488B301C5A7BF70035776B /* Configuration.plist in Resources */,
-				C3CA27031C7A1ACE00E6696E /* C CustomCodeInventory ViewController.xib in Resources */,
+				C3CA27031C7A1ACE00E6696E /* CCustomCodeInventoryViewController.xib in Resources */,
 				C3488B271C5A79860035776B /* LaunchScreen.storyboard in Resources */,
 				C3488B241C5A79860035776B /* Assets.xcassets in Resources */,
 			);
@@ -580,7 +580,7 @@
 				C30236561C5D147500684957 /* DSNavigationBar.m in Sources */,
 				C30236121C5C5C5600684957 /* CBaseViewController.m in Sources */,
 				C302362F1C5C5D0800684957 /* NSString+AppPath.m in Sources */,
-				C3CA27021C7A1ACE00E6696E /* C CustomCodeInventory ViewController.m in Sources */,
+				C3CA27021C7A1ACE00E6696E /* CCustomCodeInventoryViewController.m in Sources */,
 				C3CA27071C7A1AE100E6696E /* CQRCodeInventoryViewController.m in Sources */,
 				C30236281C5C5D0800684957 /* CAPIClient.m in Sources */,
 				C3B7F95A1C74D2A100F95D8A /* CPopoverView.m in Sources */,

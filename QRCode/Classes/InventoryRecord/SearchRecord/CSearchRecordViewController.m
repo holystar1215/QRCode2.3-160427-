@@ -9,6 +9,7 @@
 #import "CSearchRecordViewController.h"
 #import "CRecordTableViewCell.h"
 #import <Masonry.h>
+#import <UIBarButtonItem+BlocksKit.h>
 
 static NSString * const reuseIdentifier = @"UITableViewCell";
 
@@ -24,6 +25,10 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"back-arrow"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+    
     [self.contentTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:reuseIdentifier];
 }
 
