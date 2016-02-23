@@ -8,6 +8,20 @@
 
 #import "CLoginViewCell.h"
 
+@interface CLoginViewCell () <UITextFieldDelegate>
+
+@end
+
 @implementation CLoginViewCell
+
+- (void)awakeFromNib {
+    self.textField.delegate = self;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if ([self.delegate respondsToSelector:@selector(didSelectCell:)]) {
+        [self.delegate didSelectCell:self];
+    }
+}
 
 @end

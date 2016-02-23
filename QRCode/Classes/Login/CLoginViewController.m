@@ -9,14 +9,17 @@
 #import "CLoginViewController.h"
 #import "CLoginViewCell.h"
 #import "CListPopoverView.h"
-#import "CShoolModel.h"
+#import "CSchoolModel.h"
+#import "CLoginModel.h"
 
+#import "MBProgressHUD+UIView.h"
 #import <UIView+BlocksKit.h>
+#import <UIAlertView+BlocksKit.h>
 
 static NSString * const reuseIdentifier = @"CLoginViewCell";
 
-@interface CLoginViewController () <UITableViewDelegate, UITableViewDataSource, CListPopoverViewDelegate>
-@property (weak, nonatomic) IBOutlet UIButton *savePasswordButton;
+@interface CLoginViewController () <UITableViewDelegate, UITableViewDataSource, CListPopoverViewDelegate, CLoginViewCellDelegate>
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
 @property (weak, nonatomic) IBOutlet UITableView *contentTableView;
 
 @property (strong, nonatomic) CListPopoverView *popupListView;
@@ -31,13 +34,14 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    [self.logoImageView createBordersWithColor:[UIColor groupTableViewBackgroundColor] withCornerRadius:self.logoImageView.bounds.size.height / 2 andWidth:1];
+     
     [self.contentTableView registerNib:[UINib nibWithNibName:@"CLoginViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
-    [self.contentTableView createBordersWithColor:[UIColor whiteColor] withCornerRadius:6 andWidth:1];
+    [self.contentTableView createBordersWithColor:[UIColor groupTableViewBackgroundColor] withCornerRadius:0 andWidth:1];
     
     [[CWebService sharedInstance] school_list_success:^(NSArray *models) {
         NSError *jsonError;
-        self.schoolArray = [MTLJSONAdapter modelsOfClass:[CShoolModel class] fromJSONArray:models error:&jsonError];
+        self.schoolArray = [MTLJSONAdapter modelsOfClass:[CSchoolModel class] fromJSONArray:models error:&jsonError];
         self.resultArray = [NSArray arrayWithArray:self.schoolArray];
         self.popupListView = [[CListPopoverView alloc] initWithFrame:CGRectZero andTarget:self];
     } failure:^(CWebServiceError *error) {
@@ -60,14 +64,8 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)onSavePassword:(id)sender {
-    UIButton *aButton = sender;
-    [self.savePasswordButton setSelected:!aButton.selected];
+- (IBAction)onForgetPassword:(id)sender {
     
-    if (!self.savePasswordButton) {
-        [USER_DEFAULT removeObjectForKey:kUserNameDefault];
-        [USER_DEFAULT removeObjectForKey:kPasswordDefault];
-    }
 }
 
 - (IBAction)onLogin:(id)sender {
@@ -83,19 +81,19 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
     NSString *passWord = cell.textField.text;
     
     if ([userName isEqualToString:@""] || [passWord isEqualToString:@""] || [schoolName isEqualToString:@""]) {
+        [MBProgressHUD showError:@"信息输入不完整！"];
         return;
     }
     
-    if (self.savePasswordButton.isSelected) {
-        [USER_DEFAULT setObject:userName forKey:kUserNameDefault];
-        [USER_DEFAULT setObject:passWord forKey:kPasswordDefault];
-        [USER_DEFAULT synchronize];
-    }
+    [USER_DEFAULT setObject:userName forKey:kUserNameDefault];
+    [USER_DEFAULT setObject:passWord forKey:kPasswordDefault];
     
-    [[CWebService sharedInstance] login_username:userName password:passWord success:^(NSArray *models) {
-        
+    [[CWebService sharedInstance] login_username:userName password:passWord success:^(NSDictionary *models) {
+        NSError *jsonError;
+        [[CDataSource sharedInstance] setLoginDict:[MTLJSONAdapter modelOfClass:[CLoginModel class] fromJSONDictionary:models error:&jsonError]];
+        [APP_DELEGATE setupHomeViewController];
     } failure:^(CWebServiceError *error) {
-        
+        [MBProgressHUD showError:error.localizedDescription];
     } animated:YES message:@""];
 }
 
@@ -112,16 +110,17 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
     CLoginViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     
     // Configure the cell...
+    cell.delegate = self;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     switch (indexPath.row) {
         case 0: {
-            cell.imageView.image = [UIImage imageNamed:@"shcool_image"];
+            cell.imageView.image = [UIImage imageNamed:@"school"];
             cell.textField.placeholder = @"学校";
             cell.textField.enabled = NO;
             break;
         }
         case 1: {
-            cell.imageView.image = [UIImage imageNamed:@"password_image"];
+            cell.imageView.image = [UIImage imageNamed:@"password"];
             cell.textField.placeholder = @"用户";
             NSString *userName = [USER_DEFAULT objectForKey:kUserNameDefault];
             if (userName) {
@@ -130,7 +129,7 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
             break;
         }
         case 2: {
-            cell.imageView.image = [UIImage imageNamed:@"username_image"];
+            cell.imageView.image = [UIImage imageNamed:@"username"];
             cell.textField.placeholder = @"密码";
             cell.textField.secureTextEntry = YES;
             NSString *passWord = [USER_DEFAULT objectForKey:kPasswordDefault];
@@ -153,8 +152,39 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0) {
-        [self.popupListView showPopoverView];
+    CLoginViewCell *cell;
+    switch (indexPath.row) {
+        case 0: {
+            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 0)];
+            cell.imageView.image = [UIImage imageNamed:@"school_selected"];
+            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 1)];
+            cell.imageView.image = [UIImage imageNamed:@"password"];
+            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 2)];
+            cell.imageView.image = [UIImage imageNamed:@"username"];
+            self.popupListView.autoHidden = YES;
+            [self.popupListView showPopoverView];
+            break;
+        }
+        case 1: {
+            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 0)];
+            cell.imageView.image = [UIImage imageNamed:@"school"];
+            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 1)];
+            cell.imageView.image = [UIImage imageNamed:@"password_selected"];
+            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 2)];
+            cell.imageView.image = [UIImage imageNamed:@"username"];
+            break;
+        }
+        case 2: {
+            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 0)];
+            cell.imageView.image = [UIImage imageNamed:@"school"];
+            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 1)];
+            cell.imageView.image = [UIImage imageNamed:@"password"];
+            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 2)];
+            cell.imageView.image = [UIImage imageNamed:@"username_selected"];
+            break;
+        }
+        default:
+            break;
     }
 }
 
@@ -164,15 +194,29 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
 }
 
 - (NSString *)itemAtIndexPath:(NSIndexPath *)indexPath {
-    CShoolModel *school = self.resultArray[indexPath.row];
+    CSchoolModel *school = self.resultArray[indexPath.row];
     return school.schoolName;
 }
 
 - (void)didSelectedItemIndex:(NSInteger)index {
     self.currentSchool = index;
     CLoginViewCell *cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 0)];
-    CShoolModel *school = self.resultArray[self.currentSchool];
+    CSchoolModel *school = self.resultArray[self.currentSchool];
     cell.textField.text = school.schoolName;
+    
+    if ([school.isDelete isEqualToString:@"0"]) {
+        UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"抱歉，贵校目前无此授权，不能使用！"];
+        [alertView bk_addButtonWithTitle:@"知道了" handler:^{
+            
+        }];
+        [alertView show];
+    } else if ([school.serverAddr isEqualToString:@""]) {
+        UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"抱歉，贵校的服务器地址未配置！"];
+        [alertView bk_addButtonWithTitle:@"知道了" handler:^{
+            
+        }];
+        [alertView show];
+    }
 }
 
 - (void)didChangeSearchText:(NSString *)searchText {
@@ -181,6 +225,45 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
     self.resultArray = [self.schoolArray filteredArrayUsingPredicate:predicate];
     
     [self.popupListView reloadData];
+}
+
+#pragma mark - <CLoginViewCellDelegate>
+- (void)didSelectCell:(CLoginViewCell *)cell {
+    NSIndexPath *indexPath = [self.contentTableView indexPathForCell:cell];
+    
+    switch (indexPath.row) {
+        case 0: {
+            cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 0)];
+            cell.imageView.image = [UIImage imageNamed:@"school_selected"];
+            cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 1)];
+            cell.imageView.image = [UIImage imageNamed:@"password"];
+            cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 2)];
+            cell.imageView.image = [UIImage imageNamed:@"username"];
+            self.popupListView.autoHidden = YES;
+            [self.popupListView showPopoverView];
+            break;
+        }
+        case 1: {
+            cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 0)];
+            cell.imageView.image = [UIImage imageNamed:@"school"];
+            cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 1)];
+            cell.imageView.image = [UIImage imageNamed:@"password_selected"];
+            cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 2)];
+            cell.imageView.image = [UIImage imageNamed:@"username"];
+            break;
+        }
+        case 2: {
+            cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 0)];
+            cell.imageView.image = [UIImage imageNamed:@"school"];
+            cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 1)];
+            cell.imageView.image = [UIImage imageNamed:@"password"];
+            cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 2)];
+            cell.imageView.image = [UIImage imageNamed:@"username_selected"];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 @end

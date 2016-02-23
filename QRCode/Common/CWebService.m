@@ -133,18 +133,21 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
 
 - (AFHTTPRequestOperation *)login_username:(NSString *)username
                                   password:(NSString *)password
-                                   success:(void (^)(NSArray *models))success
+                                   success:(void (^)(NSDictionary *models))success
                                    failure:(WebServiceErrorRespondBlock)failure
                                   animated:(BOOL)animated
                                    message:(NSString *)message {
     NSString *uri = @"liquidation/api/liquidata/securi_login?sign=";
     self.client.baseURL = [NSURL URLWithString:[[Configuration sharedInstance] serverUrl]];
     NSDictionary *dict = @{
-                     @"Username" : username,//12000001
-                     @"Password" : [password encodeToBase64]//wuwen929
+                     @"username" : username,//12000001
+                     @"passwd" : password//wuwen929
                      };
+    NSString *param = [dict dictionaryToJSON];
+    param = [param encodeToBase64];
+    uri = [NSString stringWithFormat:@"%@%@", uri, param];
     return [self.client postHttpRequestWithURI:uri
-                                    parameters:dict
+                                    parameters:nil
                                        success:^(NSData *responseObject) {
                                            NSError *jsonError = nil;
                                            NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:&jsonError];

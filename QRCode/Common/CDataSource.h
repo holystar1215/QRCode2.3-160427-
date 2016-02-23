@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-
-
+#import "CLoginModel.h"
+#import "CSchoolModel.h"
 
 @interface CDataSource : NSObject
+@property (nonatomic, strong) CLoginModel *loginDict;
 
 DEFINE_SINGLETON_FOR_HEADER(CDataSource);
 

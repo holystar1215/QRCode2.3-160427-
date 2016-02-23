@@ -9,14 +9,14 @@
 #import "CHomeViewController.h"
 #import "CHeaderView.h"
 #import "CStatusBarView.h"
-#import "CHomeTableViewCell.h"
+#import "CHomeViewCollectionViewCell.h"
 
-static NSString * const reuseIdentifier = @"CHomeTableViewCell";
+static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
 
-@interface CHomeViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface CHomeViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet CHeaderView *headerView;
-@property (weak, nonatomic) IBOutlet CStatusBarView *statusBarView;
-@property (weak, nonatomic) IBOutlet UITableView *contentTableView;
+@property (weak, nonatomic) IBOutlet UIButton *logoutButton;
+@property (weak, nonatomic) IBOutlet UICollectionView *contentTableView;
 
 @property (nonatomic, strong) NSArray *itemsArray;
 
@@ -27,16 +27,16 @@ static NSString * const reuseIdentifier = @"CHomeTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self.contentTableView registerNib:[UINib nibWithNibName:@"CHomeTableViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
+    [self.contentTableView registerNib:[UINib nibWithNibName:@"CHomeViewCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
     
     self.itemsArray = @[
                         @[
-                            @{@"kItemName" : @"条码盘点", @"kIconName" : @""},
-                            @{@"kItemName" : @"二维码盘点", @"kIconName" : @""},
-                            @{@"kItemName" : @"自定义编码号盘点", @"kIconName" : @""},
-                            @{@"kItemName" : @"已经盘点的记录", @"kIconName" : @""},
-                            @{@"kItemName" : @"查询盘盈记录", @"kIconName" : @""},
-                            @{@"kItemName" : @"尚未盘点的记录", @"kIconName" : @""}
+                            @{@"kItemName" : @"条码盘点", @"kIconName" : @"bar_code"},
+                            @{@"kItemName" : @"二维码盘点", @"kIconName" : @"qr_code"},
+                            @{@"kItemName" : @"自定义编码号盘点", @"kIconName" : @"custom"},
+                            @{@"kItemName" : @"已经盘点的记录", @"kIconName" : @"checked"},
+                            @{@"kItemName" : @"查询盘盈记录", @"kIconName" : @"search"},
+                            @{@"kItemName" : @"尚未盘点的记录", @"kIconName" : @"unchecked"}
                           ]
                         ];
 }
@@ -47,41 +47,39 @@ static NSString * const reuseIdentifier = @"CHomeTableViewCell";
 }
 
 #pragma mark - Activity Method
-- (IBAction)onExitButton:(id)sender {
+- (IBAction)onLogout:(id)sender {
     
 }
 
-#pragma mark - <UITableViewDataSource>
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+#pragma mark - <UICollectionViewDataSource>
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return 6;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CHomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CHomeViewCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
     NSDictionary *dict = self.itemsArray[indexPath.section][indexPath.row];
     cell.titleLabel.text = dict[@"kItemName"];
-//    if ([dict[@"kHasSubItem"] boolValue]) {
-//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//    } else {
-//        cell.accessoryType = UITableViewCellAccessoryNone;
-//    }
+    cell.iconImageView.image = [UIImage imageNamed:dict[@"kIconName"]];
     
     return cell;
 }
 
-#pragma mark - <UITableViewDelegate>
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
+#pragma mark - <UICollectionViewDelegate>
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    UICollectionViewCell * cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    cell.backgroundColor = [UIColor whiteColor];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+#pragma mark - <UICollectionViewDelegateFlowLayout>
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(106, 70);
 }
 
 @end

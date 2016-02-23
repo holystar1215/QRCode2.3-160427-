@@ -48,7 +48,7 @@ DEFINE_SINGLETON_FOR_HEADER(CWebService);
 
 - (AFHTTPRequestOperation *)login_username:(NSString *)username
                                   password:(NSString *)password
-                                   success:(void (^)(NSArray *models))success
+                                   success:(void (^)(NSDictionary *models))success
                                    failure:(WebServiceErrorRespondBlock)failure
                                   animated:(BOOL)animated
                                    message:(NSString *)message;

@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class CLoginViewCell;
+@protocol CLoginViewCellDelegate <NSObject>
+@optional
+- (void)didSelectCell:(CLoginViewCell *)cell;
+
+@end
+
 @interface CLoginViewCell : UITableViewCell
+@property (weak, nonatomic) id<CLoginViewCellDelegate> delegate;
+
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 @property (weak, nonatomic) IBOutlet UIView *lineView;

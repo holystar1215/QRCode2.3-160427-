@@ -7,9 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CHomeViewController">
             <connections>
-                <outlet property="contentTableView" destination="R7D-At-T80" id="2Xe-Th-n7P"/>
+                <outlet property="contentTableView" destination="egR-T9-xst" id="xJ0-8O-s0f"/>
                 <outlet property="headerView" destination="mDz-hN-IqS" id="dYI-e5-7Sx"/>
-                <outlet property="statusBarView" destination="cUN-56-Kum" id="bPq-Z0-AA8"/>
+                <outlet property="logoutButton" destination="HPQ-jP-lNv" id="wW4-7h-Ebd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,7 +19,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mDz-hN-IqS" customClass="CHeaderView">
-                    <rect key="frame" x="0.0" y="64" width="600" height="80"/>
+                    <rect key="frame" x="0.0" y="72" width="600" height="80"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_header_icon" translatesAutoresizingMaskIntoConstraints="NO" id="qZJ-03-TN8">
                             <rect key="frame" x="15" y="10" width="60" height="60"/>
@@ -32,7 +32,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="GHQ-3K-LGV"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -41,7 +41,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="h25-Fh-JkD"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -65,51 +65,47 @@
                         <outlet property="titleLabel" destination="vYt-KW-bdC" id="hYy-ap-u4k"/>
                     </connections>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="R7D-At-T80">
-                    <rect key="frame" x="0.0" y="152" width="600" height="390"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="DYU-Hz-JtJ"/>
-                        <outlet property="delegate" destination="-1" id="2GJ-G6-tqN"/>
-                    </connections>
-                </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cUN-56-Kum" customClass="CStatusBarView">
-                    <rect key="frame" x="0.0" y="550" width="600" height="50"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aH7-MT-znT">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                            <state key="normal" title="退出">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="onExitButton:" destination="-1" eventType="touchUpInside" id="B7O-fz-gfv"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="egR-T9-xst">
+                    <rect key="frame" x="0.0" y="160" width="600" height="280"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="aH7-MT-znT" secondAttribute="bottom" id="E08-gj-Q0X"/>
-                        <constraint firstAttribute="trailing" secondItem="aH7-MT-znT" secondAttribute="trailing" id="GdL-Pg-biJ"/>
-                        <constraint firstItem="aH7-MT-znT" firstAttribute="leading" secondItem="cUN-56-Kum" secondAttribute="leading" id="I0X-n1-Wb3"/>
-                        <constraint firstAttribute="height" constant="50" id="ViP-bh-UkP"/>
-                        <constraint firstItem="aH7-MT-znT" firstAttribute="top" secondItem="cUN-56-Kum" secondAttribute="top" id="meP-pc-wrM"/>
+                        <constraint firstAttribute="height" constant="280" id="kvx-gt-yZl"/>
                     </constraints>
-                </view>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ljA-5a-9wH">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="dEQ-B8-vUR"/>
+                        <outlet property="delegate" destination="-1" id="lrt-Ih-YQ6"/>
+                    </connections>
+                </collectionView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPQ-jP-lNv">
+                    <rect key="frame" x="8" y="512" width="584" height="40"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="ivK-We-lBE"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <state key="normal" title="退出当前账号"/>
+                    <connections>
+                        <action selector="onLogout:" destination="-1" eventType="touchUpInside" id="iKy-Fl-rIC"/>
+                    </connections>
+                </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="cUN-56-Kum" secondAttribute="trailing" id="5oP-Gr-D5k"/>
-                <constraint firstAttribute="bottom" secondItem="cUN-56-Kum" secondAttribute="bottom" id="CdG-kf-gnf"/>
+                <constraint firstAttribute="bottom" secondItem="HPQ-jP-lNv" secondAttribute="bottom" constant="48" id="4fS-yo-G7T"/>
                 <constraint firstItem="mDz-hN-IqS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="GoL-rk-wxP"/>
-                <constraint firstItem="mDz-hN-IqS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="TdM-uD-ysE"/>
-                <constraint firstAttribute="trailing" secondItem="R7D-At-T80" secondAttribute="trailing" id="dDR-Pf-R2z"/>
-                <constraint firstItem="R7D-At-T80" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hOb-dJ-kn9"/>
-                <constraint firstItem="R7D-At-T80" firstAttribute="top" secondItem="mDz-hN-IqS" secondAttribute="bottom" constant="8" id="sxy-84-gwH"/>
-                <constraint firstItem="cUN-56-Kum" firstAttribute="top" secondItem="R7D-At-T80" secondAttribute="bottom" constant="8" id="trC-7W-NsY"/>
+                <constraint firstItem="HPQ-jP-lNv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="LIB-2f-4df"/>
+                <constraint firstItem="egR-T9-xst" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="RJV-cN-lrI"/>
+                <constraint firstItem="mDz-hN-IqS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="72" id="TdM-uD-ysE"/>
+                <constraint firstAttribute="trailing" secondItem="egR-T9-xst" secondAttribute="trailing" id="ZEu-8l-aO7"/>
+                <constraint firstAttribute="trailing" secondItem="HPQ-jP-lNv" secondAttribute="trailing" constant="8" id="hSG-BV-gHl"/>
+                <constraint firstItem="egR-T9-xst" firstAttribute="top" secondItem="mDz-hN-IqS" secondAttribute="bottom" constant="8" id="i7o-na-taQ"/>
                 <constraint firstAttribute="trailing" secondItem="mDz-hN-IqS" secondAttribute="trailing" id="uOY-2n-t0x"/>
-                <constraint firstItem="cUN-56-Kum" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="vhl-K7-5Ot"/>
             </constraints>
         </view>
     </objects>

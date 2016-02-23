@@ -25,10 +25,8 @@
 		C30236491C5CFFD000684957 /* CHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C30236471C5CFFD000684957 /* CHomeViewController.m */; };
 		C302364A1C5CFFD000684957 /* CHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C30236481C5CFFD000684957 /* CHomeViewController.xib */; };
 		C302364D1C5D026800684957 /* CHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C302364C1C5D026800684957 /* CHeaderView.m */; };
-		C30236511C5D028600684957 /* CHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C302364F1C5D028600684957 /* CHomeTableViewCell.m */; };
-		C30236521C5D028600684957 /* CHomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C30236501C5D028600684957 /* CHomeTableViewCell.xib */; };
 		C30236561C5D147500684957 /* DSNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C30236551C5D147500684957 /* DSNavigationBar.m */; };
-		C3104A741C787AFF00115149 /* CShoolModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3104A731C787AFF00115149 /* CShoolModel.m */; };
+		C3104A741C787AFF00115149 /* CSchoolModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3104A731C787AFF00115149 /* CSchoolModel.m */; };
 		C3488B191C5A79860035776B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C3488B181C5A79860035776B /* main.m */; };
 		C3488B1C1C5A79860035776B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C3488B1B1C5A79860035776B /* AppDelegate.m */; };
 		C3488B241C5A79860035776B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3488B231C5A79860035776B /* Assets.xcassets */; };
@@ -52,6 +50,9 @@
 		C3CA27251C7A215F00E6696E /* CUnCheckedRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CA271F1C7A215F00E6696E /* CUnCheckedRecordViewController.xib */; };
 		C3CA27291C7A218400E6696E /* CRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA27271C7A218400E6696E /* CRecordTableViewCell.m */; };
 		C3CA272A1C7A218400E6696E /* CRecordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CA27281C7A218400E6696E /* CRecordTableViewCell.xib */; };
+		C3F9E8AD1C7AE10E00506E18 /* CLoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F9E8AC1C7AE10E00506E18 /* CLoginModel.m */; };
+		C3F9E8BB1C7CB80000506E18 /* CHomeViewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F9E8B91C7CB80000506E18 /* CHomeViewCollectionViewCell.m */; };
+		C3F9E8BC1C7CB80000506E18 /* CHomeViewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3F9E8BA1C7CB80000506E18 /* CHomeViewCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,13 +91,10 @@
 		C30236481C5CFFD000684957 /* CHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CHomeViewController.xib; sourceTree = "<group>"; };
 		C302364B1C5D026800684957 /* CHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHeaderView.h; sourceTree = "<group>"; };
 		C302364C1C5D026800684957 /* CHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHeaderView.m; sourceTree = "<group>"; };
-		C302364E1C5D028600684957 /* CHomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHomeTableViewCell.h; sourceTree = "<group>"; };
-		C302364F1C5D028600684957 /* CHomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHomeTableViewCell.m; sourceTree = "<group>"; };
-		C30236501C5D028600684957 /* CHomeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CHomeTableViewCell.xib; sourceTree = "<group>"; };
 		C30236541C5D147500684957 /* DSNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSNavigationBar.h; sourceTree = "<group>"; };
 		C30236551C5D147500684957 /* DSNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSNavigationBar.m; sourceTree = "<group>"; };
-		C3104A721C787AFF00115149 /* CShoolModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CShoolModel.h; sourceTree = "<group>"; };
-		C3104A731C787AFF00115149 /* CShoolModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CShoolModel.m; sourceTree = "<group>"; };
+		C3104A721C787AFF00115149 /* CSchoolModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSchoolModel.h; sourceTree = "<group>"; };
+		C3104A731C787AFF00115149 /* CSchoolModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSchoolModel.m; sourceTree = "<group>"; };
 		C3488B141C5A79860035776B /* QRCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QRCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3488B181C5A79860035776B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C3488B1A1C5A79860035776B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -134,6 +132,11 @@
 		C3CA27261C7A218400E6696E /* CRecordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRecordTableViewCell.h; sourceTree = "<group>"; };
 		C3CA27271C7A218400E6696E /* CRecordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRecordTableViewCell.m; sourceTree = "<group>"; };
 		C3CA27281C7A218400E6696E /* CRecordTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CRecordTableViewCell.xib; sourceTree = "<group>"; };
+		C3F9E8AB1C7AE10E00506E18 /* CLoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLoginModel.h; sourceTree = "<group>"; };
+		C3F9E8AC1C7AE10E00506E18 /* CLoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLoginModel.m; sourceTree = "<group>"; };
+		C3F9E8B81C7CB80000506E18 /* CHomeViewCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHomeViewCollectionViewCell.h; sourceTree = "<group>"; };
+		C3F9E8B91C7CB80000506E18 /* CHomeViewCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHomeViewCollectionViewCell.m; sourceTree = "<group>"; };
+		C3F9E8BA1C7CB80000506E18 /* CHomeViewCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CHomeViewCollectionViewCell.xib; sourceTree = "<group>"; };
 		F21582C66C4A32303EB79BE6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -216,9 +219,9 @@
 				C30236481C5CFFD000684957 /* CHomeViewController.xib */,
 				C302364B1C5D026800684957 /* CHeaderView.h */,
 				C302364C1C5D026800684957 /* CHeaderView.m */,
-				C302364E1C5D028600684957 /* CHomeTableViewCell.h */,
-				C302364F1C5D028600684957 /* CHomeTableViewCell.m */,
-				C30236501C5D028600684957 /* CHomeTableViewCell.xib */,
+				C3F9E8B81C7CB80000506E18 /* CHomeViewCollectionViewCell.h */,
+				C3F9E8B91C7CB80000506E18 /* CHomeViewCollectionViewCell.m */,
+				C3F9E8BA1C7CB80000506E18 /* CHomeViewCollectionViewCell.xib */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -313,8 +316,10 @@
 		C3488B331C5A7C8F0035776B /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C3104A721C787AFF00115149 /* CShoolModel.h */,
-				C3104A731C787AFF00115149 /* CShoolModel.m */,
+				C3104A721C787AFF00115149 /* CSchoolModel.h */,
+				C3104A731C787AFF00115149 /* CSchoolModel.m */,
+				C3F9E8AB1C7AE10E00506E18 /* CLoginModel.h */,
+				C3F9E8AC1C7AE10E00506E18 /* CLoginModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -479,12 +484,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3F9E8BC1C7CB80000506E18 /* CHomeViewCollectionViewCell.xib in Resources */,
 				C30236441C5CFF6C00684957 /* CLoginViewController.xib in Resources */,
 				C3C767A21C5F2A0B00C8B83A /* CLoginViewCell.xib in Resources */,
 				C3CA27211C7A215F00E6696E /* CCheckedRecordViewController.xib in Resources */,
 				C3CA27251C7A215F00E6696E /* CUnCheckedRecordViewController.xib in Resources */,
 				C302364A1C5CFFD000684957 /* CHomeViewController.xib in Resources */,
-				C30236521C5D028600684957 /* CHomeTableViewCell.xib in Resources */,
 				C3CA26F91C7A1AA500E6696E /* CBarCodeInventoryViewController.xib in Resources */,
 				C3CA27081C7A1AE100E6696E /* CQRCodeInventoryViewController.xib in Resources */,
 				C3CA272A1C7A218400E6696E /* CRecordTableViewCell.xib in Resources */,
@@ -555,10 +560,9 @@
 				C3CA27201C7A215F00E6696E /* CCheckedRecordViewController.m in Sources */,
 				C30236381C5C648A00684957 /* CStatusBarView.m in Sources */,
 				C302364D1C5D026800684957 /* CHeaderView.m in Sources */,
-				C30236511C5D028600684957 /* CHomeTableViewCell.m in Sources */,
 				C3CA26F81C7A1AA500E6696E /* CBarCodeInventoryViewController.m in Sources */,
 				C302362B1C5C5D0800684957 /* Configuration.m in Sources */,
-				C3104A741C787AFF00115149 /* CShoolModel.m in Sources */,
+				C3104A741C787AFF00115149 /* CSchoolModel.m in Sources */,
 				C302362A1C5C5D0800684957 /* CDataSource.m in Sources */,
 				C302362C1C5C5D0800684957 /* CPublicModule.m in Sources */,
 				C3488B1C1C5A79860035776B /* AppDelegate.m in Sources */,
@@ -568,8 +572,10 @@
 				C3CA27241C7A215F00E6696E /* CUnCheckedRecordViewController.m in Sources */,
 				C302362D1C5C5D0800684957 /* CWebService.m in Sources */,
 				C3CA27221C7A215F00E6696E /* CSearchRecordViewController.m in Sources */,
+				C3F9E8AD1C7AE10E00506E18 /* CLoginModel.m in Sources */,
 				C30236291C5C5D0800684957 /* CDatabaseHelper.m in Sources */,
 				C3488B191C5A79860035776B /* main.m in Sources */,
+				C3F9E8BB1C7CB80000506E18 /* CHomeViewCollectionViewCell.m in Sources */,
 				C30236491C5CFFD000684957 /* CHomeViewController.m in Sources */,
 				C30236561C5D147500684957 /* DSNavigationBar.m in Sources */,
 				C30236121C5C5C5600684957 /* CBaseViewController.m in Sources */,
