@@ -7,9 +7,18 @@
 //
 
 #import "CUnCheckedRecordViewController.h"
+#import "CRecordTableViewCell.h"
+
+#import <Masonry.h>
 #import <UIBarButtonItem+BlocksKit.h>
 
-@interface CUnCheckedRecordViewController ()
+static NSString * const reuseIdentifier = @"UITableViewCell";
+
+@interface CUnCheckedRecordViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, weak) IBOutlet UITableView *contentTableView;
+@property (weak, nonatomic) IBOutlet CStatusView *statusView;
+
+@property (nonatomic, strong) NSArray *itemsArray;
 
 @end
 
@@ -28,14 +37,50 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - <UITableViewDataSource>
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
 }
-*/
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.itemsArray count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CRecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    
+    // Configure the cell...
+    cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    
+    return cell;
+}
+
+#pragma mark - <UITableViewDelegate>
+//如果要支持iOS7这个方法必须实现
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CRecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    
+    //这句代码必须要有，也就是说必须要设定contentView的宽度约束。
+    //设置以后，contentView里面的内容才知道什么时候该换行了
+    CGFloat contentViewWidth = CGRectGetWidth(tableView.frame);
+    [cell.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.equalTo(@(contentViewWidth));
+    }];
+    
+    //重新加载约束,每次计算之前一定要重新确认一下约束
+    [cell setNeedsUpdateConstraints];
+    [cell updateConstraintsIfNeeded];
+    
+    //自动算高度，+1的原因是因为contentView的高度要比cell的高度小1
+    CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
+    
+    return height;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
 
 @end

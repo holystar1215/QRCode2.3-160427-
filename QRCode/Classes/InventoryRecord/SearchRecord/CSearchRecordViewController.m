@@ -15,8 +15,9 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
 
 @interface CSearchRecordViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *contentTableView;
+@property (weak, nonatomic) IBOutlet CStatusView *statusView;
+
 @property (nonatomic, strong) NSArray *itemsArray;
-@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
 @end
 
@@ -50,7 +51,7 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     
     // Configure the cell...
-    cell.backgroundColor = [UIColor lightGrayColor];
+    cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryNone;
     
@@ -82,7 +83,5 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
 }
-
-
 
 @end

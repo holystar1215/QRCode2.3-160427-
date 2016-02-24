@@ -7,9 +7,16 @@
 //
 
 #import "CCheckedRecordViewController.h"
+#import "CRecordTableViewCell.h"
+
+#import <Masonry.h>
 #import <UIBarButtonItem+BlocksKit.h>
 
-@interface CCheckedRecordViewController ()
+@interface CCheckedRecordViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (nonatomic, weak) IBOutlet UITableView *contentTableView;
+@property (weak, nonatomic) IBOutlet CStatusView *statusView;
+
+@property (nonatomic, strong) NSArray *itemsArray;
 
 @end
 

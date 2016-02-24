@@ -8,7 +8,6 @@
 
 #import "CHomeViewController.h"
 #import "CHeaderView.h"
-#import "CStatusBarView.h"
 #import "CHomeViewCollectionViewCell.h"
 #import "CSearchRecordViewController.h"
 #import "CBarCodeInventoryViewController.h"

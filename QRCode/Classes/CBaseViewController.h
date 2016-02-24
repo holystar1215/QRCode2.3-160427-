@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CStatusBarView.h"
+#import "CStatusView.h"
 
 @interface CBaseViewController : UIViewController
 
