@@ -53,6 +53,14 @@ DEFINE_SINGLETON_FOR_HEADER(CWebService);
                                   animated:(BOOL)animated
                                    message:(NSString *)message;
 
+- (AFHTTPRequestOperation *)record_currentpage:(NSInteger)page
+                                       company:(NSString *)company
+                                          type:(NSInteger)type
+                                       success:(void (^)(NSArray *models))success
+                                       failure:(WebServiceErrorRespondBlock)failure
+                                      animated:(BOOL)animated
+                                       message:(NSString *)message;
+
 //- (AFHTTPRequestOperation *)check_update:(NSString *)update
 //                                 success:(void (^)(NSArray *models))success
 //                                 failure:(WebServiceErrorRespondBlock)failure
@@ -66,13 +74,7 @@ DEFINE_SINGLETON_FOR_HEADER(CWebService);
 //                                       animated:(BOOL)animated
 //                                        message:(NSString *)message;
 //
-//- (AFHTTPRequestOperation *)search_log_currentpage:(NSInteger)page
-//                                            company:(NSString *)company
-//                                               type:(NSInteger)type
-//                                            success:(void (^)(NSArray *models))success
-//                                            failure:(WebServiceErrorRespondBlock)failure
-//                                           animated:(BOOL)animated
-//                                            message:(NSString *)message;
+
 //
 //- (AFHTTPRequestOperation *)asset_info_number:(NSString *)number
 //                                      company:(NSString *)company

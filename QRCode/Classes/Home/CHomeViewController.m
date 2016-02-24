@@ -43,6 +43,10 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
                             @{@"kItemName" : @"尚未盘点的记录", @"kIconName" : @"unchecked"}
                           ]
                         ];
+    
+    self.headerView.headerImageView.image = [UIImage imageNamed:@"login_account"];
+    self.headerView.titleLabel.text = [NSString stringWithFormat:@"姓名:%@", [CDataSource sharedInstance].loginDict.yhmc];
+    self.headerView.subTitleLabel.text = [NSString stringWithFormat:@"隶属单位:%@", [CDataSource sharedInstance].loginDict.lxdh];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -118,18 +122,24 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
         case 3: {
             CInventoryRecordViewController *vc = [[CInventoryRecordViewController alloc] initWithNibName:@"CInventoryRecordViewController" bundle:nil];
             vc.title = dict[@"kItemName"];
+            vc.recordType = 0;
+            vc.assetCompany = [CDataSource sharedInstance].loginDict.cxdw;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 4: {
             CInventoryRecordViewController *vc = [[CInventoryRecordViewController alloc] initWithNibName:@"CInventoryRecordViewController" bundle:nil];
             vc.title = dict[@"kItemName"];
+            vc.recordType = 1;
+            vc.assetCompany = [CDataSource sharedInstance].loginDict.cxdw;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 5: {
             CInventoryRecordViewController *vc = [[CInventoryRecordViewController alloc] initWithNibName:@"CInventoryRecordViewController" bundle:nil];
             vc.title = dict[@"kItemName"];
+            vc.recordType = 2;
+            vc.assetCompany = [CDataSource sharedInstance].loginDict.cxdw;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }

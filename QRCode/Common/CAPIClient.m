@@ -105,7 +105,7 @@
                                            failure:(ErrorRespondBlock)failure
                                           animated:(BOOL)animated
                                            message:(NSString *)message {
-    NSLog(@"\r\n%@/%@\nparam:%@", self.baseURL, uri, parameters);
+    NSLog(@"\r\n%@%@\nparam:%@", self.baseURL, uri, parameters);
     NSString *url = [NSString stringWithFormat:@"%@/%@", self.baseURL, uri];
     if (animated) {
         [MBProgressHUD showMessage:message];

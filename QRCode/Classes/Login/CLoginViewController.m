@@ -39,6 +39,8 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
     [self.contentTableView registerNib:[UINib nibWithNibName:@"CLoginViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
     [self.contentTableView createBordersWithColor:[UIColor groupTableViewBackgroundColor] withCornerRadius:0 andWidth:1];
     
+    self.logoImageView.image = [UIImage imageNamed:@"login_account"];
+    
     [[CWebService sharedInstance] school_list_success:^(NSArray *models) {
         NSError *jsonError;
         self.schoolArray = [MTLJSONAdapter modelsOfClass:[CSchoolModel class] fromJSONArray:models error:&jsonError];

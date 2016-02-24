@@ -11,6 +11,7 @@
 
 #import <Masonry.h>
 #import <UIBarButtonItem+BlocksKit.h>
+#import <MJRefresh/MJRefreshAutoNormalFooter.h>
 
 static NSString * const reuseIdentifier = @"UITableViewCell";
 
@@ -34,6 +35,42 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"筛选" style:UIBarButtonItemStylePlain handler:^(id sender) {
         
     }];
+    
+    self.currentPage = 1;
+    [[CWebService sharedInstance] record_currentpage:self.currentPage company:self.assetCompany type:self.recordType success:^(NSArray *models) {
+        
+    } failure:^(CWebServiceError *error) {
+        
+    } animated:YES message:@""];
+    [self setCount:10 andAmount:10.23];
+    self.contentTableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [[CWebService sharedInstance] record_currentpage:self.currentPage company:self.assetCompany type:self.recordType success:^(NSArray *models) {
+            
+        } failure:^(CWebServiceError *error) {
+            
+        } animated:YES message:@""];
+    }];
+}
+
+- (void)setCount:(NSInteger)count andAmount:(CGFloat)amount {
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    formatter.numberStyle = NSNumberFormatterDecimalStyle;
+    
+    NSString *countText = [NSString stringWithFormat:@"记录数：%@", [formatter stringFromNumber:[NSNumber numberWithInteger:count]]];
+    NSMutableAttributedString *countAttributedString = [[NSMutableAttributedString alloc] initWithString:countText];
+    [countAttributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, countText.length)];
+    [countAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 3)];
+    [countAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(4, countText.length - 4)];
+    
+    self.statusView.countLabel.attributedText = countAttributedString;
+    
+    NSString *amountText = [NSString stringWithFormat:@"金额总计：%@", [formatter stringFromNumber:[NSNumber numberWithFloat:amount]]];
+    NSMutableAttributedString *amountAttributedString = [[NSMutableAttributedString alloc] initWithString:amountText];
+    [amountAttributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, amountText.length)];
+    [amountAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 4)];
+    [amountAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(5, amountText.length - 5)];
+    
+    self.statusView.amountLabel.attributedText = amountAttributedString;
 }
 
 - (void)didReceiveMemoryWarning {

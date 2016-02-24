@@ -171,6 +171,48 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                        message:message];
 }
 
+- (AFHTTPRequestOperation *)record_currentpage:(NSInteger)page
+                                       company:(NSString *)company
+                                          type:(NSInteger)type
+                                       success:(void (^)(NSArray *models))success
+                                       failure:(WebServiceErrorRespondBlock)failure
+                                      animated:(BOOL)animated
+                                       message:(NSString *)message {
+    NSString *uri = @"/liquidation/api/liquidata/securi_searchzc?sign=";
+    self.client.baseURL = [NSURL URLWithString:[[Configuration sharedInstance] serverUrl]];
+    NSDictionary *dict = @{
+                           @"currentpage" : [NSNumber numberWithInteger:page],
+                           @"company" : company,
+                           @"type" : [NSNumber numberWithInteger:type]
+                           };
+    NSString *param = [dict dictionaryToJSON];
+    param = [param encodeToBase64];
+    uri = [NSString stringWithFormat:@"%@%@", uri, param];
+    return [self.client postHttpRequestWithURI:uri
+                                    parameters:nil
+                                       success:^(NSData *responseObject) {
+                                           NSError *jsonError = nil;
+                                           NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:&jsonError];
+                                           if (!jsonError) {
+                                               CWebServiceError *webError = [CWebServiceError checkRespondDict:resultDic];
+                                               if (webError.errorType == eWebServiceErrorSuccess) {
+                                                   success(resultDic[@"obj"]);
+                                               } else {
+                                                   failure(webError);
+                                               }
+                                           } else {
+                                               failure([CWebServiceError checkRespondWithError:jsonError]);
+                                           }
+                                       }
+                                       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                           CWebServiceError *serviceError = [CWebServiceError checkRespondWithError:error];
+                                           serviceError.errorMessage = [operation responseObject];
+                                           failure(serviceError);
+                                       }
+                                      animated:animated
+                                       message:message];
+}
+
 //- (AFHTTPRequestOperation *)check_update:(NSString *)update
 //                                 success:(void (^)(NSArray *models))success
 //                                 failure:(WebServiceErrorRespondBlock)failure
