@@ -1,26 +1,19 @@
 //
-//  CCheckedRecordViewController.m
+//  CCodeScanViewController.m
 //  QRCode
 //
-//  Created by CarlLiu on 16/2/22.
+//  Created by CarlLiu on 16/2/24.
 //  Copyright © 2016年 Carl. All rights reserved.
 //
 
-#import "CCheckedRecordViewController.h"
-#import "CRecordTableViewCell.h"
-
-#import <Masonry.h>
+#import "CCodeScanViewController.h"
 #import <UIBarButtonItem+BlocksKit.h>
 
-@interface CCheckedRecordViewController () <UITableViewDataSource, UITableViewDelegate>
-@property (nonatomic, weak) IBOutlet UITableView *contentTableView;
-@property (weak, nonatomic) IBOutlet CStatusView *statusView;
-
-@property (nonatomic, strong) NSArray *itemsArray;
+@interface CCodeScanViewController ()
 
 @end
 
-@implementation CCheckedRecordViewController
+@implementation CCodeScanViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

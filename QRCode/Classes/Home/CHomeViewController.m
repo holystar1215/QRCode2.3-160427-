@@ -9,16 +9,15 @@
 #import "CHomeViewController.h"
 #import "CHeaderView.h"
 #import "CHomeViewCollectionViewCell.h"
-#import "CSearchRecordViewController.h"
-#import "CBarCodeInventoryViewController.h"
-#import "CQRCodeInventoryViewController.h"
-#import "CUnCheckedRecordViewController.h"
-#import "CCheckedRecordViewController.h"
+#import "CInventoryRecordViewController.h"
 #import "CCustomCodeInventoryViewController.h"
+
+#import "CCodeScanViewController.h"
+#import <QRCodeReader.h>
 
 static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
 
-@interface CHomeViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface CHomeViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, QRCodeReaderDelegate>
 @property (weak, nonatomic) IBOutlet CHeaderView *headerView;
 @property (weak, nonatomic) IBOutlet UIButton *logoutButton;
 @property (weak, nonatomic) IBOutlet UICollectionView *contentTableView;
@@ -83,16 +82,31 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
 //    cell.backgroundColor = [UIColor whiteColor];
     NSDictionary *dict = self.itemsArray[indexPath.section][indexPath.row];
     switch (indexPath.row) {
-        case 0: {
-            CBarCodeInventoryViewController *vc = [[CBarCodeInventoryViewController alloc] initWithNibName:@"CBarCodeInventoryViewController" bundle:nil];
-            vc.title = dict[@"kItemName"];
-            [self.navigationController pushViewController:vc animated:YES];
-            break;
-        }
+        case 0:
         case 1: {
-            CQRCodeInventoryViewController *vc = [[CQRCodeInventoryViewController alloc] initWithNibName:@"CQRCodeInventoryViewController" bundle:nil];
-            vc.title = dict[@"kItemName"];
-            [self.navigationController pushViewController:vc animated:YES];
+            if ([QRCodeReader supportsMetadataObjectTypes:@[AVMetadataObjectTypeQRCode]]) {
+                static CCodeScanViewController *vc = nil;
+                static dispatch_once_t onceToken;
+                
+                dispatch_once(&onceToken, ^{
+                    QRCodeReader *reader = [QRCodeReader readerWithMetadataObjectTypes:[NSArray arrayWithObjects:AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code, AVMetadataObjectTypeQRCode, nil]];
+                    vc                   = [CCodeScanViewController readerWithCancelButtonTitle:@"Cancel" codeReader:reader startScanningAtLoad:YES showSwitchCameraButton:NO showTorchButton:NO];
+                    vc.modalPresentationStyle = UIModalPresentationFormSheet;
+                });
+                vc.delegate = self;
+                
+                [vc setCompletionWithBlock:^(NSString *resultAsString) {
+                    NSLog(@"Completion with result: %@", resultAsString);
+                }];
+                
+                vc.title = dict[@"kItemName"];
+                [self.navigationController pushViewController:vc animated:YES];
+            } else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Reader not supported by the current device" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                
+                [alert show];
+            }
+            
             break;
         }
         case 2: {
@@ -102,19 +116,19 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
             break;
         }
         case 3: {
-            CCheckedRecordViewController *vc = [[CCheckedRecordViewController alloc] initWithNibName:@"CCheckedRecordViewController" bundle:nil];
+            CInventoryRecordViewController *vc = [[CInventoryRecordViewController alloc] initWithNibName:@"CInventoryRecordViewController" bundle:nil];
             vc.title = dict[@"kItemName"];
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 4: {
-            CSearchRecordViewController *vc = [[CSearchRecordViewController alloc] initWithNibName:@"CSearchRecordViewController" bundle:nil];
+            CInventoryRecordViewController *vc = [[CInventoryRecordViewController alloc] initWithNibName:@"CInventoryRecordViewController" bundle:nil];
             vc.title = dict[@"kItemName"];
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 5: {
-            CUnCheckedRecordViewController *vc = [[CUnCheckedRecordViewController alloc] initWithNibName:@"CUnCheckedRecordViewController" bundle:nil];
+            CInventoryRecordViewController *vc = [[CInventoryRecordViewController alloc] initWithNibName:@"CInventoryRecordViewController" bundle:nil];
             vc.title = dict[@"kItemName"];
             [self.navigationController pushViewController:vc animated:YES];
             break;
@@ -135,6 +149,18 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return 0;
+}
+
+#pragma mark - <QRCodeReaderDelegate>
+- (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result {
+    [self dismissViewControllerAnimated:YES completion:^{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"QRCodeReader" message:result delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }];
+}
+
+- (void)readerDidCancel:(QRCodeReaderViewController *)reader {
+    [reader.navigationController popViewControllerAnimated:YES];
 }
 
 @end

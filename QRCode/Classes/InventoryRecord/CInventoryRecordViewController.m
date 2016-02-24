@@ -1,12 +1,12 @@
 //
-//  CUnCheckedRecordViewController.m
+//  CInventoryRecordViewController.m
 //  QRCode
 //
-//  Created by CarlLiu on 16/2/22.
+//  Created by CarlLiu on 16/2/24.
 //  Copyright © 2016年 Carl. All rights reserved.
 //
 
-#import "CUnCheckedRecordViewController.h"
+#import "CInventoryRecordViewController.h"
 #import "CRecordTableViewCell.h"
 
 #import <Masonry.h>
@@ -14,7 +14,7 @@
 
 static NSString * const reuseIdentifier = @"UITableViewCell";
 
-@interface CUnCheckedRecordViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface CInventoryRecordViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *contentTableView;
 @property (weak, nonatomic) IBOutlet CStatusView *statusView;
 
@@ -22,13 +22,17 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
 
 @end
 
-@implementation CUnCheckedRecordViewController
+@implementation CInventoryRecordViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"back-arrow"] style:UIBarButtonItemStylePlain handler:^(id sender) {
         [self.navigationController popViewControllerAnimated:YES];
+    }];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"筛选" style:UIBarButtonItemStylePlain handler:^(id sender) {
+        
     }];
 }
 
@@ -47,7 +51,7 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CRecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     
     // Configure the cell...
     cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
