@@ -45,6 +45,8 @@
 		C3CA27031C7A1ACE00E6696E /* CCustomCodeInventoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CA27011C7A1ACE00E6696E /* CCustomCodeInventoryViewController.xib */; };
 		C3CA27291C7A218400E6696E /* CRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA27271C7A218400E6696E /* CRecordTableViewCell.m */; };
 		C3CA272A1C7A218400E6696E /* CRecordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CA27281C7A218400E6696E /* CRecordTableViewCell.xib */; };
+		C3D6E7AE1C7EAA3C003323E7 /* CRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D6E7AD1C7EAA3C003323E7 /* CRecordModel.m */; };
+		C3D6E7B91C7EFBDA003323E7 /* CModifyRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C3D6E7B81C7EFBDA003323E7 /* CModifyRecord.m */; };
 		C3F9E8AD1C7AE10E00506E18 /* CLoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F9E8AC1C7AE10E00506E18 /* CLoginModel.m */; };
 		C3F9E8BB1C7CB80000506E18 /* CHomeViewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3F9E8B91C7CB80000506E18 /* CHomeViewCollectionViewCell.m */; };
 		C3F9E8BC1C7CB80000506E18 /* CHomeViewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3F9E8BA1C7CB80000506E18 /* CHomeViewCollectionViewCell.xib */; };
@@ -119,6 +121,10 @@
 		C3CA27261C7A218400E6696E /* CRecordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRecordTableViewCell.h; sourceTree = "<group>"; };
 		C3CA27271C7A218400E6696E /* CRecordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRecordTableViewCell.m; sourceTree = "<group>"; };
 		C3CA27281C7A218400E6696E /* CRecordTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CRecordTableViewCell.xib; sourceTree = "<group>"; };
+		C3D6E7AC1C7EAA3C003323E7 /* CRecordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRecordModel.h; sourceTree = "<group>"; };
+		C3D6E7AD1C7EAA3C003323E7 /* CRecordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRecordModel.m; sourceTree = "<group>"; };
+		C3D6E7B71C7EFBDA003323E7 /* CModifyRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CModifyRecord.h; sourceTree = "<group>"; };
+		C3D6E7B81C7EFBDA003323E7 /* CModifyRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CModifyRecord.m; sourceTree = "<group>"; };
 		C3F9E8AB1C7AE10E00506E18 /* CLoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLoginModel.h; sourceTree = "<group>"; };
 		C3F9E8AC1C7AE10E00506E18 /* CLoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLoginModel.m; sourceTree = "<group>"; };
 		C3F9E8B81C7CB80000506E18 /* CHomeViewCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CHomeViewCollectionViewCell.h; sourceTree = "<group>"; };
@@ -304,6 +310,10 @@
 				C3104A731C787AFF00115149 /* CSchoolModel.m */,
 				C3F9E8AB1C7AE10E00506E18 /* CLoginModel.h */,
 				C3F9E8AC1C7AE10E00506E18 /* CLoginModel.m */,
+				C3D6E7AC1C7EAA3C003323E7 /* CRecordModel.h */,
+				C3D6E7AD1C7EAA3C003323E7 /* CRecordModel.m */,
+				C3D6E7B71C7EFBDA003323E7 /* CModifyRecord.h */,
+				C3D6E7B81C7EFBDA003323E7 /* CModifyRecord.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -519,9 +529,11 @@
 				C3488B191C5A79860035776B /* main.m in Sources */,
 				C3F9E8BB1C7CB80000506E18 /* CHomeViewCollectionViewCell.m in Sources */,
 				C3C83B311C7DA18100BE269C /* CInventoryRecordViewController.m in Sources */,
+				C3D6E7B91C7EFBDA003323E7 /* CModifyRecord.m in Sources */,
 				C30236491C5CFFD000684957 /* CHomeViewController.m in Sources */,
 				C30236561C5D147500684957 /* DSNavigationBar.m in Sources */,
 				C30236121C5C5C5600684957 /* CBaseViewController.m in Sources */,
+				C3D6E7AE1C7EAA3C003323E7 /* CRecordModel.m in Sources */,
 				C302362F1C5C5D0800684957 /* NSString+AppPath.m in Sources */,
 				C3CA27021C7A1ACE00E6696E /* CCustomCodeInventoryViewController.m in Sources */,
 				C30236281C5C5D0800684957 /* CAPIClient.m in Sources */,

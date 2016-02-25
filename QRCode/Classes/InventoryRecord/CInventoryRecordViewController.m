@@ -12,6 +12,7 @@
 #import <Masonry.h>
 #import <UIBarButtonItem+BlocksKit.h>
 #import <MJRefresh/MJRefreshAutoNormalFooter.h>
+#import "MBProgressHUD+UIView.h"
 
 static NSString * const reuseIdentifier = @"UITableViewCell";
 
@@ -28,6 +29,8 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.currentPage = 1;
+    
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"back-arrow"] style:UIBarButtonItemStylePlain handler:^(id sender) {
         [self.navigationController popViewControllerAnimated:YES];
     }];
@@ -36,19 +39,30 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
         
     }];
     
-    self.currentPage = 1;
-    [[CWebService sharedInstance] record_currentpage:self.currentPage company:self.assetCompany type:self.recordType success:^(NSArray *models) {
-        
-    } failure:^(CWebServiceError *error) {
-        
-    } animated:YES message:@""];
-    [self setCount:10 andAmount:10.23];
-    self.contentTableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [[CWebService sharedInstance] record_currentpage:self.currentPage company:self.assetCompany type:self.recordType success:^(NSArray *models) {
-            
+    NSString *company = [[CDataSource sharedInstance].loginDict pddw];
+    if (company) {
+        [[CWebService sharedInstance] record_currentpage:[NSString stringWithFormat:@"%d", self.currentPage] company:company type:[NSString stringWithFormat:@"%d", self.recordType] success:^(NSArray *models) {
+            NSError *jsonError;
+            self.itemsArray = [MTLJSONAdapter modelsOfClass:[CRecordModel class] fromJSONArray:models error:&jsonError];
+            [self setCount:[self.itemsArray count] andAmount:0.0f];
         } failure:^(CWebServiceError *error) {
-            
+            [MBProgressHUD showError:error.localizedDescription];
         } animated:YES message:@""];
+    }
+    
+    self.contentTableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        NSString *company = [[CDataSource sharedInstance].loginDict pddw];
+        if (company) {
+            [[CWebService sharedInstance] record_currentpage:[NSString stringWithFormat:@"%d", self.currentPage] company:company type:[NSString stringWithFormat:@"%d", self.recordType] success:^(NSArray *models) {
+                NSError *jsonError;
+                NSMutableArray *moreItems = [[NSMutableArray alloc] initWithArray:self.itemsArray];
+                [moreItems addObjectsFromArray:[MTLJSONAdapter modelsOfClass:[CRecordModel class] fromJSONArray:models error:&jsonError]];
+                self.itemsArray = moreItems;
+                [self.contentTableView reloadData];
+            } failure:^(CWebServiceError *error) {
+                [MBProgressHUD showError:error.localizedDescription];
+            } animated:YES message:@""];
+        }
     }];
 }
 

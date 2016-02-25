@@ -71,4 +71,15 @@
     };
 }
 
+- (NSString *)pddw {
+    NSString *dw = self.cxdw;
+    dw = [dw stringByReplacingOccurrencesOfString:@"][" withString:@","];
+    dw = [dw stringByReplacingOccurrencesOfString:@"]" withString:@""];
+    dw = [dw stringByReplacingOccurrencesOfString:@"[" withString:@""];
+    NSArray *dwArray = [dw componentsSeparatedByString:@","];
+    if (dwArray && [dwArray count] > 0) {
+        return dwArray[0];
+    }
+    return nil;
+}
 @end

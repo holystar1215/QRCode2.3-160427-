@@ -33,6 +33,7 @@ typedef NS_ENUM(NSInteger, WebServiceError) {
 
 typedef void(^WebServiceErrorRespondBlock)(CWebServiceError *error);
 
+@class CRecordModel;
 @interface CWebService : NSObject
 @property (nonatomic, assign) BOOL isLogin;
 
@@ -53,13 +54,19 @@ DEFINE_SINGLETON_FOR_HEADER(CWebService);
                                   animated:(BOOL)animated
                                    message:(NSString *)message;
 
-- (AFHTTPRequestOperation *)record_currentpage:(NSInteger)page
+- (AFHTTPRequestOperation *)record_currentpage:(NSString *)page
                                        company:(NSString *)company
-                                          type:(NSInteger)type
+                                          type:(NSString *)type
                                        success:(void (^)(NSArray *models))success
                                        failure:(WebServiceErrorRespondBlock)failure
                                       animated:(BOOL)animated
                                        message:(NSString *)message;
+
+- (AFHTTPRequestOperation *)update_record:(CRecordModel *)model
+                                  success:(void (^)(NSArray *models))success
+                                  failure:(WebServiceErrorRespondBlock)failure
+                                 animated:(BOOL)animated
+                                  message:(NSString *)message;
 
 //- (AFHTTPRequestOperation *)check_update:(NSString *)update
 //                                 success:(void (^)(NSArray *models))success
@@ -125,14 +132,7 @@ DEFINE_SINGLETON_FOR_HEADER(CWebService);
 //                                       animated:(BOOL)animated
 //                                        message:(NSString *)message;
 //
-//- (AFHTTPRequestOperation *)update_asset_number:(NSString *)number
-//                                           user:(NSString *)user
-//                                        company:(NSString *)company
-//                                         manual:(NSString *)manual
-//                                        success:(void (^)(NSArray *models))success
-//                                        failure:(WebServiceErrorRespondBlock)failure
-//                                       animated:(BOOL)animated
-//                                        message:(NSString *)message;
+
 
 
 @end

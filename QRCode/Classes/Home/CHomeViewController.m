@@ -122,7 +122,7 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
         case 3: {
             CInventoryRecordViewController *vc = [[CInventoryRecordViewController alloc] initWithNibName:@"CInventoryRecordViewController" bundle:nil];
             vc.title = dict[@"kItemName"];
-            vc.recordType = 0;
+            vc.recordType = 1;
             vc.assetCompany = [CDataSource sharedInstance].loginDict.cxdw;
             [self.navigationController pushViewController:vc animated:YES];
             break;
@@ -130,7 +130,7 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
         case 4: {
             CInventoryRecordViewController *vc = [[CInventoryRecordViewController alloc] initWithNibName:@"CInventoryRecordViewController" bundle:nil];
             vc.title = dict[@"kItemName"];
-            vc.recordType = 1;
+            vc.recordType = 2;
             vc.assetCompany = [CDataSource sharedInstance].loginDict.cxdw;
             [self.navigationController pushViewController:vc animated:YES];
             break;
@@ -138,7 +138,7 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
         case 5: {
             CInventoryRecordViewController *vc = [[CInventoryRecordViewController alloc] initWithNibName:@"CInventoryRecordViewController" bundle:nil];
             vc.title = dict[@"kItemName"];
-            vc.recordType = 2;
+            vc.recordType = 3;
             vc.assetCompany = [CDataSource sharedInstance].loginDict.cxdw;
             [self.navigationController pushViewController:vc animated:YES];
             break;

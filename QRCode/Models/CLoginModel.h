@@ -98,4 +98,6 @@
 
 @property (nonatomic, strong) NSString *ysnr;
 
+- (NSString *)pddw;
+
 @end

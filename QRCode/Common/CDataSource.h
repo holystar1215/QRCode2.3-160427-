@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CLoginModel.h"
 #import "CSchoolModel.h"
+#import "CRecordModel.h"
 
 @interface CDataSource : NSObject
 @property (nonatomic, strong) CLoginModel *loginDict;
