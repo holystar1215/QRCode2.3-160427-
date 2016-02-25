@@ -33,6 +33,10 @@
 		C3488B301C5A7BF70035776B /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3488B2E1C5A7BF70035776B /* Configuration.plist */; };
 		C3512D511C77797300153C6C /* CListPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3512D501C77797300153C6C /* CListPopoverView.m */; };
 		C38958E91C7D6EFC00EFB16E /* CStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = C38958E81C7D6EFC00EFB16E /* CStatusView.m */; };
+		C3B431051C7F51EC0064256F /* CRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B431031C7F51EC0064256F /* CRecordViewController.m */; };
+		C3B431061C7F51EC0064256F /* CRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3B431041C7F51EC0064256F /* CRecordViewController.xib */; };
+		C3B4310A1C7F52730064256F /* CFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B431081C7F52730064256F /* CFilterViewController.m */; };
+		C3B4310B1C7F52730064256F /* CFilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3B431091C7F52730064256F /* CFilterViewController.xib */; };
 		C3B7F95A1C74D2A100F95D8A /* CPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B7F9591C74D2A100F95D8A /* CPopoverView.m */; };
 		C3C767A01C5F261900C8B83A /* CLoginViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C7679F1C5F261900C8B83A /* CLoginViewCell.m */; };
 		C3C767A21C5F2A0B00C8B83A /* CLoginViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3C767A11C5F2A0B00C8B83A /* CLoginViewCell.xib */; };
@@ -103,6 +107,12 @@
 		C3512D501C77797300153C6C /* CListPopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CListPopoverView.m; sourceTree = "<group>"; };
 		C38958E71C7D6EFC00EFB16E /* CStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CStatusView.h; sourceTree = "<group>"; };
 		C38958E81C7D6EFC00EFB16E /* CStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CStatusView.m; sourceTree = "<group>"; };
+		C3B431021C7F51EC0064256F /* CRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRecordViewController.h; sourceTree = "<group>"; };
+		C3B431031C7F51EC0064256F /* CRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRecordViewController.m; sourceTree = "<group>"; };
+		C3B431041C7F51EC0064256F /* CRecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CRecordViewController.xib; sourceTree = "<group>"; };
+		C3B431071C7F52730064256F /* CFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFilterViewController.h; sourceTree = "<group>"; };
+		C3B431081C7F52730064256F /* CFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFilterViewController.m; sourceTree = "<group>"; };
+		C3B431091C7F52730064256F /* CFilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CFilterViewController.xib; sourceTree = "<group>"; };
 		C3B7F9581C74D2A100F95D8A /* CPopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPopoverView.h; sourceTree = "<group>"; };
 		C3B7F9591C74D2A100F95D8A /* CPopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPopoverView.m; sourceTree = "<group>"; };
 		C3C7679E1C5F261900C8B83A /* CLoginViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLoginViewCell.h; sourceTree = "<group>"; };
@@ -277,11 +287,11 @@
 		C3488B311C5A7C8F0035776B /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C30236101C5C5C5600684957 /* CBaseViewController.h */,
+				C30236111C5C5C5600684957 /* CBaseViewController.m */,
 				C3C83B331C7DA4CD00BE269C /* CodeScan */,
 				C3CA27131C7A215F00E6696E /* InventoryRecord */,
 				C3CA26F11C7A1A8100E6696E /* CustomCodeInventory */,
-				C30236101C5C5C5600684957 /* CBaseViewController.h */,
-				C30236111C5C5C5600684957 /* CBaseViewController.m */,
 				C3488B321C5A7C8F0035776B /* Login */,
 				C30236451C5CFFB700684957 /* Home */,
 			);
@@ -377,6 +387,12 @@
 				C38958E71C7D6EFC00EFB16E /* CStatusView.h */,
 				C38958E81C7D6EFC00EFB16E /* CStatusView.m */,
 				C3C83B2C1C7D9E3300BE269C /* CStatusView.xib */,
+				C3B431021C7F51EC0064256F /* CRecordViewController.h */,
+				C3B431031C7F51EC0064256F /* CRecordViewController.m */,
+				C3B431041C7F51EC0064256F /* CRecordViewController.xib */,
+				C3B431071C7F52730064256F /* CFilterViewController.h */,
+				C3B431081C7F52730064256F /* CFilterViewController.m */,
+				C3B431091C7F52730064256F /* CFilterViewController.xib */,
 			);
 			path = InventoryRecord;
 			sourceTree = "<group>";
@@ -447,11 +463,13 @@
 				C3C767A21C5F2A0B00C8B83A /* CLoginViewCell.xib in Resources */,
 				C302364A1C5CFFD000684957 /* CHomeViewController.xib in Resources */,
 				C3CA272A1C7A218400E6696E /* CRecordTableViewCell.xib in Resources */,
+				C3B431061C7F51EC0064256F /* CRecordViewController.xib in Resources */,
 				C3C83B321C7DA18100BE269C /* CInventoryRecordViewController.xib in Resources */,
 				C3488B301C5A7BF70035776B /* Configuration.plist in Resources */,
 				C3CA27031C7A1ACE00E6696E /* CCustomCodeInventoryViewController.xib in Resources */,
 				C3C83B2D1C7D9E3300BE269C /* CStatusView.xib in Resources */,
 				C3488B271C5A79860035776B /* LaunchScreen.storyboard in Resources */,
+				C3B4310B1C7F52730064256F /* CFilterViewController.xib in Resources */,
 				C3488B241C5A79860035776B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -515,6 +533,7 @@
 				C302364D1C5D026800684957 /* CHeaderView.m in Sources */,
 				C302362B1C5C5D0800684957 /* Configuration.m in Sources */,
 				C3104A741C787AFF00115149 /* CSchoolModel.m in Sources */,
+				C3B431051C7F51EC0064256F /* CRecordViewController.m in Sources */,
 				C302362A1C5C5D0800684957 /* CDataSource.m in Sources */,
 				C302362C1C5C5D0800684957 /* CPublicModule.m in Sources */,
 				C3488B1C1C5A79860035776B /* AppDelegate.m in Sources */,
@@ -536,6 +555,7 @@
 				C3D6E7AE1C7EAA3C003323E7 /* CRecordModel.m in Sources */,
 				C302362F1C5C5D0800684957 /* NSString+AppPath.m in Sources */,
 				C3CA27021C7A1ACE00E6696E /* CCustomCodeInventoryViewController.m in Sources */,
+				C3B4310A1C7F52730064256F /* CFilterViewController.m in Sources */,
 				C30236281C5C5D0800684957 /* CAPIClient.m in Sources */,
 				C3B7F95A1C74D2A100F95D8A /* CPopoverView.m in Sources */,
 				C3C767A01C5F261900C8B83A /* CLoginViewCell.m in Sources */,

@@ -105,4 +105,23 @@ DEFINE_SINGLETON_FOR_HEADER(CWebService);
                                 failure:(WebServiceErrorRespondBlock)failure
                                animated:(BOOL)animated
                                 message:(NSString *)message;
+
+- (AFHTTPRequestOperation *)manual_profit_code:(NSString *)code
+                                          dlmc:(NSString *)dlmc
+                                          pddw:(NSString *)pddw
+                                            mc:(NSString *)mc
+                                       success:(void (^)(NSArray *models))success
+                                       failure:(WebServiceErrorRespondBlock)failure
+                                      animated:(BOOL)animated
+                                       message:(NSString *)message;
+
+- (AFHTTPRequestOperation *)manual_confirm_code:(NSString *)code
+                                           dlmc:(NSString *)dlmc
+                                           pddw:(NSString *)pddw
+                                             mc:(NSString *)mc
+                                        success:(void (^)(NSArray *models))success
+                                        failure:(WebServiceErrorRespondBlock)failure
+                                       animated:(BOOL)animated
+                                        message:(NSString *)message;
+
 @end

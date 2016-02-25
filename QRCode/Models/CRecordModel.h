@@ -9,36 +9,21 @@
 #import <Mantle/Mantle.h>
 
 @interface CRecordModel : MTLModel <MTLJSONSerializing>
-@property (nonatomic, copy) NSString *ID;
-
-@property (nonatomic, copy) NSString *zcbh;
-
-@property (nonatomic, copy) NSString *changjia;
-
-@property (nonatomic, copy) NSString *jine;
-
-@property (nonatomic, copy) NSString *cfdd;
-
-@property (nonatomic, copy) NSString *lyr;
-
-@property (nonatomic, copy) NSString *mc;
-
-@property (nonatomic, copy) NSString *syfxm;
-
-@property (nonatomic, copy) NSString *sydwh;
-
-@property (nonatomic, copy) NSString *jfkmm;
-
-@property (nonatomic, copy) NSString *jxs;
-
-@property (nonatomic, copy) NSString *sydwm;
-
-@property (nonatomic, copy) NSString *zcnr;
-
-@property (nonatomic, copy) NSString *rksj;
-
-@property (nonatomic, copy) NSString *gg;
-
-@property (nonatomic, copy) NSString *xh;
+@property (nonatomic, strong) NSString *ID;
+@property (nonatomic, strong) NSString *zcbh;
+@property (nonatomic, strong) NSString *changjia;
+@property (nonatomic, strong) NSString *jine;
+@property (nonatomic, strong) NSString *cfdd;
+@property (nonatomic, strong) NSString *lyr;
+@property (nonatomic, strong) NSString *mc;
+@property (nonatomic, strong) NSString *syfxm;
+@property (nonatomic, strong) NSString *sydwh;
+@property (nonatomic, strong) NSString *jfkmm;
+@property (nonatomic, strong) NSString *jxs;
+@property (nonatomic, strong) NSString *sydwm;
+@property (nonatomic, strong) NSString *zcnr;
+@property (nonatomic, strong) NSString *rksj;
+@property (nonatomic, strong) NSString *gg;
+@property (nonatomic, strong) NSString *xh;
 
 @end

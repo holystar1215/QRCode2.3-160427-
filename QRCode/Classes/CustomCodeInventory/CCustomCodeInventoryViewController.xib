@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CCustomCodeInventoryViewController">
             <connections>
+                <outlet property="loadButton" destination="lmP-pz-xsp" id="BHZ-pi-xb9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="9WG-Q4-zCc"/>
             </connections>
         </placeholder>
@@ -14,7 +15,49 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xZa-CP-MLv">
+                    <rect key="frame" x="266" y="77" width="118" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="BBq-Cc-PfS"/>
+                        <constraint firstAttribute="width" constant="118" id="PwQ-Ma-sGL"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmP-pz-xsp">
+                    <rect key="frame" x="8" y="495" width="584" height="30"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="584" id="Uvn-3H-0G8"/>
+                        <constraint firstAttribute="height" constant="30" id="gIS-52-yrV"/>
+                    </constraints>
+                    <state key="normal" title="读取数据"/>
+                    <connections>
+                        <action selector="onLoad:" destination="-1" eventType="touchUpInside" id="sXo-Gp-TFP"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="资产编号：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VpH-r7-EAg">
+                    <rect key="frame" x="168" y="81" width="90" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="90" id="MsN-7Z-mkS"/>
+                        <constraint firstAttribute="height" constant="21" id="mIR-bx-lQr"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="xZa-CP-MLv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="25" id="7cU-g3-xV3"/>
+                <constraint firstItem="lmP-pz-xsp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="ISp-TL-Gms"/>
+                <constraint firstAttribute="bottom" secondItem="lmP-pz-xsp" secondAttribute="bottom" constant="75" id="R8c-jA-DTb"/>
+                <constraint firstItem="xZa-CP-MLv" firstAttribute="centerY" secondItem="VpH-r7-EAg" secondAttribute="centerY" id="WuF-IE-uES"/>
+                <constraint firstItem="xZa-CP-MLv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="77" id="c0N-kE-jmY"/>
+                <constraint firstAttribute="trailing" secondItem="lmP-pz-xsp" secondAttribute="trailing" constant="8" id="gUc-6b-IqE"/>
+                <constraint firstItem="xZa-CP-MLv" firstAttribute="leading" secondItem="VpH-r7-EAg" secondAttribute="trailing" constant="8" id="qRY-Px-Mo9"/>
+            </constraints>
         </view>
     </objects>
 </document>

@@ -7,12 +7,10 @@
 //
 
 #import "CInventoryRecordViewController.h"
+#import "CRecordViewController.h"
+#import "CFilterViewController.h"
 #import "CRecordTableViewCell.h"
-
-#import <Masonry.h>
-#import <UIBarButtonItem+BlocksKit.h>
-#import <MJRefresh/MJRefreshAutoNormalFooter.h>
-#import "MBProgressHUD+UIView.h"
+#import "CRecordModel.h"
 
 static NSString * const reuseIdentifier = @"UITableViewCell";
 
@@ -36,7 +34,9 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
     }];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"筛选" style:UIBarButtonItemStylePlain handler:^(id sender) {
-        
+        CFilterViewController *vc = [[CFilterViewController alloc] initWithNibName:@"CFilterViewController" bundle:nil];
+        vc.title = @"筛选";
+        [self.navigationController pushViewController:vc animated:YES];
     }];
     
     NSString *company = [[CDataSource sharedInstance].loginDict pddw];
@@ -44,7 +44,11 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
         [[CWebService sharedInstance] record_currentpage:[NSString stringWithFormat:@"%d", self.currentPage] company:company type:[NSString stringWithFormat:@"%d", self.recordType] success:^(NSArray *models) {
             NSError *jsonError;
             self.itemsArray = [MTLJSONAdapter modelsOfClass:[CRecordModel class] fromJSONArray:models error:&jsonError];
-            [self setCount:[self.itemsArray count] andAmount:0.0f];
+            __block CGFloat sumValue = 0.0;
+            [self.itemsArray enumerateObjectsUsingBlock:^(CRecordModel *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                sumValue = sumValue + [obj.jine floatValue];
+            }];
+            [self setCount:[self.itemsArray count] andAmount:sumValue];
         } failure:^(CWebServiceError *error) {
             [MBProgressHUD showError:error.localizedDescription];
         } animated:YES message:@""];
@@ -58,7 +62,12 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
                 NSMutableArray *moreItems = [[NSMutableArray alloc] initWithArray:self.itemsArray];
                 [moreItems addObjectsFromArray:[MTLJSONAdapter modelsOfClass:[CRecordModel class] fromJSONArray:models error:&jsonError]];
                 self.itemsArray = moreItems;
+                __block CGFloat sumValue = 0.0;
+                [self.itemsArray enumerateObjectsUsingBlock:^(CRecordModel *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    sumValue = sumValue + [obj.jine floatValue];
+                }];
                 [self.contentTableView reloadData];
+                [self setCount:[self.itemsArray count] andAmount:sumValue];
             } failure:^(CWebServiceError *error) {
                 [MBProgressHUD showError:error.localizedDescription];
             } animated:YES message:@""];
@@ -87,6 +96,29 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
     self.statusView.amountLabel.attributedText = amountAttributedString;
 }
 
+- (NSAttributedString *)type:(NSInteger)type recordIndex:(NSInteger)recordIndex {
+    NSString *recordString = @"";
+//    CRecordModel *model = self.itemsArray[recordIndex];
+    switch (type) {
+        case 1: {
+            
+            break;
+        }
+        case 2: {
+//            recordString = [NSString stringWithFormat:@"资产编号：%@\n名称：%@\n单位名称：%@\n盘点人：%@\n盘点时间：%@", model.zcbh, model.mc, model.sydwm, model];
+            break;
+        }
+        case 3: {
+            break;
+        }
+        default:
+            break;
+    }
+    NSMutableAttributedString *recordAttributedString = [[NSMutableAttributedString alloc] initWithString:recordString];
+    
+    return recordAttributedString;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -94,20 +126,24 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
 
 #pragma mark - <UITableViewDataSource>
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return [self.itemsArray count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.itemsArray count];
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     
     // Configure the cell...
-    cell.backgroundColor = [UIColor groupTableViewBackgroundColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.accessoryType = UITableViewCellAccessoryNone;
+    if (self.recordType == 1) {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    
     
     return cell;
 }
@@ -135,7 +171,26 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    switch (self.recordType) {
+        case 1: {
+            
+            break;
+        }
+        case 2: {
+            CRecordViewController *vc = [[CRecordViewController alloc] initWithNibName:@"CRecordViewController" bundle:nil];
+            vc.title = self.title;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 3: {
+            CRecordViewController *vc = [[CRecordViewController alloc] initWithNibName:@"CRecordViewController" bundle:nil];
+            vc.title = self.title;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 @end

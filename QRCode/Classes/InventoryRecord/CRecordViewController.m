@@ -1,19 +1,18 @@
 //
-//  CCustomCodeInventoryViewController.m
+//  CRecordViewController.m
 //  QRCode
 //
-//  Created by CarlLiu on 16/2/22.
+//  Created by CarlLiu on 16/2/25.
 //  Copyright © 2016年 Carl. All rights reserved.
 //
 
-#import "CCustomCodeInventoryViewController.h"
+#import "CRecordViewController.h"
 
-@interface CCustomCodeInventoryViewController ()
-@property (nonatomic, weak) IBOutlet UIButton *loadButton;
+@interface CRecordViewController ()
 
 @end
 
-@implementation CCustomCodeInventoryViewController
+@implementation CRecordViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -21,8 +20,6 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"back-arrow"] style:UIBarButtonItemStylePlain handler:^(id sender) {
         [self.navigationController popViewControllerAnimated:YES];
     }];
-    
-    [self.loadButton createBordersWithColor:[UIColor groupTableViewBackgroundColor] withCornerRadius:6 andWidth:1];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,8 +27,14 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)onLoad:(id)sender {
-    
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
 }
+*/
 
 @end

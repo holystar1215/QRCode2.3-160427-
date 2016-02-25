@@ -455,4 +455,93 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                       animated:animated
                                        message:message];
 }
+
+- (AFHTTPRequestOperation *)manual_profit_code:(NSString *)code
+                                          dlmc:(NSString *)dlmc
+                                          pddw:(NSString *)pddw
+                                            mc:(NSString *)mc
+                                       success:(void (^)(NSArray *models))success
+                                       failure:(WebServiceErrorRespondBlock)failure
+                                      animated:(BOOL)animated
+                                       message:(NSString *)message {
+    NSString *uri = @"/liquidation/api/liquidatarg/securi_updateassetnumber?sign=";
+    self.client.baseURL = [NSURL URLWithString:[[Configuration sharedInstance] serverUrl]];
+    NSDictionary *dict = @{
+                           @"assetnumber" : code,
+                           @"dlmc" : dlmc,
+                           @"pddw" : pddw,
+                           @"mc" : mc
+                           };
+    NSString *param = [dict dictionaryToJSON];
+    param = [param encodeToBase64];
+    uri = [NSString stringWithFormat:@"%@%@", uri, param];
+    return [self.client postHttpRequestWithURI:uri
+                                    parameters:nil
+                                       success:^(NSData *responseObject) {
+                                           NSError *jsonError = nil;
+                                           NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:&jsonError];
+                                           if (!jsonError) {
+                                               CWebServiceError *webError = [CWebServiceError checkRespondDict:resultDic];
+                                               if (webError.errorType == eWebServiceErrorSuccess) {
+                                                   success(resultDic[@"obj"]);
+                                               } else {
+                                                   failure(webError);
+                                               }
+                                           } else {
+                                               failure([CWebServiceError checkRespondWithError:jsonError]);
+                                           }
+                                       }
+                                       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                           CWebServiceError *serviceError = [CWebServiceError checkRespondWithError:error];
+                                           serviceError.errorMessage = [operation responseObject];
+                                           failure(serviceError);
+                                       }
+                                      animated:animated
+                                       message:message];
+}
+
+- (AFHTTPRequestOperation *)manual_confirm_code:(NSString *)code
+                                           dlmc:(NSString *)dlmc
+                                           pddw:(NSString *)pddw
+                                             mc:(NSString *)mc
+                                        success:(void (^)(NSArray *models))success
+                                        failure:(WebServiceErrorRespondBlock)failure
+                                       animated:(BOOL)animated
+                                        message:(NSString *)message {
+    NSString *uri = @"/liquidation/api/liquidatarg/securi_updateassepy?sign=";
+    self.client.baseURL = [NSURL URLWithString:[[Configuration sharedInstance] serverUrl]];
+    NSDictionary *dict = @{
+                           @"assetnumber" : code,
+                           @"dlmc" : dlmc,
+                           @"pddw" : pddw,
+                           @"mc" : mc
+                           };
+    NSString *param = [dict dictionaryToJSON];
+    param = [param encodeToBase64];
+    uri = [NSString stringWithFormat:@"%@%@", uri, param];
+    return [self.client postHttpRequestWithURI:uri
+                                    parameters:nil
+                                       success:^(NSData *responseObject) {
+                                           NSError *jsonError = nil;
+                                           NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:&jsonError];
+                                           if (!jsonError) {
+                                               CWebServiceError *webError = [CWebServiceError checkRespondDict:resultDic];
+                                               if (webError.errorType == eWebServiceErrorSuccess) {
+                                                   success(resultDic[@"obj"]);
+                                               } else {
+                                                   failure(webError);
+                                               }
+                                           } else {
+                                               failure([CWebServiceError checkRespondWithError:jsonError]);
+                                           }
+                                       }
+                                       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                           CWebServiceError *serviceError = [CWebServiceError checkRespondWithError:error];
+                                           serviceError.errorMessage = [operation responseObject];
+                                           failure(serviceError);
+                                       }
+                                      animated:animated
+                                       message:message];
+}
+
 @end

@@ -11,8 +11,8 @@
 #import "CHomeViewCollectionViewCell.h"
 #import "CInventoryRecordViewController.h"
 #import "CCustomCodeInventoryViewController.h"
-
 #import "CCodeScanViewController.h"
+
 #import <QRCodeReader.h>
 
 static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
