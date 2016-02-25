@@ -43,18 +43,4 @@
     };
 }
 
-//- (NSDictionary *)recordDict {
-//    return @{
-//             @"zcbh" : self.zcbh,
-//             @"sydwh" : self.sydwh,
-//             @"lyr" : self.lyr,
-//             @"cfdd" : self.cfdd,
-//             @"grgh" : self.grgh,
-//             //修改人工号
-//             @"fjmc" : self.fjmc,
-//             //房间名称
-//             @"lyrgh" : self.lyrgh
-//             };
-//}
-
 @end

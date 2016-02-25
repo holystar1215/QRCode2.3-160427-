@@ -6,8 +6,8 @@
 //  Copyright © 2016年 Carl. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <Mantle/Mantle.h>
 
-@interface CModifyRecord : NSObject
+@interface CModifyRecord : MTLModel <MTLJSONSerializing>
 
 @end

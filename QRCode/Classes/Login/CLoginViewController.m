@@ -218,6 +218,13 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
             
         }];
         [alertView show];
+    } else {
+        UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"抱歉,贵校未开通自定义资产编号盘点功能,请通过条形码或二维码扫描功能读取资产编号"];
+        [alertView bk_addButtonWithTitle:@"知道了" handler:^{
+            
+        }];
+        [alertView show];
+        
     }
 }
 
