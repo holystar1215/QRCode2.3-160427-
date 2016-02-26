@@ -52,7 +52,7 @@
                         <action selector="onForgetPassword:" destination="-1" eventType="touchUpInside" id="MgC-AU-dbP"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_header_icon" translatesAutoresizingMaskIntoConstraints="NO" id="fXc-ZR-iMH">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_account" translatesAutoresizingMaskIntoConstraints="NO" id="fXc-ZR-iMH">
                     <rect key="frame" x="263" y="106" width="75" height="75"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="75" id="kIm-iZ-YCS"/>
@@ -76,7 +76,7 @@
         </view>
     </objects>
     <resources>
-        <image name="home_header_icon" width="60" height="60"/>
+        <image name="login_account" width="43" height="49"/>
         <image name="login_button" width="347" height="42"/>
     </resources>
 </document>

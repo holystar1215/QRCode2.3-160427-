@@ -23,22 +23,19 @@
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"cfdd": @"cfdd",
-             @"changjia": @"changjia",
-             @"gg": @"gg",
-             @"ID": @"id",
-             @"jfkmm": @"jfkmm",
-             @"jine": @"jine",
-             @"jxs": @"jxs",
-             @"lyr": @"lyr",
-             @"mc": @"mc",
-             @"rksj": @"rksj",
-             @"sydwh": @"sydwh",
-             @"sydwm": @"sydwm",
-             @"syfxm": @"syfxm",
-             @"xh": @"xh",
-             @"zcbh": @"zcbh",
-             @"zcnr": @"zcnr"
+             @"zcbh" : @"zcbh",
+             @"sydwh" : @"sydwh",
+             // 要修改的领用人
+             @"lyr" : @"lyr",
+             // 要修改的存放地点
+             @"cfdd" : @"cfdd",
+             // 要修改的使用单位号
+             @"x_sydwh" : @"x_sydwh",
+             @"x_lyr" : @"x_lyr",
+             @"x_cfdd" : @"x_cfdd",
+             @"xgrgh" : @"xgrgh",
+             @"fjmc" : @"fjmc",
+             @"x_lyrgh" : @"x_lyrgh"
              };
 }
 

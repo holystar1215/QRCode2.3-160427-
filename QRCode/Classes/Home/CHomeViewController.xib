@@ -21,7 +21,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mDz-hN-IqS" customClass="CHeaderView">
                     <rect key="frame" x="0.0" y="72" width="600" height="80"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_header_icon" translatesAutoresizingMaskIntoConstraints="NO" id="qZJ-03-TN8">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_account" translatesAutoresizingMaskIntoConstraints="NO" id="qZJ-03-TN8">
                             <rect key="frame" x="15" y="10" width="60" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="sRG-ZA-zpY"/>
@@ -110,6 +110,6 @@
         </view>
     </objects>
     <resources>
-        <image name="home_header_icon" width="60" height="60"/>
+        <image name="login_account" width="43" height="49"/>
     </resources>
 </document>

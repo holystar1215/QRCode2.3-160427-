@@ -105,7 +105,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                         failure:(WebServiceErrorRespondBlock)failure
                                        animated:(BOOL)animated
                                         message:(NSString *)message {
-    NSString *uri = @"netcx-config/api/configController/securi_config";
+    NSString *uri = @"/netcx-config/api/configController/securi_config";
     self.client.baseURL = [NSURL URLWithString:[[Configuration sharedInstance] totalUrl]];
     return [self.client postHttpRequestWithURI:uri
                                     parameters:nil
@@ -138,7 +138,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                    failure:(WebServiceErrorRespondBlock)failure
                                   animated:(BOOL)animated
                                    message:(NSString *)message {
-    NSString *uri = @"liquidation/api/liquidata/securi_login?sign=";
+    NSString *uri = @"/liquidation/api/liquidata/securi_login?sign=";
     self.client.baseURL = [NSURL URLWithString:[[Configuration sharedInstance] serverUrl]];
     NSDictionary *dict = @{
                      @"username" : username,//12000001

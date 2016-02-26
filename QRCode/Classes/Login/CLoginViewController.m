@@ -43,7 +43,7 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
         self.resultArray = [NSArray arrayWithArray:self.schoolArray];
         self.popupListView = [[CListPopoverView alloc] initWithFrame:CGRectZero andTarget:self];
     } failure:^(CWebServiceError *error) {
-        
+        [MBProgressHUD showError:error.localizedDescription];
     } animated:YES message:@""];
     
 }

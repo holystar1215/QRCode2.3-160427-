@@ -41,7 +41,7 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
     
     NSString *company = [[CDataSource sharedInstance].loginDict pddw];
     if (company) {
-        [[CWebService sharedInstance] record_currentpage:[NSString stringWithFormat:@"%d", self.currentPage] company:company type:[NSString stringWithFormat:@"%d", self.recordType] success:^(NSArray *models) {
+        [[CWebService sharedInstance] record_currentpage:[NSString stringWithFormat:@"%ld", (long)self.currentPage] company:company type:[NSString stringWithFormat:@"%ld", (long)self.recordType] success:^(NSArray *models) {
             NSError *jsonError;
             self.itemsArray = [MTLJSONAdapter modelsOfClass:[CRecordModel class] fromJSONArray:models error:&jsonError];
             __block CGFloat sumValue = 0.0;
@@ -57,7 +57,7 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
     self.contentTableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         NSString *company = [[CDataSource sharedInstance].loginDict pddw];
         if (company) {
-            [[CWebService sharedInstance] record_currentpage:[NSString stringWithFormat:@"%d", self.currentPage] company:company type:[NSString stringWithFormat:@"%d", self.recordType] success:^(NSArray *models) {
+            [[CWebService sharedInstance] record_currentpage:[NSString stringWithFormat:@"%ld", (long)self.currentPage] company:company type:[NSString stringWithFormat:@"%ld", (long)self.recordType] success:^(NSArray *models) {
                 NSError *jsonError;
                 NSMutableArray *moreItems = [[NSMutableArray alloc] initWithArray:self.itemsArray];
                 [moreItems addObjectsFromArray:[MTLJSONAdapter modelsOfClass:[CRecordModel class] fromJSONArray:models error:&jsonError]];
