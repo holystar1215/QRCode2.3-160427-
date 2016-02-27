@@ -57,6 +57,9 @@ DEFINE_SINGLETON_FOR_HEADER(CWebService);
 - (AFHTTPRequestOperation *)record_currentpage:(NSString *)page
                                        company:(NSString *)company
                                           type:(NSString *)type
+                                           lyr:(NSString *)lyr
+                                          zcbh:(NSString *)zcbh
+                                          cfdd:(NSString *)cfdd
                                        success:(void (^)(NSArray *models, NSString *msg))success
                                        failure:(WebServiceErrorRespondBlock)failure
                                       animated:(BOOL)animated
@@ -95,6 +98,12 @@ DEFINE_SINGLETON_FOR_HEADER(CWebService);
 
 - (AFHTTPRequestOperation *)search_dw:(NSString *)dw
                               success:(void (^)(NSArray *models))success
+                              failure:(WebServiceErrorRespondBlock)failure
+                             animated:(BOOL)animated
+                              message:(NSString *)message;
+
+- (AFHTTPRequestOperation *)search_workno:(NSString *)workno
+                              success:(void (^)(NSString *lyr))success
                               failure:(WebServiceErrorRespondBlock)failure
                              animated:(BOOL)animated
                               message:(NSString *)message;

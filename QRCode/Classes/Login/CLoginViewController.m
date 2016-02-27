@@ -80,9 +80,10 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
     [[CWebService sharedInstance] login_username:userName password:passWord success:^(NSDictionary *models) {
         NSError *jsonError;
         [[CDataSource sharedInstance] setLoginDict:[MTLJSONAdapter modelOfClass:[CLoginModel class] fromJSONDictionary:models error:&jsonError]];
+        
         [APP_DELEGATE setupHomeViewController];
     } failure:^(CWebServiceError *error) {
-        [MBProgressHUD showError:error.localizedDescription];
+        [MBProgressHUD showError:error.errorMessage];
     } animated:YES message:@""];
 }
 
@@ -95,7 +96,7 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
         self.popupListView.autoHidden = YES;
         [self.popupListView showPopoverView];
     } failure:^(CWebServiceError *error) {
-        [MBProgressHUD showError:error.localizedDescription];
+        [MBProgressHUD showError:error.errorMessage];
     } animated:YES message:@""];
 }
 
@@ -204,6 +205,7 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
     CLoginViewCell *cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 0)];
     CSchoolModel *school = self.resultArray[self.currentSchool];
     cell.textField.text = school.schoolName;
+    [[Configuration sharedInstance] setServerAddr:school.serverAddr];
     
     if ([school.isDelete isEqualToString:@"0"]) {
         UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"抱歉，贵校目前无此授权，不能使用！"];

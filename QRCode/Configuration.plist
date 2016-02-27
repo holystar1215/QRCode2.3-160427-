@@ -6,8 +6,6 @@
 	<string>1</string>
 	<key>dbFileName</key>
 	<string>QRCode.sqlite</string>
-	<key>serverUrl</key>
-	<string>http://202.119.81.163:8080</string>
 	<key>totalUrl</key>
 	<string>http://202.119.81.162:8080</string>
 </dict>

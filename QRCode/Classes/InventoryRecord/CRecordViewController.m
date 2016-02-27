@@ -12,7 +12,7 @@
 
 static NSString * const reuseIdentifier = @"CRecordTableViewCell";
 
-@interface CRecordViewController () <UITableViewDataSource, UITableViewDelegate, CListPopoverViewDelegate>
+@interface CRecordViewController () <UITableViewDataSource, UITableViewDelegate, CListPopoverViewDelegate, UITextFieldDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *contentTableView;
 @property (strong, nonatomic) CListPopoverView *popupListView;
 @property (strong, nonatomic) NSArray *schoolArray;
@@ -24,6 +24,8 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
 @property (weak, nonatomic) IBOutlet UITextField *xlyrghTextField;
 @property (weak, nonatomic) IBOutlet UITextField *xsydwhTextField;
 
+@property (weak, nonatomic) IBOutlet UIButton *submitButton;
+
 @end
 
 @implementation CRecordViewController
@@ -31,6 +33,8 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.submitButton createBordersWithColor:[UIColor blueColor] withCornerRadius:6 andWidth:1];
+    
     [self.contentTableView registerNib:[UINib nibWithNibName:@"CRecordTableViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"back-arrow"] style:UIBarButtonItemStylePlain handler:^(id sender) {
@@ -142,14 +146,14 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
     
     CLogRecordModel *model = self.modelSelected;
     NSDictionary *dict = @{
-                           @"cfdd":@"*",
+                           @"cfdd":[model cfdd],
                            @"fjmc":@"",
                            @"lyr":[model lyr],
                            @"sydwh":[model sydwh],
-                           @"x_cfdd":@"*",
-                           @"x_lyr":@"*",
-                           @"x_lyrgh":@"*",
-                           @"x_sydwh":@"*",
+                           @"x_cfdd":@"",
+                           @"x_lyr":@"",
+                           @"x_lyrgh":@"",
+                           @"x_sydwh":@"",
                            @"xgrgh":[[CDataSource sharedInstance].loginDict yhmc],
                            @"zcbh":[model zcbh]
                            };
@@ -169,32 +173,54 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
             modifyModel.x_sydwh = self.xsydwhTextField.text;
         }
     }
+
+    UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"修改申请需要领导审批后才生效，您可以在浏览器系统中查阅审批流程，请确认是否发送修改申请？"];
+    [alertView bk_addButtonWithTitle:@"取消" handler:^{
+        
+    }];
     
-    [[CWebService sharedInstance] modify_record:modifyModel success:^(NSString *msg) {
-        [MBProgressHUD showSuccess:msg];
+    [alertView bk_addButtonWithTitle:@"确定" handler:^{
+        [[CWebService sharedInstance] modify_record:modifyModel success:^(NSString *msg) {
+            [MBProgressHUD showSuccess:msg];
+        } failure:^(CWebServiceError *error) {
+            [MBProgressHUD showError:error.errorMessage];
+        } animated:YES message:nil];
+    }];
+    
+    [alertView show];
+    
+}
+
+- (IBAction)onLyr:(id)sender {
+    [self searchLyrByNo:self.xlyrghTextField.text];
+}
+
+- (void)searchLyrByNo:(NSString *)no {
+    [[CWebService sharedInstance] search_workno:no success:^(NSString *lyr) {
+        self.xlyrTextField.text = lyr;
     } failure:^(CWebServiceError *error) {
-        [MBProgressHUD showError:error.localizedDescription];
+        [MBProgressHUD showError:error.errorMessage];
     } animated:YES message:@""];
 }
 
-- (void)showPopList {
-    [[CWebService sharedInstance] school_list_success:^(NSArray *models) {
+- (IBAction)onSydw:(id)sender {
+    [self showDwList];
+}
+
+- (void)showDwList {
+    [[CWebService sharedInstance] search_dw:[[CDataSource sharedInstance].loginDict pddw] success:^(NSArray *models) {
         NSError *jsonError;
-        self.schoolArray = [MTLJSONAdapter modelsOfClass:[CSchoolModel class] fromJSONArray:models error:&jsonError];
+        self.schoolArray = [MTLJSONAdapter modelsOfClass:[CCompanyModel class] fromJSONArray:models error:&jsonError];
         self.resultArray = [NSArray arrayWithArray:self.schoolArray];
         self.popupListView = [[CListPopoverView alloc] initWithFrame:CGRectZero andTarget:self];
         self.popupListView.autoHidden = YES;
         [self.popupListView showPopoverView];
     } failure:^(CWebServiceError *error) {
-        [MBProgressHUD showError:error.localizedDescription];
+        [MBProgressHUD showError:error.errorMessage];
     } animated:YES message:@""];
 }
 
 #pragma mark - <UITableViewDataSource>
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 1;
 }
@@ -205,12 +231,7 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
     // Configure the cell...
     cell.recordLabel.attributedText = [self recordByType:self.recordType andModel:self.modelSelected];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if (self.recordType == 3) {
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
-    
+    cell.accessoryType = UITableViewCellAccessoryNone;
     
     return cell;
 }
@@ -249,23 +270,28 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
 }
 
 - (NSString *)itemAtIndexPath:(NSIndexPath *)indexPath {
-    CSchoolModel *school = self.resultArray[indexPath.row];
-    return school.schoolName;
+    CCompanyModel *school = self.resultArray[indexPath.row];
+    return [NSString stringWithFormat:@"%@ %@", school.dwdm, school.dwmc];
 }
 
 - (void)didSelectedItemIndex:(NSInteger)index {
     self.currentSchool = index;
     
-    CSchoolModel *school = self.resultArray[self.currentSchool];
-    self.xsydwhTextField.text = school.schoolName;
+    CCompanyModel *school = self.resultArray[self.currentSchool];
+    self.xsydwhTextField.text = school.dwmc;
 }
 
 - (void)didChangeSearchText:(NSString *)searchText {
     NSString *match = [NSString stringWithFormat:@"*%@*", searchText];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"schoolName like[cd] %@", match];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"dwmc like[cd] %@", match];
     self.resultArray = [self.schoolArray filteredArrayUsingPredicate:predicate];
     
     [self.popupListView reloadData];
+}
+
+#pragma mark - <UITextFieldDelegate>
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    [self searchLyrByNo:self.xlyrghTextField.text];
 }
 
 @end

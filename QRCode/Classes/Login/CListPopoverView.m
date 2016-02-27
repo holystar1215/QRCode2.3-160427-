@@ -64,13 +64,14 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
     } else {
         cell.textLabel.text = @"Null";
     }
+    cell.textLabel.font = [UIFont systemFontOfSize:13.0];
     
     return cell;
 }
 
 #pragma mark - <UITableViewDelegate>
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44;
+    return 34;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

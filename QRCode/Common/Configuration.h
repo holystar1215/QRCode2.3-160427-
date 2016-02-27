@@ -28,6 +28,7 @@
 #define kPasswordDefault @"kPasswordDefault"
 
 @interface Configuration : NSObject
+@property (nonatomic, strong) NSString *serverAddr;
 
 DEFINE_SINGLETON_FOR_HEADER(Configuration)
 

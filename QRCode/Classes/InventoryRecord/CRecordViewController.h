@@ -10,7 +10,6 @@
 
 @interface CRecordViewController : CBaseViewController
 @property (nonatomic, assign) NSInteger recordType;
-@property (nonatomic, strong) NSString *assetCompany;
 @property (nonatomic, strong) id modelSelected;
 
 @end

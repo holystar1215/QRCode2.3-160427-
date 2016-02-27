@@ -11,7 +11,7 @@
 #import <UIBarButtonItem+BlocksKit.h>
 #import <MJRefresh/MJRefreshAutoNormalFooter.h>
 #import <UIAlertView+BlocksKit.h>
-
+#import "DSNavigationBar.h"
 #import "CStatusView.h"
 #import "MBProgressHUD+UIView.h"
 

@@ -9,7 +9,8 @@
 #import "CCustomCodeInventoryViewController.h"
 
 @interface CCustomCodeInventoryViewController ()
-@property (nonatomic, weak) IBOutlet UIButton *loadButton;
+@property (nonatomic, weak) IBOutlet UIButton *readCodeButton;
+@property (nonatomic, weak) IBOutlet UITextField *codeTextField;
 
 @end
 
@@ -22,7 +23,7 @@
         [self.navigationController popViewControllerAnimated:YES];
     }];
     
-    [self.loadButton createBordersWithColor:[UIColor groupTableViewBackgroundColor] withCornerRadius:6 andWidth:1];
+    [self.readCodeButton createBordersWithColor:[UIColor groupTableViewBackgroundColor] withCornerRadius:6 andWidth:1];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,8 +31,12 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)onLoad:(id)sender {
-    
+- (IBAction)onReadCode:(id)sender {
+    [[CWebService sharedInstance] manual_code:self.codeTextField.text pddw:[[CDataSource sharedInstance].loginDict pddw] success:^(NSArray *models) {
+        
+    } failure:^(CWebServiceError *error) {
+        [MBProgressHUD showError:error.errorMessage];
+    } animated:YES message:@""];
 }
 
 @end

@@ -13,13 +13,17 @@
 
 static NSString * const reuseIdentifier = @"CRecordTableViewCell";
 
-@interface CInventoryRecordViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface CInventoryRecordViewController () <UITableViewDataSource, UITableViewDelegate, CCFilterViewControllerDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *contentTableView;
 @property (weak, nonatomic) IBOutlet CStatusView *statusView;
 
 @property (nonatomic, strong) NSArray *itemsArray;
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, assign) NSInteger recordCount;
+
+@property (nonatomic, strong) NSString *lyr;
+@property (nonatomic, strong) NSString *zcbh;
+@property (nonatomic, strong) NSString *cfdd;
 
 @end
 
@@ -29,56 +33,47 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.currentPage = 1;
-    
+    [self.statusView createBordersWithColor:[UIColor groupTableViewBackgroundColor] withCornerRadius:0 andWidth:1];
     [self.contentTableView registerNib:[UINib nibWithNibName:@"CRecordTableViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"back-arrow"] style:UIBarButtonItemStylePlain handler:^(id sender) {
         [self.navigationController popViewControllerAnimated:YES];
     }];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"筛选" style:UIBarButtonItemStylePlain handler:^(id sender) {
-        CFilterViewController *vc = [[CFilterViewController alloc] initWithNibName:@"CFilterViewController" bundle:nil];
-        vc.title = @"筛选";
-        [self.navigationController pushViewController:vc animated:YES];
-    }];
+    self.lyr = @"";
+    self.zcbh = @"";
+    self.cfdd = @"";
     
-    weakSelf(wSelf);
-    NSString *company = [[CDataSource sharedInstance].loginDict pddw];
-    if (company) {
-        [[CWebService sharedInstance] record_currentpage:[NSString stringWithFormat:@"%ld", (long)wSelf.currentPage] company:company type:[NSString stringWithFormat:@"%ld", (long)wSelf.recordType] success:^(NSArray *models, NSString *msg) {
-            NSError *jsonError;
-            switch (wSelf.recordType) {
-                case 1: {
-                    wSelf.itemsArray = [MTLJSONAdapter modelsOfClass:[CLogRecordModel class] fromJSONArray:models error:&jsonError];
-                    break;
-                }
-                case 2: {
-                    wSelf.itemsArray = [MTLJSONAdapter modelsOfClass:[COverageRecordModel class] fromJSONArray:models error:&jsonError];
-                    break;
-                }
-                case 3: {
-                    wSelf.itemsArray = [MTLJSONAdapter modelsOfClass:[CLogRecordModel class] fromJSONArray:models error:&jsonError];
-                    break;
-                }
-                default:
-                    break;
-            }
-            [wSelf.contentTableView reloadData];
-            wSelf.recordCount = [wSelf formatStatusMsg:msg];
-            [wSelf.contentTableView.footer resetNoMoreData];
-        } failure:^(CWebServiceError *error) {
-            [MBProgressHUD showError:error.localizedDescription];
-        } animated:YES message:@""];
+    switch (self.recordType) {
+        case 2: {
+            break;
+        }
+        case 1:
+        case 3: {
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"筛选" style:UIBarButtonItemStylePlain handler:^(id sender) {
+                CFilterViewController *vc = [[CFilterViewController alloc] initWithNibName:@"CFilterViewController" bundle:nil];
+                vc.title = @"筛选";
+                vc.delegate = self;
+                vc.lyr = self.lyr;
+                vc.zcbh = self.zcbh;
+                vc.cfdd = self.cfdd;
+                [self.navigationController pushViewController:vc animated:YES];
+            }];
+            break;
+        }
+        default:
+            break;
     }
     
     
+    weakSelf(wSelf);
     self.contentTableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         if ([wSelf.itemsArray count] < wSelf.recordCount) {
             wSelf.currentPage += 1;
             
             NSString *company = [[CDataSource sharedInstance].loginDict pddw];
             if (company) {
-                [[CWebService sharedInstance] record_currentpage:[NSString stringWithFormat:@"%ld", (long)wSelf.currentPage] company:company type:[NSString stringWithFormat:@"%ld", (long)wSelf.recordType] success:^(NSArray *models, NSString *msg) {
+                [[CWebService sharedInstance] record_currentpage:[NSString stringWithFormat:@"%ld", (long)wSelf.currentPage] company:company type:[NSString stringWithFormat:@"%ld", (long)wSelf.recordType] lyr:self.lyr zcbh:self.zcbh cfdd:self.cfdd success:^(NSArray *models, NSString *msg) {
                     NSError *jsonError;
                     NSMutableArray *moreItems = [[NSMutableArray alloc] initWithArray:self.itemsArray];
                     switch (wSelf.recordType) {
@@ -101,13 +96,51 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
                     [wSelf.contentTableView reloadData];
                     [wSelf.contentTableView.footer resetNoMoreData];
                 } failure:^(CWebServiceError *error) {
-                    [MBProgressHUD showError:error.localizedDescription];
+                    [MBProgressHUD showError:error.errorMessage];
                 } animated:NO message:nil];
             }
         } else {
             [wSelf.contentTableView.footer endRefreshingWithNoMoreData];
         }
     }];
+    
+    [self reloadRecordData];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)reloadRecordData {
+    weakSelf(wSelf);
+    NSString *company = [[CDataSource sharedInstance].loginDict pddw];
+    if (company) {
+        [[CWebService sharedInstance] record_currentpage:[NSString stringWithFormat:@"%ld", (long)wSelf.currentPage] company:company type:[NSString stringWithFormat:@"%ld", (long)self.recordType] lyr:self.lyr zcbh:self.zcbh cfdd:self.cfdd success:^(NSArray *models, NSString *msg) {
+            NSError *jsonError;
+            switch (wSelf.recordType) {
+                case 1: {
+                    wSelf.itemsArray = [MTLJSONAdapter modelsOfClass:[CLogRecordModel class] fromJSONArray:models error:&jsonError];
+                    break;
+                }
+                case 2: {
+                    wSelf.itemsArray = [MTLJSONAdapter modelsOfClass:[COverageRecordModel class] fromJSONArray:models error:&jsonError];
+                    break;
+                }
+                case 3: {
+                    wSelf.itemsArray = [MTLJSONAdapter modelsOfClass:[CLogRecordModel class] fromJSONArray:models error:&jsonError];
+                    break;
+                }
+                default:
+                    break;
+            }
+            [wSelf.contentTableView reloadData];
+            wSelf.recordCount = [wSelf formatStatusMsg:msg];
+            [wSelf.contentTableView.footer resetNoMoreData];
+        } failure:^(CWebServiceError *error) {
+            [MBProgressHUD showError:error.errorMessage];
+        } animated:YES message:@""];
+    }
 }
 
 - (void)setCount:(NSString *)count andAmount:(NSString *)amount {
@@ -228,11 +261,6 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
     return attributedString;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - <UITableViewDataSource>
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [self.itemsArray count];
@@ -296,12 +324,21 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
             CRecordViewController *vc = [[CRecordViewController alloc] initWithNibName:@"CRecordViewController" bundle:nil];
             vc.title = @"数据修改";
             vc.modelSelected = self.itemsArray[indexPath.row];
+            vc.recordType = self.recordType;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         default:
             break;
     }
+}
+
+#pragma mark - <CCFilterViewControllerDelegate>
+- (void)didSearchByLyr:(NSString *)lyr andZcbh:(NSString *)zcbh andCfdd:(NSString *)cfdd {
+    self.lyr = lyr;
+    self.zcbh = zcbh;
+    self.cfdd = cfdd;
+    [self reloadRecordData];
 }
 
 @end

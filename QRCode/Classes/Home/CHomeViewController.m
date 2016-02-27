@@ -17,7 +17,7 @@
 
 static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
 
-@interface CHomeViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, QRCodeReaderDelegate>
+@interface CHomeViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet CHeaderView *headerView;
 @property (weak, nonatomic) IBOutlet UIButton *logoutButton;
 @property (weak, nonatomic) IBOutlet UICollectionView *contentTableView;
@@ -31,6 +31,8 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.logoutButton createBordersWithColor:[UIColor groupTableViewBackgroundColor] withCornerRadius:6 andWidth:1];
+    
     [self.contentTableView registerNib:[UINib nibWithNibName:@"CHomeViewCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:reuseIdentifier];
     
     self.itemsArray = @[
@@ -86,7 +88,31 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
 //    cell.backgroundColor = [UIColor whiteColor];
     NSDictionary *dict = self.itemsArray[indexPath.section][indexPath.row];
     switch (indexPath.row) {
-        case 0:
+        case 0: {
+            if ([QRCodeReader supportsMetadataObjectTypes:@[AVMetadataObjectTypeQRCode]]) {
+                static CCodeScanViewController *vc = nil;
+                static dispatch_once_t onceToken;
+                
+                dispatch_once(&onceToken, ^{
+                    QRCodeReader *reader = [QRCodeReader readerWithMetadataObjectTypes:[NSArray arrayWithObjects:AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code, nil]];
+                    vc                   = [CCodeScanViewController readerWithCancelButtonTitle:@"取消" codeReader:reader startScanningAtLoad:YES showSwitchCameraButton:NO showTorchButton:NO];
+                    vc.modalPresentationStyle = UIModalPresentationFormSheet;
+                });
+                
+                vc.title = dict[@"kItemName"];
+                
+                DSNavigationBar *bar = (DSNavigationBar *)self.navigationController.navigationBar;
+                [bar setNavigationBarWithColor:RGBA(0, 0, 0, 0.5)];
+                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+                [self.navigationController pushViewController:vc animated:YES];
+            } else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"当前设备不支持扫码功能！" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
+                
+                [alert show];
+            }
+            
+            break;
+        }
         case 1: {
             if ([QRCodeReader supportsMetadataObjectTypes:@[AVMetadataObjectTypeQRCode]]) {
                 static CCodeScanViewController *vc = nil;
@@ -94,19 +120,18 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
                 
                 dispatch_once(&onceToken, ^{
                     QRCodeReader *reader = [QRCodeReader readerWithMetadataObjectTypes:[NSArray arrayWithObjects:AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code, AVMetadataObjectTypeQRCode, nil]];
-                    vc                   = [CCodeScanViewController readerWithCancelButtonTitle:@"Cancel" codeReader:reader startScanningAtLoad:YES showSwitchCameraButton:NO showTorchButton:NO];
+                    vc                   = [CCodeScanViewController readerWithCancelButtonTitle:@"取消" codeReader:reader startScanningAtLoad:YES showSwitchCameraButton:NO showTorchButton:NO];
                     vc.modalPresentationStyle = UIModalPresentationFormSheet;
                 });
-                vc.delegate = self;
-                
-                [vc setCompletionWithBlock:^(NSString *resultAsString) {
-                    NSLog(@"Completion with result: %@", resultAsString);
-                }];
                 
                 vc.title = dict[@"kItemName"];
+                
+                DSNavigationBar *bar = (DSNavigationBar *)self.navigationController.navigationBar;
+                [bar setNavigationBarWithColor:RGBA(0, 0, 0, 0.5)];
+                [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
                 [self.navigationController pushViewController:vc animated:YES];
             } else {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Reader not supported by the current device" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"错误" message:@"当前设备不支持扫码功能！" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
                 
                 [alert show];
             }
@@ -159,18 +184,6 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
     return 0;
-}
-
-#pragma mark - <QRCodeReaderDelegate>
-- (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result {
-    [self dismissViewControllerAnimated:YES completion:^{
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"QRCodeReader" message:result delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
-    }];
-}
-
-- (void)readerDidCancel:(QRCodeReaderViewController *)reader {
-    [reader.navigationController popViewControllerAnimated:YES];
 }
 
 @end

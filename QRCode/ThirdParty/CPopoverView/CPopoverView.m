@@ -12,7 +12,7 @@
 
 //高度，宽度
 #define kPopoverViewDefaultWidth  288
-#define kPopoverViewDefaultHeight 180
+#define kPopoverViewDefaultHeight 300
 
 @interface CPopoverView ()
 @property (nonatomic, strong) UIView *headerView;
@@ -104,7 +104,7 @@
     self.containerView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.backgroudView addSubview:self.containerView];
     [self.containerView autoAlignAxisToSuperviewAxis:ALAxisVertical];
-    [self.containerView autoConstrainAttribute:ALEdgeTop toAttribute:ALAxisHorizontal ofView:self withMultiplier:0.8];
+    [self.containerView autoConstrainAttribute:ALEdgeTop toAttribute:ALAxisHorizontal ofView:self withMultiplier:0.3];
     [self.containerView autoSetDimensionsToSize:CGSizeMake(kPopoverViewDefaultWidth, kPopoverViewDefaultHeight)];
     
     [self.containerView addSubview:self.headerView];

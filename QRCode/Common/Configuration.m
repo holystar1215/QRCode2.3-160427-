@@ -37,7 +37,7 @@ DEFINE_SINGLETON_FOR_CLASS(Configuration)
 }
 
 - (NSString *)serverUrl {
-	return [[[self.class sharedInstance] info] objectForKey:@"serverUrl"];
+	return [NSString stringWithFormat:@"http://%@", self.serverAddr];
 }
 
 - (NSString *)totalUrl {

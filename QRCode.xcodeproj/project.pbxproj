@@ -32,6 +32,9 @@
 		C3488B271C5A79860035776B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3488B251C5A79860035776B /* LaunchScreen.storyboard */; };
 		C3488B301C5A7BF70035776B /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = C3488B2E1C5A7BF70035776B /* Configuration.plist */; };
 		C3512D511C77797300153C6C /* CListPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = C3512D501C77797300153C6C /* CListPopoverView.m */; };
+		C37F1EFB1C81FA3700ACE517 /* CCodeInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = C37F1EFA1C81FA3700ACE517 /* CCodeInfoView.m */; };
+		C37F1EFE1C82219900ACE517 /* CScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = C37F1EFD1C82219900ACE517 /* CScanView.m */; };
+		C37F1F001C82268700ACE517 /* CCodeInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C37F1EFF1C82268700ACE517 /* CCodeInfoView.xib */; };
 		C38958E91C7D6EFC00EFB16E /* CStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = C38958E81C7D6EFC00EFB16E /* CStatusView.m */; };
 		C3B431051C7F51EC0064256F /* CRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3B431031C7F51EC0064256F /* CRecordViewController.m */; };
 		C3B431061C7F51EC0064256F /* CRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3B431041C7F51EC0064256F /* CRecordViewController.xib */; };
@@ -107,6 +110,11 @@
 		C3488B2F1C5A7BF70035776B /* QRCode-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QRCode-Prefix.pch"; sourceTree = "<group>"; };
 		C3512D4F1C77797300153C6C /* CListPopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CListPopoverView.h; sourceTree = "<group>"; };
 		C3512D501C77797300153C6C /* CListPopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CListPopoverView.m; sourceTree = "<group>"; };
+		C37F1EF91C81FA3700ACE517 /* CCodeInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCodeInfoView.h; sourceTree = "<group>"; };
+		C37F1EFA1C81FA3700ACE517 /* CCodeInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCodeInfoView.m; sourceTree = "<group>"; };
+		C37F1EFC1C82219900ACE517 /* CScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CScanView.h; sourceTree = "<group>"; };
+		C37F1EFD1C82219900ACE517 /* CScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CScanView.m; sourceTree = "<group>"; };
+		C37F1EFF1C82268700ACE517 /* CCodeInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCodeInfoView.xib; sourceTree = "<group>"; };
 		C38958E71C7D6EFC00EFB16E /* CStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CStatusView.h; sourceTree = "<group>"; };
 		C38958E81C7D6EFC00EFB16E /* CStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CStatusView.m; sourceTree = "<group>"; };
 		C3B431021C7F51EC0064256F /* CRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRecordViewController.h; sourceTree = "<group>"; };
@@ -371,6 +379,11 @@
 				C3C83B341C7DA4DA00BE269C /* CCodeScanViewController.h */,
 				C3C83B351C7DA4DA00BE269C /* CCodeScanViewController.m */,
 				C3C83B361C7DA4DA00BE269C /* CCodeScanViewController.xib */,
+				C37F1EF91C81FA3700ACE517 /* CCodeInfoView.h */,
+				C37F1EFA1C81FA3700ACE517 /* CCodeInfoView.m */,
+				C37F1EFF1C82268700ACE517 /* CCodeInfoView.xib */,
+				C37F1EFC1C82219900ACE517 /* CScanView.h */,
+				C37F1EFD1C82219900ACE517 /* CScanView.m */,
 			);
 			path = CodeScan;
 			sourceTree = "<group>";
@@ -471,6 +484,7 @@
 				C3F9E8BC1C7CB80000506E18 /* CHomeViewCollectionViewCell.xib in Resources */,
 				C30236441C5CFF6C00684957 /* CLoginViewController.xib in Resources */,
 				C3C767A21C5F2A0B00C8B83A /* CLoginViewCell.xib in Resources */,
+				C37F1F001C82268700ACE517 /* CCodeInfoView.xib in Resources */,
 				C302364A1C5CFFD000684957 /* CHomeViewController.xib in Resources */,
 				C3CA272A1C7A218400E6696E /* CRecordTableViewCell.xib in Resources */,
 				C3B431061C7F51EC0064256F /* CRecordViewController.xib in Resources */,
@@ -553,6 +567,7 @@
 				C302362E1C5C5D0800684957 /* MBProgressHUD+UIView.m in Sources */,
 				C30236351C5C643F00684957 /* UIView+AutoLayout.m in Sources */,
 				C302363D1C5C670A00684957 /* GTMBase64.m in Sources */,
+				C37F1EFB1C81FA3700ACE517 /* CCodeInfoView.m in Sources */,
 				C3C83B371C7DA4DA00BE269C /* CCodeScanViewController.m in Sources */,
 				C302362D1C5C5D0800684957 /* CWebService.m in Sources */,
 				C3F9E8AD1C7AE10E00506E18 /* CLoginModel.m in Sources */,
@@ -567,6 +582,7 @@
 				C3D6E7AE1C7EAA3C003323E7 /* COverageRecordModel.m in Sources */,
 				C302362F1C5C5D0800684957 /* NSString+AppPath.m in Sources */,
 				C3CA27021C7A1ACE00E6696E /* CCustomCodeInventoryViewController.m in Sources */,
+				C37F1EFE1C82219900ACE517 /* CScanView.m in Sources */,
 				C3B4310A1C7F52730064256F /* CFilterViewController.m in Sources */,
 				C30236281C5C5D0800684957 /* CAPIClient.m in Sources */,
 				C3B7F95A1C74D2A100F95D8A /* CPopoverView.m in Sources */,

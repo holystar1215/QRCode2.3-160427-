@@ -22,6 +22,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [application setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
 
@@ -64,7 +66,10 @@
     homeViewController.title = @"资产盘点系统";
     self.navigationController = [[UINavigationController alloc] initWithNavigationBarClass:[DSNavigationBar class] toolbarClass:nil];
     self.navigationController.viewControllers = @[homeViewController];
-//    [[DSNavigationBar appearance] setNavigationBarWithColor:RGBA(252, 115, 10, 0.9)];
+    DSNavigationBar *bar = (DSNavigationBar *)self.navigationController.navigationBar;
+    [bar setNavigationBarWithColor:RGBA(255, 255, 255, 0.8)];
+    [bar setTintColor:[UIColor blueColor]];
+    [bar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor blackColor]}];
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
 }

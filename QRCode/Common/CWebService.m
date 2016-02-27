@@ -174,6 +174,9 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
 - (AFHTTPRequestOperation *)record_currentpage:(NSString *)page
                                        company:(NSString *)company
                                           type:(NSString *)type
+                                           lyr:(NSString *)lyr
+                                          zcbh:(NSString *)zcbh
+                                          cfdd:(NSString *)cfdd
                                        success:(void (^)(NSArray *models, NSString *msg))success
                                        failure:(WebServiceErrorRespondBlock)failure
                                       animated:(BOOL)animated
@@ -183,7 +186,10 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
     NSDictionary *dict = @{
                            @"curpage" : page,
                            @"pddw" : company,
-                           @"type" : type
+                           @"type" : type,
+                           @"lyr" : lyr,
+                           @"zcbh" : zcbh,
+                           @"cfdd" : cfdd
                            };
     NSString *param = [dict dictionaryToJSON];
     param = [param encodeToBase64];
@@ -386,6 +392,44 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
     self.client.baseURL = [NSURL URLWithString:[[Configuration sharedInstance] serverUrl]];
     NSDictionary *dict = @{
                            @"dw" : dw
+                           };
+    NSString *param = [dict dictionaryToJSON];
+    param = [param encodeToBase64];
+    uri = [NSString stringWithFormat:@"%@%@", uri, param];
+    return [self.client postHttpRequestWithURI:uri
+                                    parameters:nil
+                                       success:^(NSData *responseObject) {
+                                           NSError *jsonError = nil;
+                                           NSDictionary *resultDic = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableLeaves error:&jsonError];
+                                           if (!jsonError) {
+                                               CWebServiceError *webError = [CWebServiceError checkRespondDict:resultDic];
+                                               if (webError.errorType == eWebServiceErrorSuccess) {
+                                                   success(resultDic[@"obj"]);
+                                               } else {
+                                                   failure(webError);
+                                               }
+                                           } else {
+                                               failure([CWebServiceError checkRespondWithError:jsonError]);
+                                           }
+                                       }
+                                       failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                           CWebServiceError *serviceError = [CWebServiceError checkRespondWithError:error];
+                                           serviceError.errorMessage = [operation responseObject];
+                                           failure(serviceError);
+                                       }
+                                      animated:animated
+                                       message:message];
+}
+
+- (AFHTTPRequestOperation *)search_workno:(NSString *)workno
+                                 success:(void (^)(NSString *lyr))success
+                                 failure:(WebServiceErrorRespondBlock)failure
+                                animated:(BOOL)animated
+                                 message:(NSString *)message {
+    NSString *uri = @"api/uplyr/securi_findNameByNo?sign=";
+    self.client.baseURL = [NSURL URLWithString:[[Configuration sharedInstance] serverUrl]];
+    NSDictionary *dict = @{
+                           @"workno" : workno
                            };
     NSString *param = [dict dictionaryToJSON];
     param = [param encodeToBase64];

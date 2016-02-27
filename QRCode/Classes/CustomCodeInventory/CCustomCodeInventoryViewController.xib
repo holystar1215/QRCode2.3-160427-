@@ -7,7 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CCustomCodeInventoryViewController">
             <connections>
-                <outlet property="loadButton" destination="lmP-pz-xsp" id="BHZ-pi-xb9"/>
+                <outlet property="codeTextField" destination="xZa-CP-MLv" id="2FA-tt-NR0"/>
+                <outlet property="readCodeButton" destination="lmP-pz-xsp" id="cbA-id-ODA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="9WG-Q4-zCc"/>
             </connections>
         </placeholder>
@@ -17,37 +18,42 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xZa-CP-MLv">
-                    <rect key="frame" x="266" y="77" width="118" height="30"/>
+                    <rect key="frame" x="260" y="77" width="130" height="30"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="BBq-Cc-PfS"/>
-                        <constraint firstAttribute="width" constant="118" id="PwQ-Ma-sGL"/>
+                        <constraint firstAttribute="width" constant="130" id="PwQ-Ma-sGL"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="wFA-qj-uzh"/>
+                    </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmP-pz-xsp">
-                    <rect key="frame" x="8" y="495" width="584" height="30"/>
+                    <rect key="frame" x="8" y="485" width="584" height="40"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="gIS-52-yrV"/>
+                        <constraint firstAttribute="height" constant="40" id="gIS-52-yrV"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <state key="normal" title="读取数据"/>
                     <connections>
-                        <action selector="onLoad:" destination="-1" eventType="touchUpInside" id="sXo-Gp-TFP"/>
+                        <action selector="onReadCode:" destination="-1" eventType="touchUpInside" id="06W-m3-lkp"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="资产编号：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VpH-r7-EAg">
-                    <rect key="frame" x="168" y="81" width="90" height="21"/>
+                    <rect key="frame" x="162" y="81" width="90" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="90" id="MsN-7Z-mkS"/>
                         <constraint firstAttribute="height" constant="21" id="mIR-bx-lQr"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="lmP-pz-xsp" secondAttribute="bottom" constant="75" id="0YO-td-Ljo"/>
                 <constraint firstItem="xZa-CP-MLv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="25" id="7cU-g3-xV3"/>
