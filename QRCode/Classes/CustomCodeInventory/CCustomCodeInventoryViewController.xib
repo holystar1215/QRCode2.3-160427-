@@ -29,7 +29,6 @@
                     <rect key="frame" x="8" y="495" width="584" height="30"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="584" id="Uvn-3H-0G8"/>
                         <constraint firstAttribute="height" constant="30" id="gIS-52-yrV"/>
                     </constraints>
                     <state key="normal" title="读取数据"/>
@@ -48,13 +47,13 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="lmP-pz-xsp" secondAttribute="bottom" constant="75" id="0YO-td-Ljo"/>
                 <constraint firstItem="xZa-CP-MLv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="25" id="7cU-g3-xV3"/>
                 <constraint firstItem="lmP-pz-xsp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="ISp-TL-Gms"/>
-                <constraint firstAttribute="bottom" secondItem="lmP-pz-xsp" secondAttribute="bottom" constant="75" id="R8c-jA-DTb"/>
-                <constraint firstItem="xZa-CP-MLv" firstAttribute="centerY" secondItem="VpH-r7-EAg" secondAttribute="centerY" id="WuF-IE-uES"/>
                 <constraint firstItem="xZa-CP-MLv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="77" id="c0N-kE-jmY"/>
+                <constraint firstItem="VpH-r7-EAg" firstAttribute="centerY" secondItem="xZa-CP-MLv" secondAttribute="centerY" id="fzf-uV-eVc"/>
                 <constraint firstAttribute="trailing" secondItem="lmP-pz-xsp" secondAttribute="trailing" constant="8" id="gUc-6b-IqE"/>
                 <constraint firstItem="xZa-CP-MLv" firstAttribute="leading" secondItem="VpH-r7-EAg" secondAttribute="trailing" constant="8" id="qRY-Px-Mo9"/>
             </constraints>

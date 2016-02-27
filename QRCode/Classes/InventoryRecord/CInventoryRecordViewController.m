@@ -10,15 +10,16 @@
 #import "CRecordViewController.h"
 #import "CFilterViewController.h"
 #import "CRecordTableViewCell.h"
-#import "CRecordModel.h"
 
-static NSString * const reuseIdentifier = @"UITableViewCell";
+static NSString * const reuseIdentifier = @"CRecordTableViewCell";
 
 @interface CInventoryRecordViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, weak) IBOutlet UITableView *contentTableView;
 @property (weak, nonatomic) IBOutlet CStatusView *statusView;
 
 @property (nonatomic, strong) NSArray *itemsArray;
+@property (nonatomic, assign) NSInteger currentPage;
+@property (nonatomic, assign) NSInteger recordCount;
 
 @end
 
@@ -28,6 +29,8 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.currentPage = 1;
+    
+    [self.contentTableView registerNib:[UINib nibWithNibName:@"CRecordTableViewCell" bundle:nil] forCellReuseIdentifier:reuseIdentifier];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"back-arrow"] style:UIBarButtonItemStylePlain handler:^(id sender) {
         [self.navigationController popViewControllerAnimated:YES];
@@ -39,47 +42,79 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
         [self.navigationController pushViewController:vc animated:YES];
     }];
     
+    weakSelf(wSelf);
     NSString *company = [[CDataSource sharedInstance].loginDict pddw];
     if (company) {
-        [[CWebService sharedInstance] record_currentpage:[NSString stringWithFormat:@"%ld", (long)self.currentPage] company:company type:[NSString stringWithFormat:@"%ld", (long)self.recordType] success:^(NSArray *models) {
+        [[CWebService sharedInstance] record_currentpage:[NSString stringWithFormat:@"%ld", (long)wSelf.currentPage] company:company type:[NSString stringWithFormat:@"%ld", (long)wSelf.recordType] success:^(NSArray *models, NSString *msg) {
             NSError *jsonError;
-            self.itemsArray = [MTLJSONAdapter modelsOfClass:[CRecordModel class] fromJSONArray:models error:&jsonError];
-            __block CGFloat sumValue = 0.0;
-            [self.itemsArray enumerateObjectsUsingBlock:^(CRecordModel *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                sumValue = sumValue + [obj.jine floatValue];
-            }];
-            [self setCount:[self.itemsArray count] andAmount:sumValue];
+            switch (wSelf.recordType) {
+                case 1: {
+                    wSelf.itemsArray = [MTLJSONAdapter modelsOfClass:[CLogRecordModel class] fromJSONArray:models error:&jsonError];
+                    break;
+                }
+                case 2: {
+                    wSelf.itemsArray = [MTLJSONAdapter modelsOfClass:[COverageRecordModel class] fromJSONArray:models error:&jsonError];
+                    break;
+                }
+                case 3: {
+                    wSelf.itemsArray = [MTLJSONAdapter modelsOfClass:[CLogRecordModel class] fromJSONArray:models error:&jsonError];
+                    break;
+                }
+                default:
+                    break;
+            }
+            [wSelf.contentTableView reloadData];
+            wSelf.recordCount = [wSelf formatStatusMsg:msg];
+            [wSelf.contentTableView.footer resetNoMoreData];
         } failure:^(CWebServiceError *error) {
             [MBProgressHUD showError:error.localizedDescription];
         } animated:YES message:@""];
     }
     
+    
     self.contentTableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        NSString *company = [[CDataSource sharedInstance].loginDict pddw];
-        if (company) {
-            [[CWebService sharedInstance] record_currentpage:[NSString stringWithFormat:@"%ld", (long)self.currentPage] company:company type:[NSString stringWithFormat:@"%ld", (long)self.recordType] success:^(NSArray *models) {
-                NSError *jsonError;
-                NSMutableArray *moreItems = [[NSMutableArray alloc] initWithArray:self.itemsArray];
-                [moreItems addObjectsFromArray:[MTLJSONAdapter modelsOfClass:[CRecordModel class] fromJSONArray:models error:&jsonError]];
-                self.itemsArray = moreItems;
-                __block CGFloat sumValue = 0.0;
-                [self.itemsArray enumerateObjectsUsingBlock:^(CRecordModel *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    sumValue = sumValue + [obj.jine floatValue];
-                }];
-                [self.contentTableView reloadData];
-                [self setCount:[self.itemsArray count] andAmount:sumValue];
-            } failure:^(CWebServiceError *error) {
-                [MBProgressHUD showError:error.localizedDescription];
-            } animated:YES message:@""];
+        if ([wSelf.itemsArray count] < wSelf.recordCount) {
+            wSelf.currentPage += 1;
+            
+            NSString *company = [[CDataSource sharedInstance].loginDict pddw];
+            if (company) {
+                [[CWebService sharedInstance] record_currentpage:[NSString stringWithFormat:@"%ld", (long)wSelf.currentPage] company:company type:[NSString stringWithFormat:@"%ld", (long)wSelf.recordType] success:^(NSArray *models, NSString *msg) {
+                    NSError *jsonError;
+                    NSMutableArray *moreItems = [[NSMutableArray alloc] initWithArray:self.itemsArray];
+                    switch (wSelf.recordType) {
+                        case 1: {
+                            [moreItems addObjectsFromArray:[MTLJSONAdapter modelsOfClass:[CLogRecordModel class] fromJSONArray:models error:&jsonError]];
+                            break;
+                        }
+                        case 2: {
+                            [moreItems addObjectsFromArray:[MTLJSONAdapter modelsOfClass:[COverageRecordModel class] fromJSONArray:models error:&jsonError]];
+                            break;
+                        }
+                        case 3: {
+                            [moreItems addObjectsFromArray:[MTLJSONAdapter modelsOfClass:[CLogRecordModel class] fromJSONArray:models error:&jsonError]];
+                            break;
+                        }
+                        default:
+                            break;
+                    }
+                    wSelf.itemsArray = moreItems;
+                    [wSelf.contentTableView reloadData];
+                    [wSelf.contentTableView.footer resetNoMoreData];
+                } failure:^(CWebServiceError *error) {
+                    [MBProgressHUD showError:error.localizedDescription];
+                } animated:NO message:nil];
+            }
+        } else {
+            [wSelf.contentTableView.footer endRefreshingWithNoMoreData];
         }
     }];
 }
 
-- (void)setCount:(NSInteger)count andAmount:(CGFloat)amount {
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    formatter.numberStyle = NSNumberFormatterDecimalStyle;
+- (void)setCount:(NSString *)count andAmount:(NSString *)amount {
+//    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+//    formatter.numberStyle = NSNumberFormatterDecimalStyle;
     
-    NSString *countText = [NSString stringWithFormat:@"记录数：%@", [formatter stringFromNumber:[NSNumber numberWithInteger:count]]];
+    NSString *countText = [NSString stringWithFormat:@"记录数：%@", count];//[formatter stringFromNumber:[NSNumber numberWithInteger:count]]
     NSMutableAttributedString *countAttributedString = [[NSMutableAttributedString alloc] initWithString:countText];
     [countAttributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, countText.length)];
     [countAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 3)];
@@ -87,7 +122,7 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
     
     self.statusView.countLabel.attributedText = countAttributedString;
     
-    NSString *amountText = [NSString stringWithFormat:@"金额总计：%@", [formatter stringFromNumber:[NSNumber numberWithFloat:amount]]];
+    NSString *amountText = [NSString stringWithFormat:@"金额总计：%@", amount];//[formatter stringFromNumber:[NSNumber numberWithFloat:amount]]
     NSMutableAttributedString *amountAttributedString = [[NSMutableAttributedString alloc] initWithString:amountText];
     [amountAttributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, amountText.length)];
     [amountAttributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 4)];
@@ -96,27 +131,101 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
     self.statusView.amountLabel.attributedText = amountAttributedString;
 }
 
+- (NSInteger)formatStatusMsg:(NSString *)msg {
+    NSString *cj = msg;
+    cj = [cj stringByReplacingOccurrencesOfString:@"记录数:" withString:@""];
+    cj = [cj stringByReplacingOccurrencesOfString:@"、金额合计:" withString:@","];
+
+    NSArray *cjArray = [cj componentsSeparatedByString:@","];
+    if (cjArray && [cjArray count] > 0) {
+        [self setCount:cjArray[0] andAmount:cjArray[1]];
+        return [cjArray[0] integerValue];
+    } else {
+        [self setCount:@"" andAmount:@""];
+        return 0;
+    }
+}
+
 - (NSAttributedString *)type:(NSInteger)type recordIndex:(NSInteger)recordIndex {
     NSString *recordString = @"";
-//    CRecordModel *model = self.itemsArray[recordIndex];
+    NSMutableAttributedString *attributedString;
+    
     switch (type) {
         case 1: {
+            CLogRecordModel *model = self.itemsArray[recordIndex];
+            recordString = [NSString stringWithFormat:@"资产编号：%@\n领用人：%@\n使用单位号：%@\n使用单位名：%@\n存放地点：%@\n入库时间：%@\n使用方向名：%@\n经费科目名：%@\n名称：%@\n型号：%@\n规格：%@\n金额：%@\n厂家：%@\n经销商：%@\n资产内容：%@", model.zcbh, model.lyr, model.sydwh, model.syfxm, model.cfdd, model.rksj, model.syfxm, model.jfkmm, model.mc, model.xh, model.gg, model.jine, model.changjia, model.jxs, model.zcnr];
+            attributedString = [[NSMutableAttributedString alloc] initWithString:recordString];
+            [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, recordString.length)];
+            
+            NSInteger offset = 0, len = 0;
+            
+            offset = [[NSString stringWithFormat:@"资产编号："] length];
+            len = model.zcbh.length;
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(offset, len)];
+            
+            offset = [[NSString stringWithFormat:@"资产编号：%@\n领用人：", model.zcbh] length];
+            len = [model.lyr length];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(offset, len)];
+            
+            offset = [[NSString stringWithFormat:@"资产编号：%@\n领用人：%@\n使用单位号：%@\n使用单位名：%@\n存放地点：", model.zcbh, model.lyr, model.sydwh, model.syfxm] length];
+            len = [model.cfdd length];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor groupTableViewBackgroundColor] range:NSMakeRange(offset, len)];
+            
+            offset = [[NSString stringWithFormat:@"资产编号：%@\n领用人：%@\n使用单位号：%@\n使用单位名：%@\n存放地点：%@\n入库时间：%@\n使用方向名：%@\n经费科目名：%@\n", model.zcbh, model.lyr, model.sydwh, model.syfxm, model.cfdd, model.rksj, model.syfxm, model.jfkmm] length];
+            len = [[NSString stringWithFormat:@"名称：%@\n型号：%@\n规格：%@\n金额：%@\n厂家：%@\n经销商：%@\n资产内容：%@", model.mc, model.xh, model.gg, model.jine, model.changjia, model.jxs, model.zcnr] length];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor groupTableViewBackgroundColor] range:NSMakeRange(offset, len)];
             
             break;
         }
         case 2: {
-//            recordString = [NSString stringWithFormat:@"资产编号：%@\n名称：%@\n单位名称：%@\n盘点人：%@\n盘点时间：%@", model.zcbh, model.mc, model.sydwm, model];
+            COverageRecordModel *model = self.itemsArray[recordIndex];
+            recordString = [NSString stringWithFormat:@"资产编号：%@\n名称：%@\n单位名称：%@\n盘点人：%@\n盘点时间：%@", model.zcbh, model.mc, model.sydwm, model.lyr, model.rksj];
+            attributedString = [[NSMutableAttributedString alloc] initWithString:recordString];
+            [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, recordString.length)];
+            
+            NSInteger offset = 0, len = 0;
+            
+            offset = [[NSString stringWithFormat:@"资产编号："] length];
+            len = model.zcbh.length;
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(offset, len)];
+            
+            offset = [[NSString stringWithFormat:@"资产编号：%@\n名称：%@\n单位名称：%@\n", model.zcbh, model.mc, model.sydwm] length];
+            len = [[NSString stringWithFormat:@"盘点人：%@\n盘点时间：%@", model.lyr, model.rksj] length];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(offset, len)];
+            
             break;
         }
         case 3: {
+            CLogRecordModel *model = self.itemsArray[recordIndex];
+            recordString = [NSString stringWithFormat:@"资产编号：%@\n领用人：%@\n使用单位号：%@\n使用单位名：%@\n存放地点：%@\n入库时间：%@\n使用方向名：%@\n经费科目名：%@\n名称：%@\n型号：%@\n规格：%@\n金额：%@\n厂家：%@\n经销商：%@\n资产内容：%@", model.zcbh, model.lyr, model.sydwh, model.syfxm, model.cfdd, model.rksj, model.syfxm, model.jfkmm, model.mc, model.xh, model.gg, model.jine, model.changjia, model.jxs, model.zcnr];
+            attributedString = [[NSMutableAttributedString alloc] initWithString:recordString];
+            [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, recordString.length)];
+            
+            NSInteger offset = 0, len = 0;
+            
+            offset = [[NSString stringWithFormat:@"资产编号："] length];
+            len = model.zcbh.length;
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(offset, len)];
+            
+            offset = [[NSString stringWithFormat:@"资产编号：%@\n领用人：", model.zcbh] length];
+            len = [model.lyr length];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(offset, len)];
+            
+            offset = [[NSString stringWithFormat:@"资产编号：%@\n领用人：%@\n使用单位号：%@\n使用单位名：%@\n存放地点：", model.zcbh, model.lyr, model.sydwh, model.syfxm] length];
+            len = [model.cfdd length];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor groupTableViewBackgroundColor] range:NSMakeRange(offset, len)];
+            
+            offset = [[NSString stringWithFormat:@"资产编号：%@\n领用人：%@\n使用单位号：%@\n使用单位名：%@\n存放地点：%@\n入库时间：%@\n使用方向名：%@\n经费科目名：%@\n", model.zcbh, model.lyr, model.sydwh, model.syfxm, model.cfdd, model.rksj, model.syfxm, model.jfkmm] length];
+            len = [[NSString stringWithFormat:@"名称：%@\n型号：%@\n规格：%@\n金额：%@\n厂家：%@\n经销商：%@\n资产内容：%@", model.mc, model.xh, model.gg, model.jine, model.changjia, model.jxs, model.zcnr] length];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(offset, len)];
+            
             break;
         }
         default:
             break;
     }
-    NSMutableAttributedString *recordAttributedString = [[NSMutableAttributedString alloc] initWithString:recordString];
     
-    return recordAttributedString;
+    return attributedString;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -134,14 +243,15 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    CRecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     
     // Configure the cell...
+    cell.recordLabel.attributedText = [self type:self.recordType recordIndex:indexPath.row];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if (self.recordType == 1) {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    } else {
+    if (self.recordType == 3) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
     
     
@@ -152,6 +262,8 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
 //如果要支持iOS7这个方法必须实现
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CRecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    cell.recordLabel.attributedText = [self type:self.recordType recordIndex:indexPath.row];
+    cell.recordLabel.numberOfLines = 0;
     
     //这句代码必须要有，也就是说必须要设定contentView的宽度约束。
     //设置以后，contentView里面的内容才知道什么时候该换行了
@@ -177,14 +289,13 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
             break;
         }
         case 2: {
-            CRecordViewController *vc = [[CRecordViewController alloc] initWithNibName:@"CRecordViewController" bundle:nil];
-            vc.title = self.title;
-            [self.navigationController pushViewController:vc animated:YES];
+            
             break;
         }
         case 3: {
             CRecordViewController *vc = [[CRecordViewController alloc] initWithNibName:@"CRecordViewController" bundle:nil];
-            vc.title = self.title;
+            vc.title = @"数据修改";
+            vc.modelSelected = self.itemsArray[indexPath.row];
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }

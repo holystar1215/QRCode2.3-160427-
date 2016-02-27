@@ -37,15 +37,6 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
     
     self.logoImageView.image = [UIImage imageNamed:@"login_account"];
     
-    [[CWebService sharedInstance] school_list_success:^(NSArray *models) {
-        NSError *jsonError;
-        self.schoolArray = [MTLJSONAdapter modelsOfClass:[CSchoolModel class] fromJSONArray:models error:&jsonError];
-        self.resultArray = [NSArray arrayWithArray:self.schoolArray];
-        self.popupListView = [[CListPopoverView alloc] initWithFrame:CGRectZero andTarget:self];
-    } failure:^(CWebServiceError *error) {
-        [MBProgressHUD showError:error.localizedDescription];
-    } animated:YES message:@""];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -90,6 +81,19 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
         NSError *jsonError;
         [[CDataSource sharedInstance] setLoginDict:[MTLJSONAdapter modelOfClass:[CLoginModel class] fromJSONDictionary:models error:&jsonError]];
         [APP_DELEGATE setupHomeViewController];
+    } failure:^(CWebServiceError *error) {
+        [MBProgressHUD showError:error.localizedDescription];
+    } animated:YES message:@""];
+}
+
+- (void)showPopList {
+    [[CWebService sharedInstance] school_list_success:^(NSArray *models) {
+        NSError *jsonError;
+        self.schoolArray = [MTLJSONAdapter modelsOfClass:[CSchoolModel class] fromJSONArray:models error:&jsonError];
+        self.resultArray = [NSArray arrayWithArray:self.schoolArray];
+        self.popupListView = [[CListPopoverView alloc] initWithFrame:CGRectZero andTarget:self];
+        self.popupListView.autoHidden = YES;
+        [self.popupListView showPopoverView];
     } failure:^(CWebServiceError *error) {
         [MBProgressHUD showError:error.localizedDescription];
     } animated:YES message:@""];
@@ -159,8 +163,7 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
             cell.imageView.image = [UIImage imageNamed:@"password"];
             cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 2)];
             cell.imageView.image = [UIImage imageNamed:@"username"];
-            self.popupListView.autoHidden = YES;
-            [self.popupListView showPopoverView];
+            [self showPopList];
             break;
         }
         case 1: {
@@ -244,8 +247,7 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
             cell.imageView.image = [UIImage imageNamed:@"password"];
             cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 2)];
             cell.imageView.image = [UIImage imageNamed:@"username"];
-            self.popupListView.autoHidden = YES;
-            [self.popupListView showPopoverView];
+            
             break;
         }
         case 1: {

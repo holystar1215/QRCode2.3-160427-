@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "CLoginModel.h"
 #import "CSchoolModel.h"
-#import "CRecordModel.h"
+#import "CModifyRecordModel.h"
+#import "CCompanyModel.h"
+#import "CLogRecordModel.h"
+#import "COverageRecordModel.h"
 
 @interface CDataSource : NSObject
 @property (nonatomic, strong) CLoginModel *loginDict;

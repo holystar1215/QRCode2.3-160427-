@@ -1,5 +1,5 @@
 //
-//  CModifyRecord.h
+//  CModifyRecordModel.h
 //  QRCode
 //
 //  Created by CarlLiu on 16/2/25.
@@ -8,7 +8,7 @@
 
 #import <Mantle/Mantle.h>
 
-@interface CModifyRecord : MTLModel <MTLJSONSerializing>
+@interface CModifyRecordModel : MTLModel <MTLJSONSerializing>
 @property (nonatomic, strong) NSString *zcbh;
 @property (nonatomic, strong) NSString *sydwh;
 // 要修改的领用人

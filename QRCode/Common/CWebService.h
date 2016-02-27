@@ -57,13 +57,13 @@ DEFINE_SINGLETON_FOR_HEADER(CWebService);
 - (AFHTTPRequestOperation *)record_currentpage:(NSString *)page
                                        company:(NSString *)company
                                           type:(NSString *)type
-                                       success:(void (^)(NSArray *models))success
+                                       success:(void (^)(NSArray *models, NSString *msg))success
                                        failure:(WebServiceErrorRespondBlock)failure
                                       animated:(BOOL)animated
                                        message:(NSString *)message;
 
-- (AFHTTPRequestOperation *)update_record:(CRecordModel *)model
-                                  success:(void (^)(NSArray *models))success
+- (AFHTTPRequestOperation *)modify_record:(CModifyRecordModel *)model
+                                  success:(void (^)(NSString *msg))success
                                   failure:(WebServiceErrorRespondBlock)failure
                                  animated:(BOOL)animated
                                   message:(NSString *)message;

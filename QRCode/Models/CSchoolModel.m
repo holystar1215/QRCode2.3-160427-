@@ -36,7 +36,7 @@
              @"schoolCode" : @"schoolcode",
              @"serverAddr" : @"serverAddr",
              @"unifiedCode" : @"unifiedCode"
-             };
+    };
 }
 
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "CWebService.h"
-#import "CModifyRecord.h"
 
 #import <AFNetworking.h>
 
@@ -175,7 +174,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
 - (AFHTTPRequestOperation *)record_currentpage:(NSString *)page
                                        company:(NSString *)company
                                           type:(NSString *)type
-                                       success:(void (^)(NSArray *models))success
+                                       success:(void (^)(NSArray *models, NSString *msg))success
                                        failure:(WebServiceErrorRespondBlock)failure
                                       animated:(BOOL)animated
                                        message:(NSString *)message {
@@ -197,7 +196,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                            if (!jsonError) {
                                                CWebServiceError *webError = [CWebServiceError checkRespondDict:resultDic];
                                                if (webError.errorType == eWebServiceErrorSuccess) {
-                                                   success(resultDic[@"obj"]);
+                                                   success(resultDic[@"obj"], resultDic[@"msg"]);
                                                } else {
                                                    failure(webError);
                                                }
@@ -214,8 +213,8 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                        message:message];
 }
 
-- (AFHTTPRequestOperation *)update_record:(CModifyRecord *)model
-                                  success:(void (^)(NSArray *models))success
+- (AFHTTPRequestOperation *)modify_record:(CModifyRecordModel *)model
+                                  success:(void (^)(NSString *msg))success
                                   failure:(WebServiceErrorRespondBlock)failure
                                  animated:(BOOL)animated
                                   message:(NSString *)message {
@@ -233,7 +232,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                            if (!jsonError) {
                                                CWebServiceError *webError = [CWebServiceError checkRespondDict:resultDic];
                                                if (webError.errorType == eWebServiceErrorSuccess) {
-                                                   success(resultDic[@"obj"]);
+                                                   success(resultDic[@"msg"]);
                                                } else {
                                                    failure(webError);
                                                }

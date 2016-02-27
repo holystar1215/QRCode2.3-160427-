@@ -11,6 +11,5 @@
 @interface CInventoryRecordViewController : CBaseViewController
 @property (nonatomic, assign) NSInteger recordType;
 @property (nonatomic, strong) NSString *assetCompany;
-@property (nonatomic, assign) NSInteger currentPage;
 
 @end
