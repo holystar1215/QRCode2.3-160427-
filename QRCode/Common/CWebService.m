@@ -255,12 +255,12 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                        message:message];
 }
 
-- (AFHTTPRequestOperation *)asset_info_code:(NSString *)code
-                                       pddw:(NSString *)pddw
-                                    success:(void (^)(NSArray *models))success
-                                    failure:(WebServiceErrorRespondBlock)failure
-                                   animated:(BOOL)animated
-                                    message:(NSString *)message {
+- (AFHTTPRequestOperation *)scan_code:(NSString *)code
+                                 pddw:(NSString *)pddw
+                              success:(void (^)(NSString *obj, NSInteger code))success
+                              failure:(WebServiceErrorRespondBlock)failure
+                             animated:(BOOL)animated
+                              message:(NSString *)message {
     NSString *uri = @"/liquidation/api/liquidata/securi_findByAssetnumber?sign=";
     self.client.baseURL = [NSURL URLWithString:[[Configuration sharedInstance] serverUrl]];
     NSDictionary *dict = @{
@@ -278,7 +278,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                            if (!jsonError) {
                                                CWebServiceError *webError = [CWebServiceError checkRespondDict:resultDic];
                                                if (webError.errorType == eWebServiceErrorSuccess) {
-                                                   success(resultDic[@"obj"]);
+                                                   success(resultDic[@"obj"], [resultDic[@"code"] integerValue]);
                                                } else {
                                                    failure(webError);
                                                }
@@ -295,14 +295,14 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                        message:message];
 }
 
-- (AFHTTPRequestOperation *)profit_code:(NSString *)code
-                                   dlmc:(NSString *)dlmc
-                                   pddw:(NSString *)pddw
-                                     mc:(NSString *)mc
-                                success:(void (^)(NSArray *models))success
-                                failure:(WebServiceErrorRespondBlock)failure
-                               animated:(BOOL)animated
-                                message:(NSString *)message {
+- (AFHTTPRequestOperation *)scan_profit_code:(NSString *)code
+                                        dlmc:(NSString *)dlmc
+                                        pddw:(NSString *)pddw
+                                          mc:(NSString *)mc
+                                     success:(void (^)(NSString *msg, NSInteger code))success
+                                     failure:(WebServiceErrorRespondBlock)failure
+                                    animated:(BOOL)animated
+                                     message:(NSString *)message {
     NSString *uri = @"/liquidation/api/liquidata/securi_updateassepy?sign=";
     self.client.baseURL = [NSURL URLWithString:[[Configuration sharedInstance] serverUrl]];
     NSDictionary *dict = @{
@@ -322,7 +322,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                            if (!jsonError) {
                                                CWebServiceError *webError = [CWebServiceError checkRespondDict:resultDic];
                                                if (webError.errorType == eWebServiceErrorSuccess) {
-                                                   success(resultDic[@"obj"]);
+                                                   success(resultDic[@"msg"], [resultDic[@"code"] integerValue]);
                                                } else {
                                                    failure(webError);
                                                }
@@ -339,14 +339,14 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                        message:message];
 }
 
-- (AFHTTPRequestOperation *)confirm_code:(NSString *)code
-                                    dlmc:(NSString *)dlmc
-                                    pddw:(NSString *)pddw
-                                      mc:(NSString *)mc
-                                 success:(void (^)(NSArray *models))success
-                                 failure:(WebServiceErrorRespondBlock)failure
-                                animated:(BOOL)animated
-                                 message:(NSString *)message {
+- (AFHTTPRequestOperation *)scan_confirm_code:(NSString *)code
+                                         dlmc:(NSString *)dlmc
+                                         pddw:(NSString *)pddw
+                                           mc:(NSString *)mc
+                                      success:(void (^)(NSString *msg, NSInteger code))success
+                                      failure:(WebServiceErrorRespondBlock)failure
+                                     animated:(BOOL)animated
+                                      message:(NSString *)message {
     NSString *uri = @"/liquidation/api/liquidata/securi_updateassetnumber?sign=";
     self.client.baseURL = [NSURL URLWithString:[[Configuration sharedInstance] serverUrl]];
     NSDictionary *dict = @{
@@ -366,7 +366,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                            if (!jsonError) {
                                                CWebServiceError *webError = [CWebServiceError checkRespondDict:resultDic];
                                                if (webError.errorType == eWebServiceErrorSuccess) {
-                                                   success(resultDic[@"obj"]);
+                                                   success(resultDic[@"msg"], [resultDic[@"code"] integerValue]);
                                                } else {
                                                    failure(webError);
                                                }
@@ -461,7 +461,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
 
 - (AFHTTPRequestOperation *)manual_code:(NSString *)code
                                    pddw:(NSString *)pddw
-                                success:(void (^)(NSArray *models))success
+                                success:(void (^)(NSString *obj, NSInteger code))success
                                 failure:(WebServiceErrorRespondBlock)failure
                                animated:(BOOL)animated
                                 message:(NSString *)message {
@@ -482,7 +482,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                            if (!jsonError) {
                                                CWebServiceError *webError = [CWebServiceError checkRespondDict:resultDic];
                                                if (webError.errorType == eWebServiceErrorSuccess) {
-                                                   success(resultDic[@"obj"]);
+                                                   success(resultDic[@"obj"], [resultDic[@"code"] integerValue]);
                                                } else {
                                                    failure(webError);
                                                }
@@ -503,7 +503,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                           dlmc:(NSString *)dlmc
                                           pddw:(NSString *)pddw
                                             mc:(NSString *)mc
-                                       success:(void (^)(NSArray *models))success
+                                       success:(void (^)(NSString *msg, NSInteger code))success
                                        failure:(WebServiceErrorRespondBlock)failure
                                       animated:(BOOL)animated
                                        message:(NSString *)message {
@@ -526,7 +526,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                            if (!jsonError) {
                                                CWebServiceError *webError = [CWebServiceError checkRespondDict:resultDic];
                                                if (webError.errorType == eWebServiceErrorSuccess) {
-                                                   success(resultDic[@"obj"]);
+                                                   success(resultDic[@"msg"], [resultDic[@"code"] integerValue]);
                                                } else {
                                                    failure(webError);
                                                }
@@ -547,7 +547,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                            dlmc:(NSString *)dlmc
                                            pddw:(NSString *)pddw
                                              mc:(NSString *)mc
-                                        success:(void (^)(NSArray *models))success
+                                        success:(void (^)(NSString *msg, NSInteger code))success
                                         failure:(WebServiceErrorRespondBlock)failure
                                        animated:(BOOL)animated
                                         message:(NSString *)message {
@@ -570,7 +570,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                            if (!jsonError) {
                                                CWebServiceError *webError = [CWebServiceError checkRespondDict:resultDic];
                                                if (webError.errorType == eWebServiceErrorSuccess) {
-                                                   success(resultDic[@"obj"]);
+                                                   success(resultDic[@"msg"], [resultDic[@"code"] integerValue]);
                                                } else {
                                                    failure(webError);
                                                }

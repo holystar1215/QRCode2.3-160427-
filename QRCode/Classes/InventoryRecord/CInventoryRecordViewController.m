@@ -71,7 +71,7 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
         if ([wSelf.itemsArray count] < wSelf.recordCount) {
             wSelf.currentPage += 1;
             
-            NSString *company = [[CDataSource sharedInstance].loginDict pddw];
+            NSString *company = [[CDataSource sharedInstance].loginModel pddw];
             if (company) {
                 [[CWebService sharedInstance] record_currentpage:[NSString stringWithFormat:@"%ld", (long)wSelf.currentPage] company:company type:[NSString stringWithFormat:@"%ld", (long)wSelf.recordType] lyr:self.lyr zcbh:self.zcbh cfdd:self.cfdd success:^(NSArray *models, NSString *msg) {
                     NSError *jsonError;
@@ -114,7 +114,7 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
 
 - (void)reloadRecordData {
     weakSelf(wSelf);
-    NSString *company = [[CDataSource sharedInstance].loginDict pddw];
+    NSString *company = [[CDataSource sharedInstance].loginModel pddw];
     if (company) {
         [[CWebService sharedInstance] record_currentpage:[NSString stringWithFormat:@"%ld", (long)wSelf.currentPage] company:company type:[NSString stringWithFormat:@"%ld", (long)self.recordType] lyr:self.lyr zcbh:self.zcbh cfdd:self.cfdd success:^(NSArray *models, NSString *msg) {
             NSError *jsonError;

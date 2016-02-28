@@ -154,7 +154,7 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
                            @"x_lyr":@"",
                            @"x_lyrgh":@"",
                            @"x_sydwh":@"",
-                           @"xgrgh":[[CDataSource sharedInstance].loginDict yhmc],
+                           @"xgrgh":[[CDataSource sharedInstance].loginModel yhmc],
                            @"zcbh":[model zcbh]
                            };
     NSError *modelError;
@@ -208,7 +208,7 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
 }
 
 - (void)showDwList {
-    [[CWebService sharedInstance] search_dw:[[CDataSource sharedInstance].loginDict pddw] success:^(NSArray *models) {
+    [[CWebService sharedInstance] search_dw:[[CDataSource sharedInstance].loginModel pddw] success:^(NSArray *models) {
         NSError *jsonError;
         self.schoolArray = [MTLJSONAdapter modelsOfClass:[CCompanyModel class] fromJSONArray:models error:&jsonError];
         self.resultArray = [NSArray arrayWithArray:self.schoolArray];

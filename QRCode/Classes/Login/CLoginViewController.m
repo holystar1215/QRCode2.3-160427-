@@ -79,7 +79,7 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
     
     [[CWebService sharedInstance] login_username:userName password:passWord success:^(NSDictionary *models) {
         NSError *jsonError;
-        [[CDataSource sharedInstance] setLoginDict:[MTLJSONAdapter modelOfClass:[CLoginModel class] fromJSONDictionary:models error:&jsonError]];
+        [[CDataSource sharedInstance] setLoginModel:[MTLJSONAdapter modelOfClass:[CLoginModel class] fromJSONDictionary:models error:&jsonError]];
         
         [APP_DELEGATE setupHomeViewController];
     } failure:^(CWebServiceError *error) {

@@ -47,8 +47,8 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
                         ];
     
     self.headerView.headerImageView.image = [UIImage imageNamed:@"login_account"];
-    self.headerView.titleLabel.text = [NSString stringWithFormat:@"姓名:%@", [CDataSource sharedInstance].loginDict.yhmc];
-    self.headerView.subTitleLabel.text = [NSString stringWithFormat:@"隶属单位:%@", [CDataSource sharedInstance].loginDict.lxdh];
+    self.headerView.titleLabel.text = [NSString stringWithFormat:@"姓名:%@", [CDataSource sharedInstance].loginModel.yhmc];
+    self.headerView.subTitleLabel.text = [NSString stringWithFormat:@"隶属单位:%@", [CDataSource sharedInstance].loginModel.lxdh];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -148,7 +148,7 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
             CInventoryRecordViewController *vc = [[CInventoryRecordViewController alloc] initWithNibName:@"CInventoryRecordViewController" bundle:nil];
             vc.title = dict[@"kItemName"];
             vc.recordType = 1;
-            vc.assetCompany = [CDataSource sharedInstance].loginDict.cxdw;
+            vc.assetCompany = [CDataSource sharedInstance].loginModel.cxdw;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
@@ -156,7 +156,7 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
             CInventoryRecordViewController *vc = [[CInventoryRecordViewController alloc] initWithNibName:@"CInventoryRecordViewController" bundle:nil];
             vc.title = dict[@"kItemName"];
             vc.recordType = 2;
-            vc.assetCompany = [CDataSource sharedInstance].loginDict.cxdw;
+            vc.assetCompany = [CDataSource sharedInstance].loginModel.cxdw;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
@@ -164,7 +164,7 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
             CInventoryRecordViewController *vc = [[CInventoryRecordViewController alloc] initWithNibName:@"CInventoryRecordViewController" bundle:nil];
             vc.title = dict[@"kItemName"];
             vc.recordType = 3;
-            vc.assetCompany = [CDataSource sharedInstance].loginDict.cxdw;
+            vc.assetCompany = [CDataSource sharedInstance].loginModel.cxdw;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }

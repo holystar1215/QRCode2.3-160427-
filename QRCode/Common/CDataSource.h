@@ -15,7 +15,7 @@
 #import "COverageRecordModel.h"
 
 @interface CDataSource : NSObject
-@property (nonatomic, strong) CLoginModel *loginDict;
+@property (nonatomic, strong) CLoginModel *loginModel;
 
 DEFINE_SINGLETON_FOR_HEADER(CDataSource);
 
