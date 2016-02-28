@@ -276,7 +276,7 @@
 - (void)didCheckedButton:(UIButton *)sender {
     [self.infoView.layer removeFromSuperlayer];
     
-    [[CWebService sharedInstance] manual_code:self.codeInfo pddw:[[CDataSource sharedInstance].loginModel pddw] success:^(NSString *obj, NSInteger code) {
+    [[CWebService sharedInstance] scan_code:self.codeInfo pddw:[[CDataSource sharedInstance].loginModel pddw] success:^(NSString *obj, NSInteger code) {
         
         switch (code) {
             case 1002: {
@@ -290,7 +290,7 @@
                     
                 }];
                 [alertView bk_addButtonWithTitle:@"确定" handler:^{
-                    [[CWebService sharedInstance] manual_profit_code:self.codeInfo dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
+                    [[CWebService sharedInstance] scan_profit_code:self.codeInfo dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
                         //TODO:
                     } failure:^(CWebServiceError *error) {
                         [MBProgressHUD showError:error.errorMessage];
@@ -308,7 +308,7 @@
                     [alertView bk_addButtonWithTitle:@"确定" handler:^{
                         
                         
-                        [[CWebService sharedInstance] manual_confirm_code:self.codeInfo dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
+                        [[CWebService sharedInstance] scan_confirm_code:self.codeInfo dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
                             
                         } failure:^(CWebServiceError *error) {
                             
@@ -323,7 +323,7 @@
                     [alertView bk_addButtonWithTitle:@"确定" handler:^{
                         
                     }];[alertView bk_addButtonWithTitle:@"确定" handler:^{
-                        [[CWebService sharedInstance] manual_profit_code:self.codeInfo dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
+                        [[CWebService sharedInstance] scan_profit_code:self.codeInfo dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
                             //TODO:
                         } failure:^(CWebServiceError *error) {
                             [MBProgressHUD showError:error.errorMessage];
