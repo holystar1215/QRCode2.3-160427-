@@ -80,7 +80,8 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
     [[CWebService sharedInstance] login_username:userName password:passWord success:^(NSDictionary *models) {
         NSError *jsonError;
         [[CDataSource sharedInstance] setLoginModel:[MTLJSONAdapter modelOfClass:[CLoginModel class] fromJSONDictionary:models error:&jsonError]];
-        
+        CSchoolModel *school = self.resultArray[self.currentSchool];
+    	[[CDataSource sharedInstance] setSchoolModel:school];
         [APP_DELEGATE setupHomeViewController];
     } failure:^(CWebServiceError *error) {
         [MBProgressHUD showError:error.errorMessage];
@@ -204,6 +205,7 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
     self.currentSchool = index;
     CLoginViewCell *cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 0)];
     CSchoolModel *school = self.resultArray[self.currentSchool];
+    [[CDataSource sharedInstance] setSchoolModel:school];
     cell.textField.text = school.schoolName;
     [[Configuration sharedInstance] setServerAddr:school.serverAddr];
     
@@ -219,13 +221,6 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
             
         }];
         [alertView show];
-    } else {
-        UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"抱歉,贵校未开通自定义资产编号盘点功能,请通过条形码或二维码扫描功能读取资产编号"];
-        [alertView bk_addButtonWithTitle:@"知道了" handler:^{
-            
-        }];
-        [alertView show];
-        
     }
 }
 

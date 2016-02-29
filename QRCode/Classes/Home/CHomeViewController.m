@@ -139,9 +139,17 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
             break;
         }
         case 2: {
-            CCustomCodeInventoryViewController *vc = [[CCustomCodeInventoryViewController alloc] initWithNibName:@"CCustomCodeInventoryViewController" bundle:nil];
-            vc.title = dict[@"kItemName"];
-            [self.navigationController pushViewController:vc animated:YES];
+			if ([[[CDataSource sharedInstance].schoolModel customizeNo] isEqualToString:@"0"]) {
+				UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"抱歉,贵校未开通自定义资产编号盘点功能,请通过条形码或二维码扫描功能读取资产编号"];
+				[alertView bk_addButtonWithTitle:@"知道了" handler:^{
+					
+				}];
+				[alertView show];
+			} else {
+				CCustomCodeInventoryViewController *vc = [[CCustomCodeInventoryViewController alloc] initWithNibName:@"CCustomCodeInventoryViewController" bundle:nil];
+				vc.title = dict[@"kItemName"];
+				[self.navigationController pushViewController:vc animated:YES];
+			}
             break;
         }
         case 3: {

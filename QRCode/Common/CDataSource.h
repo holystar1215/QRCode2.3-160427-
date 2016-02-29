@@ -16,6 +16,7 @@
 
 @interface CDataSource : NSObject
 @property (nonatomic, strong) CLoginModel *loginModel;
+@property (nonatomic, strong) CSchoolModel *schoolModel;
 
 DEFINE_SINGLETON_FOR_HEADER(CDataSource);
 
