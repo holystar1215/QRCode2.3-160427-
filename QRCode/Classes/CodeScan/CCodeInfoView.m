@@ -7,6 +7,7 @@
 //
 
 #import "CCodeInfoView.h"
+#import <UIControl+BlocksKit.h>
 
 @interface CCodeInfoView ()
 @property (nonatomic, strong) IBOutlet UIButton *checkButton;
@@ -30,7 +31,7 @@
 }
 
 - (void)awakeFromNib {
-    
+
 }
 
 - (IBAction)onCheck:(id)sender {

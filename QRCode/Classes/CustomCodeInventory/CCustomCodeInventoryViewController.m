@@ -52,7 +52,7 @@
                 }];
                 [alertView bk_addButtonWithTitle:@"确定" handler:^{
                     [[CWebService sharedInstance] manual_profit_code:self.codeTextField.text dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
-                        //TODO:
+                        [MBProgressHUD showSuccess:msg];
                     } failure:^(CWebServiceError *error) {
                         [MBProgressHUD showError:error.errorMessage];
                     } animated:YES message:@""];
@@ -61,6 +61,8 @@
                 break;
             }
             case 2000: {
+                NSInteger chartIndex = [obj indexOfCharacter:'@'] == -1 ? 0 : [obj indexOfCharacter:'@'] + 1;
+                self.resultLabel.text = [obj substringFromIndex:chartIndex];
                 if ([[obj substringToCharacter:'@'] isEqualToString:[[CDataSource sharedInstance].loginModel pddw]]) {
                     UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"是否盘盈?"];
                     [alertView bk_addButtonWithTitle:@"取消" handler:^{
@@ -85,7 +87,7 @@
                         
                     }];[alertView bk_addButtonWithTitle:@"确定" handler:^{
                         [[CWebService sharedInstance] manual_profit_code:self.codeTextField.text dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
-                            //TODO:
+                            [MBProgressHUD showSuccess:msg];
                         } failure:^(CWebServiceError *error) {
                             [MBProgressHUD showError:error.errorMessage];
                         } animated:YES message:@""];
@@ -117,7 +119,6 @@
         }
     } failure:^(CWebServiceError *error) {
         [MBProgressHUD showError:error.errorMessage];
-        
     } animated:YES message:@""];
 }
 

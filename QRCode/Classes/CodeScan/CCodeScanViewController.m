@@ -29,6 +29,8 @@
 
 @property (strong, nonatomic) CCodeInfoView *infoView;
 @property (strong, nonatomic) NSString *codeInfo;
+@property (assign, nonatomic) NSInteger serverCode;
+@property (strong, nonatomic) NSString *serverPddw;
 
 @property (copy, nonatomic) void (^completionBlock) (NSString * __nullable);
 @end
@@ -43,19 +45,30 @@
     self.infoView.layer.frame = self.view.layer.frame;
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"back-arrow"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+//        [self.infoView.layer removeFromSuperlayer];
         [self.navigationController popViewControllerAnimated:YES];
     }];
     
     weakSelf(wSelf);
     [self setCompletionWithBlock:^(NSString *resultAsString) {
-        MAINTHREAD_RUN_BLOCK((^{
-            wSelf.codeInfo = resultAsString;
-            [wSelf stopScanning];
-            wSelf.infoView.codeLabel.text = [NSString stringWithFormat:@"编码：%@", wSelf.codeInfo];
-            [wSelf.view.layer addSublayer:wSelf.infoView.layer];
-        }));
+        wSelf.codeInfo = resultAsString;
+        [wSelf stopScanning];
+        wSelf.infoView.codeLabel.text = [NSString stringWithFormat:@"编码：%@", wSelf.codeInfo];
         NSLog(@"Completion with result: %@", resultAsString);
         
+        [[CWebService sharedInstance] scan_code:wSelf.codeInfo pddw:[[CDataSource sharedInstance].loginModel pddw] success:^(NSString *obj, NSInteger code) {
+            NSInteger chartIndex = [obj indexOfCharacter:'@'] == -1 ? 0 : [obj indexOfCharacter:'@'] + 1;
+            wSelf.infoView.infoLabel.text = [obj substringFromIndex:chartIndex];
+            wSelf.serverCode = code;
+            wSelf.serverPddw = [obj substringToCharacter:'@'];
+//            [wSelf.view.layer addSublayer:wSelf.infoView.layer];
+            [wSelf.view addSubview:wSelf.infoView];
+            [wSelf.infoView autoCenterInSuperview];
+            [wSelf.infoView autoSetDimensionsToSize:wSelf.view.bounds.size];
+        } failure:^(CWebServiceError *error) {
+            [MBProgressHUD showError:error.errorMessage];
+            
+        } animated:YES message:@""];
     }];
 }
 
@@ -274,90 +287,79 @@
 
 #pragma mark - <CCodeInfoViewDelegate>
 - (void)didCheckedButton:(UIButton *)sender {
-    [self.infoView.layer removeFromSuperlayer];
-    
-    [[CWebService sharedInstance] scan_code:self.codeInfo pddw:[[CDataSource sharedInstance].loginModel pddw] success:^(NSString *obj, NSInteger code) {
-        
-        switch (code) {
-            case 1002: {
-                [MBProgressHUD showError:@"服务器异常"];
-                break;
-            }
-            case 1006: {
-                [MBProgressHUD showError:@"资产编号不存在"];
-                UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"该资产不在本次清查的记录中,请确认是否标记为盘盈资产"];
+    switch (self.serverCode) {
+        case 1002: {
+            [MBProgressHUD showError:@"服务器异常"];
+            break;
+        }
+        case 1006: {
+            [MBProgressHUD showError:@"资产编号不存在"];
+            UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"该资产不在本次清查的记录中,请确认是否标记为盘盈资产"];
+            [alertView bk_addButtonWithTitle:@"取消" handler:^{
+                
+            }];
+            [alertView bk_addButtonWithTitle:@"确定" handler:^{
+                [[CWebService sharedInstance] scan_profit_code:self.codeInfo dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
+                    [MBProgressHUD showSuccess:msg];
+                } failure:^(CWebServiceError *error) {
+                    [MBProgressHUD showError:error.errorMessage];
+                } animated:YES message:@""];
+            }];
+            [alertView show];
+            break;
+        }
+        case 2000: {
+            if ([self.serverPddw isEqualToString:[[CDataSource sharedInstance].loginModel pddw]]) {
+                UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"是否盘盈?"];
                 [alertView bk_addButtonWithTitle:@"取消" handler:^{
                     
                 }];
                 [alertView bk_addButtonWithTitle:@"确定" handler:^{
-                    [[CWebService sharedInstance] scan_profit_code:self.codeInfo dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
-                        //TODO:
+                    [[CWebService sharedInstance] scan_confirm_code:self.codeInfo dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
+                        [MBProgressHUD showSuccess:msg];
                     } failure:^(CWebServiceError *error) {
                         [MBProgressHUD showError:error.errorMessage];
                     } animated:YES message:@""];
                 }];
                 [alertView show];
-                break;
-            }
-            case 2000: {
-                if ([[obj substringToCharacter:'@'] isEqualToString:[[CDataSource sharedInstance].loginModel pddw]]) {
-                    UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"是否盘盈?"];
-                    [alertView bk_addButtonWithTitle:@"取消" handler:^{
-                        
-                    }];
-                    [alertView bk_addButtonWithTitle:@"确定" handler:^{
-                        
-                        
-                        [[CWebService sharedInstance] scan_confirm_code:self.codeInfo dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
-                            
-                        } failure:^(CWebServiceError *error) {
-                            
-                        } animated:YES message:@""];
-                    }];
-                    [alertView show];
-                } else {
-                    UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"该资产的隶属单位,与您的隶属单位不一样,请确认是否标记为您单位的盘盈资产?"];
-                    [alertView bk_addButtonWithTitle:@"取消" handler:^{
-                        
-                    }];
-                    [alertView bk_addButtonWithTitle:@"确定" handler:^{
-                        
-                    }];[alertView bk_addButtonWithTitle:@"确定" handler:^{
-                        [[CWebService sharedInstance] scan_profit_code:self.codeInfo dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
-                            //TODO:
-                        } failure:^(CWebServiceError *error) {
-                            [MBProgressHUD showError:error.errorMessage];
-                        } animated:YES message:@""];
-                    }];
-                    [alertView show];
-                }
-                break;
-            }
-            case 2002: {
-                self.infoView.infoLabel.text = obj;
-                UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"对不起,您的优先级小于1,不能二次盘点"];
-                [alertView bk_addButtonWithTitle:@"确定" handler:^{
+            } else {
+                UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"该资产的隶属单位,与您的隶属单位不一样,请确认是否标记为您单位的盘盈资产?"];
+                [alertView bk_addButtonWithTitle:@"取消" handler:^{
                     
                 }];
-                [alertView show];
-                break;
-            }
-            case 2003: {//对不起,您的优先级小于1,不能二次盘点.
-                self.infoView.infoLabel.text = @"页面上显示 资产不存在";
-                UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"对不起,您的优先级小于1,不能二次盘点"];
                 [alertView bk_addButtonWithTitle:@"确定" handler:^{
-                    
+                    [[CWebService sharedInstance] scan_profit_code:self.codeInfo dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
+                        [MBProgressHUD showSuccess:msg];
+                    } failure:^(CWebServiceError *error) {
+                        [MBProgressHUD showError:error.errorMessage];
+                    } animated:YES message:@""];
                 }];
                 [alertView show];
-                break;
             }
-            default:
-                break;
+            break;
         }
-    } failure:^(CWebServiceError *error) {
-        [MBProgressHUD showError:error.errorMessage];
-        
-    } animated:YES message:@""];
+        case 2002: {
+            UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"对不起,您的优先级小于1,不能二次盘点"];
+            [alertView bk_addButtonWithTitle:@"确定" handler:^{
+                
+            }];
+            [alertView show];
+            break;
+        }
+        case 2003: {//对不起,您的优先级小于1,不能二次盘点.
+            self.infoView.infoLabel.text = @"页面上显示 资产不存在";
+            UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"对不起,您的优先级小于1,不能二次盘点"];
+            [alertView bk_addButtonWithTitle:@"确定" handler:^{
+                
+            }];
+            [alertView show];
+            break;
+        }
+        default:
+            break;
+    }
+    
+//    [self.infoView.layer removeFromSuperlayer];
 }
 
 @end

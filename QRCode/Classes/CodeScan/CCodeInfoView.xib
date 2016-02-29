@@ -11,17 +11,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXn-9v-OKl">
-                    <rect key="frame" x="76" y="408" width="168" height="48"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="168" id="UOB-Ph-qs8"/>
-                        <constraint firstAttribute="height" constant="48" id="cFR-SJ-yjv"/>
-                    </constraints>
-                    <state key="normal" title="点击盘点/盘盈" image="money" backgroundImage="box_button"/>
-                    <connections>
-                        <action selector="onCheck:" destination="iN0-l3-epB" eventType="touchUpInside" id="VQo-QW-U9N"/>
-                    </connections>
-                </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="code_frame" translatesAutoresizingMaskIntoConstraints="NO" id="VTq-oY-d96">
                     <rect key="frame" x="42" y="144" width="126" height="126"/>
                     <constraints>
@@ -34,16 +23,27 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="jR5-lo-KIF"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="416" translatesAutoresizingMaskIntoConstraints="NO" id="sej-Nh-SDB">
-                    <rect key="frame" x="176" y="144" width="136" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <rect key="frame" x="176" y="144" width="136" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXn-9v-OKl">
+                    <rect key="frame" x="76" y="408" width="168" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="168" id="UOB-Ph-qs8"/>
+                        <constraint firstAttribute="height" constant="48" id="cFR-SJ-yjv"/>
+                    </constraints>
+                    <state key="normal" title="点击盘点/盘盈" image="money" backgroundImage="box_button"/>
+                    <connections>
+                        <action selector="onCheck:" destination="iN0-l3-epB" eventType="touchUpInside" id="VQo-QW-U9N"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>

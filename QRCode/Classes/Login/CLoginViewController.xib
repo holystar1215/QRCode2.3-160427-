@@ -41,7 +41,7 @@
                         <action selector="onLogin:" destination="-1" eventType="touchUpInside" id="5Iu-k7-QeV"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrP-sG-89z">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrP-sG-89z">
                     <rect key="frame" x="506" y="417" width="84" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="d0s-9N-mJM"/>
