@@ -200,7 +200,7 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
         self.xlyrTextField.text = lyr;
     } failure:^(CWebServiceError *error) {
         [MBProgressHUD showError:error.errorMessage];
-    } animated:YES message:@""];
+    } animated:NO message:@""];
 }
 
 - (IBAction)onSydw:(id)sender {

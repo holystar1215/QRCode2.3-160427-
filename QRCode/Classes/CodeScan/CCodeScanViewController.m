@@ -46,12 +46,16 @@
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"back-arrow"] style:UIBarButtonItemStylePlain handler:^(id sender) {
 //        [self.infoView.layer removeFromSuperlayer];
+        [self.infoView removeFromSuperview];
         [self.navigationController popViewControllerAnimated:YES];
     }];
     
     weakSelf(wSelf);
     [self setCompletionWithBlock:^(NSString *resultAsString) {
-        wSelf.codeInfo = resultAsString;
+        NSString *tmp = [resultAsString stringByReplacingOccurrencesOfString:@"×Ê²ú±àºÅ£º" withString:@""];
+        tmp = [tmp stringByReplacingOccurrencesOfString:@"£»Ãû³Æ£º" withString:@"#"];
+        tmp = [tmp substringToCharacter:'#'];
+        wSelf.codeInfo = tmp;
         [wSelf stopScanning];
         wSelf.infoView.codeLabel.text = [NSString stringWithFormat:@"编码：%@", wSelf.codeInfo];
         NSLog(@"Completion with result: %@", resultAsString);

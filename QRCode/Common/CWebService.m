@@ -22,9 +22,12 @@
 }
 
 + (instancetype)checkRespondDict:(NSDictionary *)dict {
+    BOOL flag = [[dict objectForKey:@"success"] boolValue];
     NSInteger codeValue = [[dict objectForKey:@"code"] integerValue];
     NSString *msgValue = [dict objectForKey:@"msg"];
-    
+    if (flag) {
+        codeValue = 2000;
+    }
     return [[CWebServiceError alloc] initWithCode:codeValue andMessage:msgValue];
 }
 

@@ -84,8 +84,6 @@
                         
                     }];
                     [alertView bk_addButtonWithTitle:@"确定" handler:^{
-                        
-                    }];[alertView bk_addButtonWithTitle:@"确定" handler:^{
                         [[CWebService sharedInstance] manual_profit_code:self.codeTextField.text dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
                             [MBProgressHUD showSuccess:msg];
                         } failure:^(CWebServiceError *error) {
