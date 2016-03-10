@@ -429,7 +429,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                  failure:(WebServiceErrorRespondBlock)failure
                                 animated:(BOOL)animated
                                  message:(NSString *)message {
-    NSString *uri = @"api/uplyr/securi_findNameByNo?sign=";
+    NSString *uri = @"/liquidation/api/uplyr/securi_findNameByNo?sign=";
     self.client.baseURL = [NSURL URLWithString:[[Configuration sharedInstance] serverUrl]];
     NSDictionary *dict = @{
                            @"workno" : workno
