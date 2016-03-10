@@ -95,7 +95,7 @@
                 break;
             }
             case 2002: {
-                self.resultLabel.text = obj;
+//                self.resultLabel.text = obj;
                 UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"对不起,您的优先级小于1,不能二次盘点"];
                 [alertView bk_addButtonWithTitle:@"确定" handler:^{
                     
@@ -104,7 +104,7 @@
                 break;
             }
             case 2003: {//对不起,您的优先级小于1,不能二次盘点.
-                self.resultLabel.text = @"页面上显示 资产不存在";
+                self.resultLabel.text = @"资产不存在";
                 UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"对不起,您的优先级小于1,不能二次盘点"];
                 [alertView bk_addButtonWithTitle:@"确定" handler:^{
                     

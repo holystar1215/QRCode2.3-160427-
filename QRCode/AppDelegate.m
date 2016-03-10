@@ -11,6 +11,7 @@
 #import "CHomeViewController.h"
 #import "DSNavigationBar.h"
 #import "CPopoverView.h"
+#import "CNavigationController.h"
 
 @interface AppDelegate ()
 @property (strong, nonatomic) UINavigationController *navigationController;
@@ -64,7 +65,7 @@
 - (void)setupHomeViewController {
     CHomeViewController *homeViewController = [[CHomeViewController alloc] initWithNibName:@"CHomeViewController" bundle:nil];
     homeViewController.title = @"资产盘点系统";
-    self.navigationController = [[UINavigationController alloc] initWithNavigationBarClass:[DSNavigationBar class] toolbarClass:nil];
+    self.navigationController = [[CNavigationController alloc] initWithNavigationBarClass:[DSNavigationBar class] toolbarClass:nil];
     self.navigationController.viewControllers = @[homeViewController];
     DSNavigationBar *bar = (DSNavigationBar *)self.navigationController.navigationBar;
     [bar setNavigationBarWithColor:RGBA(255, 255, 255, 0.8)];

@@ -16,7 +16,6 @@
     if (self = [super init]) {
         self.errorCode = code;
         self.errorMessage = message;
-        [self checkErrorType];
     }
     return self;
 }
@@ -25,14 +24,20 @@
     BOOL flag = [[dict objectForKey:@"success"] boolValue];
     NSInteger codeValue = [[dict objectForKey:@"code"] integerValue];
     NSString *msgValue = [dict objectForKey:@"msg"];
+    CWebServiceError *webError = [[CWebServiceError alloc] initWithCode:codeValue andMessage:msgValue];
     if (flag) {
-        codeValue = 2000;
+        webError.errorType = eWebServiceErrorSuccess;
+    } else {
+        webError.errorType = eWebServiceErrorFailed;
+        
     }
-    return [[CWebServiceError alloc] initWithCode:codeValue andMessage:msgValue];
+    return webError;
 }
 
 + (instancetype)checkRespondWithError:(NSError *)error {
-    return [[CWebServiceError alloc] initWithCode:error.code andMessage:error.localizedDescription];
+    CWebServiceError *webError = [[CWebServiceError alloc] initWithCode:error.code andMessage:error.localizedDescription];;
+    [webError checkErrorType];
+    return webError;
 }
 
 - (void)checkErrorType {

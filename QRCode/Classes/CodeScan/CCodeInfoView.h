@@ -18,5 +18,8 @@
 @property (nonatomic, strong) IBOutlet UILabel *infoLabel;
 @property (nonatomic, strong) IBOutlet UIImageView *codeImageView;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *infoWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *infoHeight;
+
 @property (nonatomic, weak) id<CCodeInfoViewDelegate> delegate;
 @end

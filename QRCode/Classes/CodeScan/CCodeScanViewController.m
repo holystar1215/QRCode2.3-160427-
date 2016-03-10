@@ -19,8 +19,8 @@
 
 @interface CCodeScanViewController () <CCodeInfoViewDelegate>
 @property (strong, nonatomic) QRCameraSwitchButton *switchCameraButton;
-@property (strong, nonatomic) QRToggleTorchButton *toggleTorchButton;
-@property (strong, nonatomic) CScanView     *cameraView;
+@property (strong, nonatomic) QRToggleTorchButton  *toggleTorchButton;
+@property (strong, nonatomic) CScanView            *cameraView;
 @property (strong, nonatomic) UIButton             *cancelButton;
 @property (strong, nonatomic) QRCodeReader         *codeReader;
 @property (assign, nonatomic) BOOL                 startScanningAtLoad;
@@ -56,13 +56,16 @@
         tmp = [tmp stringByReplacingOccurrencesOfString:@"£»Ãû³Æ£º" withString:@"#"];
         tmp = [tmp substringToCharacter:'#'];
         wSelf.codeInfo = tmp;
-        [wSelf stopScanning];
+        
         wSelf.infoView.codeLabel.text = [NSString stringWithFormat:@"编码：%@", wSelf.codeInfo];
         NSLog(@"Completion with result: %@", resultAsString);
         
         [[CWebService sharedInstance] scan_code:wSelf.codeInfo pddw:[[CDataSource sharedInstance].loginModel pddw] success:^(NSString *obj, NSInteger code) {
+            [wSelf stopScanning];
             NSInteger chartIndex = [obj indexOfCharacter:'@'] == -1 ? 0 : [obj indexOfCharacter:'@'] + 1;
             wSelf.infoView.infoLabel.text = [obj substringFromIndex:chartIndex];
+            CGSize infoSize = [CPublicModule text:wSelf.infoView.infoLabel.text font:wSelf.infoView.infoLabel.font size:wSelf.infoView.infoLabel.bounds.size];
+            wSelf.infoView.infoHeight.constant = infoSize.height;
             wSelf.serverCode = code;
             wSelf.serverPddw = [obj substringToCharacter:'@'];
 //            [wSelf.view.layer addSublayer:wSelf.infoView.layer];
@@ -72,7 +75,7 @@
         } failure:^(CWebServiceError *error) {
             [MBProgressHUD showError:error.errorMessage];
             
-        } animated:YES message:@""];
+        } animated:NO message:@""];
     }];
 }
 
@@ -151,11 +154,6 @@
     [super viewWillLayoutSubviews];
     
     _codeReader.previewLayer.frame = self.view.bounds;
-}
-
-- (BOOL)shouldAutorotate
-{
-    return YES;
 }
 
 #pragma mark - Controlling the Reader

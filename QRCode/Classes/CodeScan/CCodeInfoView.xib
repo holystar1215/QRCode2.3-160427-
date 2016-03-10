@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view alpha="0.80000000000000004" contentMode="scaleToFill" id="iN0-l3-epB" customClass="CCodeInfoView">
+        <view alpha="0.80000000000000004" tag="20160310" contentMode="scaleToFill" id="iN0-l3-epB" customClass="CCodeInfoView">
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -27,8 +27,12 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="416" translatesAutoresizingMaskIntoConstraints="NO" id="sej-Nh-SDB">
-                    <rect key="frame" x="176" y="144" width="136" height="16"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="136" translatesAutoresizingMaskIntoConstraints="NO" id="sej-Nh-SDB">
+                    <rect key="frame" x="176" y="144" width="136" height="176"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="176" id="6pA-2c-meZ"/>
+                        <constraint firstAttribute="width" constant="136" id="BEo-ex-Iej"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -63,7 +67,9 @@
                 <outlet property="checkButton" destination="dXn-9v-OKl" id="0p3-8w-OD0"/>
                 <outlet property="codeImageView" destination="VTq-oY-d96" id="Bva-iC-NdC"/>
                 <outlet property="codeLabel" destination="eJ3-wD-jmT" id="dqJ-Yb-tWX"/>
+                <outlet property="infoHeight" destination="6pA-2c-meZ" id="PRu-fV-6gs"/>
                 <outlet property="infoLabel" destination="sej-Nh-SDB" id="Z1L-jt-O3b"/>
+                <outlet property="infoWidth" destination="BEo-ex-Iej" id="zBg-e9-xCE"/>
             </connections>
         </view>
     </objects>

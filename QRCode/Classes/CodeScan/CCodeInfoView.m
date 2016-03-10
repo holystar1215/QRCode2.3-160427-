@@ -12,6 +12,7 @@
 @interface CCodeInfoView ()
 @property (nonatomic, strong) IBOutlet UIButton *checkButton;
 
+
 @end
 
 @implementation CCodeInfoView

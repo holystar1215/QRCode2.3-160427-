@@ -25,6 +25,7 @@
 		C302364A1C5CFFD000684957 /* CHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C30236481C5CFFD000684957 /* CHomeViewController.xib */; };
 		C302364D1C5D026800684957 /* CHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C302364C1C5D026800684957 /* CHeaderView.m */; };
 		C30236561C5D147500684957 /* DSNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = C30236551C5D147500684957 /* DSNavigationBar.m */; };
+		C309258B1C912AB400A264BC /* CNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C30925891C912AB400A264BC /* CNavigationController.m */; };
 		C3104A741C787AFF00115149 /* CSchoolModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C3104A731C787AFF00115149 /* CSchoolModel.m */; };
 		C3488B191C5A79860035776B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C3488B181C5A79860035776B /* main.m */; };
 		C3488B1C1C5A79860035776B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C3488B1B1C5A79860035776B /* AppDelegate.m */; };
@@ -47,7 +48,6 @@
 		C3C83B311C7DA18100BE269C /* CInventoryRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C83B2F1C7DA18100BE269C /* CInventoryRecordViewController.m */; };
 		C3C83B321C7DA18100BE269C /* CInventoryRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3C83B301C7DA18100BE269C /* CInventoryRecordViewController.xib */; };
 		C3C83B371C7DA4DA00BE269C /* CCodeScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C83B351C7DA4DA00BE269C /* CCodeScanViewController.m */; };
-		C3C83B381C7DA4DA00BE269C /* CCodeScanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3C83B361C7DA4DA00BE269C /* CCodeScanViewController.xib */; };
 		C3CA27021C7A1ACE00E6696E /* CCustomCodeInventoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA27001C7A1ACE00E6696E /* CCustomCodeInventoryViewController.m */; };
 		C3CA27031C7A1ACE00E6696E /* CCustomCodeInventoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3CA27011C7A1ACE00E6696E /* CCustomCodeInventoryViewController.xib */; };
 		C3CA27291C7A218400E6696E /* CRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C3CA27271C7A218400E6696E /* CRecordTableViewCell.m */; };
@@ -97,6 +97,8 @@
 		C302364C1C5D026800684957 /* CHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CHeaderView.m; sourceTree = "<group>"; };
 		C30236541C5D147500684957 /* DSNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSNavigationBar.h; sourceTree = "<group>"; };
 		C30236551C5D147500684957 /* DSNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSNavigationBar.m; sourceTree = "<group>"; };
+		C30925881C912AB400A264BC /* CNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNavigationController.h; sourceTree = "<group>"; };
+		C30925891C912AB400A264BC /* CNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNavigationController.m; sourceTree = "<group>"; };
 		C3104A721C787AFF00115149 /* CSchoolModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSchoolModel.h; sourceTree = "<group>"; };
 		C3104A731C787AFF00115149 /* CSchoolModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSchoolModel.m; sourceTree = "<group>"; };
 		C3488B141C5A79860035776B /* QRCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QRCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,7 +136,6 @@
 		C3C83B301C7DA18100BE269C /* CInventoryRecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CInventoryRecordViewController.xib; sourceTree = "<group>"; };
 		C3C83B341C7DA4DA00BE269C /* CCodeScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCodeScanViewController.h; sourceTree = "<group>"; };
 		C3C83B351C7DA4DA00BE269C /* CCodeScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCodeScanViewController.m; sourceTree = "<group>"; };
-		C3C83B361C7DA4DA00BE269C /* CCodeScanViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCodeScanViewController.xib; sourceTree = "<group>"; };
 		C3CA26FF1C7A1ACE00E6696E /* CCustomCodeInventoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCustomCodeInventoryViewController.h; sourceTree = "<group>"; };
 		C3CA27001C7A1ACE00E6696E /* CCustomCodeInventoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCustomCodeInventoryViewController.m; sourceTree = "<group>"; };
 		C3CA27011C7A1ACE00E6696E /* CCustomCodeInventoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CCustomCodeInventoryViewController.xib; sourceTree = "<group>"; };
@@ -303,6 +304,8 @@
 			children = (
 				C30236101C5C5C5600684957 /* CBaseViewController.h */,
 				C30236111C5C5C5600684957 /* CBaseViewController.m */,
+				C30925881C912AB400A264BC /* CNavigationController.h */,
+				C30925891C912AB400A264BC /* CNavigationController.m */,
 				C3C83B331C7DA4CD00BE269C /* CodeScan */,
 				C3CA27131C7A215F00E6696E /* InventoryRecord */,
 				C3CA26F11C7A1A8100E6696E /* CustomCodeInventory */,
@@ -378,7 +381,6 @@
 			children = (
 				C3C83B341C7DA4DA00BE269C /* CCodeScanViewController.h */,
 				C3C83B351C7DA4DA00BE269C /* CCodeScanViewController.m */,
-				C3C83B361C7DA4DA00BE269C /* CCodeScanViewController.xib */,
 				C37F1EF91C81FA3700ACE517 /* CCodeInfoView.h */,
 				C37F1EFA1C81FA3700ACE517 /* CCodeInfoView.m */,
 				C37F1EFF1C82268700ACE517 /* CCodeInfoView.xib */,
@@ -480,7 +482,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3C83B381C7DA4DA00BE269C /* CCodeScanViewController.xib in Resources */,
 				C3F9E8BC1C7CB80000506E18 /* CHomeViewCollectionViewCell.xib in Resources */,
 				C30236441C5CFF6C00684957 /* CLoginViewController.xib in Resources */,
 				C3C767A21C5F2A0B00C8B83A /* CLoginViewCell.xib in Resources */,
@@ -588,6 +589,7 @@
 				C3B7F95A1C74D2A100F95D8A /* CPopoverView.m in Sources */,
 				C3C767A01C5F261900C8B83A /* CLoginViewCell.m in Sources */,
 				C3CA27291C7A218400E6696E /* CRecordTableViewCell.m in Sources */,
+				C309258B1C912AB400A264BC /* CNavigationController.m in Sources */,
 				C30236431C5CFF6C00684957 /* CLoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
