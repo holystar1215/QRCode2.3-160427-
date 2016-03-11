@@ -96,7 +96,7 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
                 dispatch_once(&onceToken, ^{
                     QRCodeReader *reader = [QRCodeReader readerWithMetadataObjectTypes:[NSArray arrayWithObjects:AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code, AVMetadataObjectTypeCode39Code, AVMetadataObjectTypeCode39Mod43Code, nil]];
                     reader.metadataOutput.rectOfInterest = CGRectMake (( 80 )/ SCREEN_HEIGHT ,(( SCREEN_WIDTH - 295 )/ 2 )/ SCREEN_WIDTH , 295 / SCREEN_HEIGHT , 295 / SCREEN_WIDTH );
-                    vc                   = [CCodeScanViewController readerWithCancelButtonTitle:@"取消" codeReader:reader startScanningAtLoad:YES showSwitchCameraButton:NO showTorchButton:NO];
+                    vc                   = [CCodeScanViewController barCodeReader:reader startScanningAtLoad:YES];
                 });
                 
                 vc.title = dict[@"kItemName"];
@@ -121,7 +121,7 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
                 dispatch_once(&onceToken, ^{
                     QRCodeReader *reader = [QRCodeReader readerWithMetadataObjectTypes:[NSArray arrayWithObjects:AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code, AVMetadataObjectTypeQRCode, nil]];
                     reader.metadataOutput.rectOfInterest = CGRectMake (( 80 )/ SCREEN_HEIGHT ,(( SCREEN_WIDTH - 295 )/ 2 )/ SCREEN_WIDTH , 295 / SCREEN_HEIGHT , 295 / SCREEN_WIDTH );
-                    vc                   = [CCodeScanViewController readerWithCancelButtonTitle:@"取消" codeReader:reader startScanningAtLoad:YES showSwitchCameraButton:NO showTorchButton:NO];
+                    vc                   = [CCodeScanViewController qrCodeReader:reader startScanningAtLoad:YES];
                     vc.modalPresentationStyle = UIModalPresentationFormSheet;
                 });
                 

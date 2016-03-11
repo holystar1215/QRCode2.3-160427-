@@ -201,6 +201,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                            };
     NSString *param = [dict dictionaryToJSON];
     param = [param encodeToBase64];
+    param = [param URLEncode];
     uri = [NSString stringWithFormat:@"%@%@", uri, param];
     return [self.client postHttpRequestWithURI:uri
                                     parameters:nil
@@ -236,6 +237,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
     self.client.baseURL = [NSURL URLWithString:[[Configuration sharedInstance] serverUrl]];
     
     NSString *param = [[model dictionaryValue] dictionaryToJSON];
+    param = [param URLEncode];
     param = [param encodeToBase64];
     uri = [NSString stringWithFormat:@"%@%@", uri, param];
     return [self.client postHttpRequestWithURI:uri
@@ -311,7 +313,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                      failure:(WebServiceErrorRespondBlock)failure
                                     animated:(BOOL)animated
                                      message:(NSString *)message {
-    NSString *uri = @"/liquidation/api/liquidata/securi_updateassepy?sign=";
+    NSString *uri = @"/liquidation/api/liquidata/securi_updateassetnumber?sign=";
     self.client.baseURL = [NSURL URLWithString:[[Configuration sharedInstance] serverUrl]];
     NSDictionary *dict = @{
                            @"assetnumber" : code,
@@ -355,7 +357,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                       failure:(WebServiceErrorRespondBlock)failure
                                      animated:(BOOL)animated
                                       message:(NSString *)message {
-    NSString *uri = @"/liquidation/api/liquidata/securi_updateassetnumber?sign=";
+    NSString *uri = @"/liquidation/api/liquidata/securi_updateassepy?sign=";
     self.client.baseURL = [NSURL URLWithString:[[Configuration sharedInstance] serverUrl]];
     NSDictionary *dict = @{
                            @"assetnumber" : code,

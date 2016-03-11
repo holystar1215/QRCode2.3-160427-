@@ -198,15 +198,15 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
             
             offset = [[NSString stringWithFormat:@"资产编号：%@\n领用人：", model.zcbh] length];
             len = [model.lyr length];
-            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(offset, len)];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(offset, len)];
             
             offset = [[NSString stringWithFormat:@"资产编号：%@\n领用人：%@\n使用单位号：%@\n使用单位名：%@\n存放地点：", model.zcbh, model.lyr, model.sydwh, model.syfxm] length];
             len = [model.cfdd length];
-            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor groupTableViewBackgroundColor] range:NSMakeRange(offset, len)];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor brownColor] range:NSMakeRange(offset, len)];
             
             offset = [[NSString stringWithFormat:@"资产编号：%@\n领用人：%@\n使用单位号：%@\n使用单位名：%@\n存放地点：%@\n入库时间：%@\n使用方向名：%@\n经费科目名：%@\n", model.zcbh, model.lyr, model.sydwh, model.syfxm, model.cfdd, model.rksj, model.syfxm, model.jfkmm] length];
             len = [[NSString stringWithFormat:@"名称：%@\n型号：%@\n规格：%@\n金额：%@\n厂家：%@\n经销商：%@\n资产内容：%@", model.mc, model.xh, model.gg, model.jine, model.changjia, model.jxs, model.zcnr] length];
-            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor groupTableViewBackgroundColor] range:NSMakeRange(offset, len)];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(offset, len)];
             
             break;
         }
@@ -246,7 +246,7 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
             
             offset = [[NSString stringWithFormat:@"资产编号：%@\n领用人：%@\n使用单位号：%@\n使用单位名：%@\n存放地点：", model.zcbh, model.lyr, model.sydwh, model.syfxm] length];
             len = [model.cfdd length];
-            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor groupTableViewBackgroundColor] range:NSMakeRange(offset, len)];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(offset, len)];
             
             offset = [[NSString stringWithFormat:@"资产编号：%@\n领用人：%@\n使用单位号：%@\n使用单位名：%@\n存放地点：%@\n入库时间：%@\n使用方向名：%@\n经费科目名：%@\n", model.zcbh, model.lyr, model.sydwh, model.syfxm, model.cfdd, model.rksj, model.syfxm, model.jfkmm] length];
             len = [[NSString stringWithFormat:@"名称：%@\n型号：%@\n规格：%@\n金额：%@\n厂家：%@\n经销商：%@\n资产内容：%@", model.mc, model.xh, model.gg, model.jine, model.changjia, model.jxs, model.zcnr] length];
@@ -274,7 +274,7 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
     CRecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     
     // Configure the cell...
-    cell.recordLabel.attributedText = [self type:self.recordType recordIndex:indexPath.row];
+    cell.recordLabel.attributedText = [self type:self.recordType recordIndex:indexPath.section];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (self.recordType == 3) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -306,7 +306,7 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
     
     //自动算高度，+1的原因是因为contentView的高度要比cell的高度小1
     CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
-    
+    cell.recordLabel.attributedText = nil;
     return height;
 }
 

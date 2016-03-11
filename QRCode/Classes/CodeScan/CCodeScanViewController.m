@@ -17,6 +17,11 @@
 #import "CCodeInfoView.h"
 #import <QRToggleTorchButton.h>
 
+typedef NS_ENUM(NSInteger, ScanType) {
+    eQRCode,
+    eBarCode
+};
+
 @interface CCodeScanViewController () <CCodeInfoViewDelegate>
 @property (strong, nonatomic) QRCameraSwitchButton *switchCameraButton;
 @property (strong, nonatomic) QRToggleTorchButton  *toggleTorchButton;
@@ -32,7 +37,10 @@
 @property (assign, nonatomic) NSInteger serverCode;
 @property (strong, nonatomic) NSString *serverPddw;
 
+@property (assign, nonatomic) ScanType scanType;
+
 @property (copy, nonatomic) void (^completionBlock) (NSString * __nullable);
+
 @end
 
 @implementation CCodeScanViewController
@@ -52,30 +60,60 @@
     
     weakSelf(wSelf);
     [self setCompletionWithBlock:^(NSString *resultAsString) {
-        NSString *tmp = [resultAsString stringByReplacingOccurrencesOfString:@"×Ê²ú±àºÅ£º" withString:@""];
-        tmp = [tmp stringByReplacingOccurrencesOfString:@"£»Ãû³Æ£º" withString:@"#"];
-        tmp = [tmp substringToCharacter:'#'];
-        wSelf.codeInfo = tmp;
+        switch (wSelf.scanType) {
+            case eQRCode: {
+                NSString *tmp = [resultAsString stringByReplacingOccurrencesOfString:@"×Ê²ú±àºÅ£º" withString:@""];
+                tmp = [tmp stringByReplacingOccurrencesOfString:@"£»Ãû³Æ£º" withString:@"#"];
+                tmp = [tmp substringToCharacter:'#'];
+                wSelf.codeInfo = tmp;
+                
+                wSelf.infoView.codeLabel.text = [NSString stringWithFormat:@"编码：%@", wSelf.codeInfo];
+                NSLog(@"Completion with result: %@", resultAsString);
+                [wSelf stopScanning];
+                [[CWebService sharedInstance] scan_code:wSelf.codeInfo pddw:[[CDataSource sharedInstance].loginModel pddw] success:^(NSString *obj, NSInteger code) {
+                    
+                    NSInteger chartIndex = [obj indexOfCharacter:'@'] == -1 ? 0 : [obj indexOfCharacter:'@'] + 1;
+                    wSelf.infoView.infoLabel.text = [obj substringFromIndex:chartIndex];
+                    CGSize infoSize = [CPublicModule text:wSelf.infoView.infoLabel.text font:wSelf.infoView.infoLabel.font size:wSelf.infoView.infoLabel.bounds.size];
+                    wSelf.infoView.infoHeight.constant = infoSize.height;
+                    wSelf.serverCode = code;
+                    wSelf.serverPddw = [obj substringToCharacter:'@'];
+                    [wSelf.view addSubview:wSelf.infoView];
+                    [wSelf.infoView autoCenterInSuperview];
+                    [wSelf.infoView autoSetDimensionsToSize:wSelf.view.bounds.size];
+                } failure:^(CWebServiceError *error) {
+                    [MBProgressHUD showError:error.errorMessage];
+                    [wSelf startScanning];
+                } animated:NO message:@""];
+                break;
+            }
+            case eBarCode: {
+                wSelf.codeInfo = resultAsString;
+                
+                wSelf.infoView.codeLabel.text = [NSString stringWithFormat:@"编码：%@", wSelf.codeInfo];
+                NSLog(@"Completion with result: %@", resultAsString);
+                [wSelf stopScanning];
+                [[CWebService sharedInstance] scan_code:wSelf.codeInfo pddw:[[CDataSource sharedInstance].loginModel pddw] success:^(NSString *obj, NSInteger code) {
+                    
+                    NSInteger chartIndex = [obj indexOfCharacter:'@'] == -1 ? 0 : [obj indexOfCharacter:'@'] + 1;
+                    wSelf.infoView.infoLabel.text = [obj substringFromIndex:chartIndex];
+                    CGSize infoSize = [CPublicModule text:wSelf.infoView.infoLabel.text font:wSelf.infoView.infoLabel.font size:wSelf.infoView.infoLabel.bounds.size];
+                    wSelf.infoView.infoHeight.constant = infoSize.height;
+                    wSelf.serverCode = code;
+                    wSelf.serverPddw = [obj substringToCharacter:'@'];
+                    [wSelf.view addSubview:wSelf.infoView];
+                    [wSelf.infoView autoCenterInSuperview];
+                    [wSelf.infoView autoSetDimensionsToSize:wSelf.view.bounds.size];
+                } failure:^(CWebServiceError *error) {
+                    [MBProgressHUD showError:error.errorMessage];
+                    [wSelf startScanning];
+                } animated:NO message:@""];
+                break;
+            }
+            default:
+                break;
+        }
         
-        wSelf.infoView.codeLabel.text = [NSString stringWithFormat:@"编码：%@", wSelf.codeInfo];
-        NSLog(@"Completion with result: %@", resultAsString);
-        
-        [[CWebService sharedInstance] scan_code:wSelf.codeInfo pddw:[[CDataSource sharedInstance].loginModel pddw] success:^(NSString *obj, NSInteger code) {
-            [wSelf stopScanning];
-            NSInteger chartIndex = [obj indexOfCharacter:'@'] == -1 ? 0 : [obj indexOfCharacter:'@'] + 1;
-            wSelf.infoView.infoLabel.text = [obj substringFromIndex:chartIndex];
-            CGSize infoSize = [CPublicModule text:wSelf.infoView.infoLabel.text font:wSelf.infoView.infoLabel.font size:wSelf.infoView.infoLabel.bounds.size];
-            wSelf.infoView.infoHeight.constant = infoSize.height;
-            wSelf.serverCode = code;
-            wSelf.serverPddw = [obj substringToCharacter:'@'];
-//            [wSelf.view.layer addSublayer:wSelf.infoView.layer];
-            [wSelf.view addSubview:wSelf.infoView];
-            [wSelf.infoView autoCenterInSuperview];
-            [wSelf.infoView autoSetDimensionsToSize:wSelf.view.bounds.size];
-        } failure:^(CWebServiceError *error) {
-            [MBProgressHUD showError:error.errorMessage];
-            
-        } animated:NO message:@""];
     }];
 }
 
@@ -122,9 +160,18 @@
     return self;
 }
 
-+ (instancetype)readerWithCancelButtonTitle:(NSString *)cancelTitle codeReader:(QRCodeReader *)codeReader startScanningAtLoad:(BOOL)startScanningAtLoad showSwitchCameraButton:(BOOL)showSwitchCameraButton showTorchButton:(BOOL)showTorchButton
++ (instancetype)qrCodeReader:(QRCodeReader *)codeReader startScanningAtLoad:(BOOL)startScanningAtLoad
 {
-    return [[self alloc] initWithCancelButtonTitle:cancelTitle codeReader:codeReader startScanningAtLoad:startScanningAtLoad showSwitchCameraButton:showSwitchCameraButton showTorchButton:showTorchButton];
+    CCodeScanViewController *vc = [[self alloc] initWithCancelButtonTitle:nil codeReader:codeReader startScanningAtLoad:startScanningAtLoad showSwitchCameraButton:NO showTorchButton:NO];
+    vc.scanType = eQRCode;
+    return vc;
+}
+
++ (instancetype)barCodeReader:(QRCodeReader *)codeReader startScanningAtLoad:(BOOL)startScanningAtLoad
+{
+    CCodeScanViewController *vc = [[self alloc] initWithCancelButtonTitle:nil codeReader:codeReader startScanningAtLoad:startScanningAtLoad showSwitchCameraButton:NO showTorchButton:NO];
+    vc.scanType = eBarCode;
+    return vc;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -295,7 +342,6 @@
             break;
         }
         case 1006: {
-            [MBProgressHUD showError:@"资产编号不存在"];
             UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"该资产不在本次清查的记录中,请确认是否标记为盘盈资产"];
             [alertView bk_addButtonWithTitle:@"取消" handler:^{
                 
@@ -317,7 +363,7 @@
                     
                 }];
                 [alertView bk_addButtonWithTitle:@"确定" handler:^{
-                    [[CWebService sharedInstance] scan_confirm_code:self.codeInfo dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
+                    [[CWebService sharedInstance] scan_profit_code:self.codeInfo dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
                         [MBProgressHUD showSuccess:msg];
                     } failure:^(CWebServiceError *error) {
                         [MBProgressHUD showError:error.errorMessage];
@@ -330,7 +376,7 @@
                     
                 }];
                 [alertView bk_addButtonWithTitle:@"确定" handler:^{
-                    [[CWebService sharedInstance] scan_profit_code:self.codeInfo dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
+                    [[CWebService sharedInstance] scan_confirm_code:self.codeInfo dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
                         [MBProgressHUD showSuccess:msg];
                     } failure:^(CWebServiceError *error) {
                         [MBProgressHUD showError:error.errorMessage];
@@ -349,8 +395,8 @@
             break;
         }
         case 2003: {//对不起,您的优先级小于1,不能二次盘点.
-            self.infoView.infoLabel.text = @"页面上显示 资产不存在";
-            UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"对不起,您的优先级小于1,不能二次盘点"];
+//            self.infoView.infoLabel.text = @"资产编号不存在";
+            UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"资产编号不存在"];
             [alertView bk_addButtonWithTitle:@"确定" handler:^{
                 
             }];

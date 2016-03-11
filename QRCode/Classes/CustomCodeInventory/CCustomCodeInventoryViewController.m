@@ -45,7 +45,6 @@
                 break;
             }
             case 1006: {
-                [MBProgressHUD showError:@"资产编号不存在"];
                 UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"该资产不在本次清查的记录中,请确认是否标记为盘盈资产"];
                 [alertView bk_addButtonWithTitle:@"取消" handler:^{
                     
@@ -71,7 +70,7 @@
                     [alertView bk_addButtonWithTitle:@"确定" handler:^{
                         
                         
-                        [[CWebService sharedInstance] manual_confirm_code:self.codeTextField.text dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
+                        [[CWebService sharedInstance] manual_profit_code:self.codeTextField.text dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
                             
                         } failure:^(CWebServiceError *error) {
                             
@@ -84,7 +83,7 @@
                         
                     }];
                     [alertView bk_addButtonWithTitle:@"确定" handler:^{
-                        [[CWebService sharedInstance] manual_profit_code:self.codeTextField.text dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
+                        [[CWebService sharedInstance] manual_confirm_code:self.codeTextField.text dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
                             [MBProgressHUD showSuccess:msg];
                         } failure:^(CWebServiceError *error) {
                             [MBProgressHUD showError:error.errorMessage];
@@ -95,17 +94,17 @@
                 break;
             }
             case 2002: {
-//                self.resultLabel.text = obj;
                 UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"对不起,您的优先级小于1,不能二次盘点"];
                 [alertView bk_addButtonWithTitle:@"确定" handler:^{
-                    
+                    NSInteger chartIndex = [obj indexOfCharacter:'@'] == -1 ? 0 : [obj indexOfCharacter:'@'] + 1;
+                    self.resultLabel.text = [obj substringFromIndex:chartIndex];
                 }];
                 [alertView show];
                 break;
             }
             case 2003: {//对不起,您的优先级小于1,不能二次盘点.
-                self.resultLabel.text = @"资产不存在";
-                UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"对不起,您的优先级小于1,不能二次盘点"];
+                self.resultLabel.text = @"资产编号不存在";
+                UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"资产编号不存在"];
                 [alertView bk_addButtonWithTitle:@"确定" handler:^{
                     
                 }];
