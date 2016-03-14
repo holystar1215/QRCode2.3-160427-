@@ -387,27 +387,38 @@ typedef NS_ENUM(NSInteger, ScanType) {
             break;
         }
         case 2002: {
-            UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"对不起,您的优先级小于1,不能二次盘点"];
-            [alertView bk_addButtonWithTitle:@"确定" handler:^{
-                
-            }];
-            [alertView show];
-            break;
-        }
-        case 2003: {//对不起,您的优先级小于1,不能二次盘点.
-//            self.infoView.infoLabel.text = @"资产编号不存在";
-            UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"资产编号不存在"];
-            [alertView bk_addButtonWithTitle:@"确定" handler:^{
-                
-            }];
-            [alertView show];
+            if ([self.serverPddw isEqualToString:[[CDataSource sharedInstance].loginModel pddw]]) {
+                UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"该资产已盘点，请确认是否再次盘点"];
+                [alertView bk_addButtonWithTitle:@"取消" handler:^{
+                    
+                }];
+                [alertView bk_addButtonWithTitle:@"确定" handler:^{
+                    [[CWebService sharedInstance] scan_profit_code:self.codeInfo dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
+                        [MBProgressHUD showSuccess:msg];
+                    } failure:^(CWebServiceError *error) {
+                        [MBProgressHUD showError:error.errorMessage];
+                    } animated:YES message:@""];
+                }];
+                [alertView show];
+            } else {
+                UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"该资产的隶属单位,与您的隶属单位不一样,请确认是否标记为您单位的盘盈资产?"];
+                [alertView bk_addButtonWithTitle:@"取消" handler:^{
+                    
+                }];
+                [alertView bk_addButtonWithTitle:@"确定" handler:^{
+                    [[CWebService sharedInstance] scan_confirm_code:self.codeInfo dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
+                        [MBProgressHUD showSuccess:msg];
+                    } failure:^(CWebServiceError *error) {
+                        [MBProgressHUD showError:error.errorMessage];
+                    } animated:YES message:@""];
+                }];
+                [alertView show];
+            }
             break;
         }
         default:
             break;
     }
-    
-//    [self.infoView.layer removeFromSuperlayer];
 }
 
 @end

@@ -32,18 +32,6 @@
                         <outlet property="delegate" destination="-1" id="wFA-qj-uzh"/>
                     </connections>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmP-pz-xsp">
-                    <rect key="frame" x="8" y="485" width="584" height="40"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="gIS-52-yrV"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                    <state key="normal" title="读取数据"/>
-                    <connections>
-                        <action selector="onReadCode:" destination="-1" eventType="touchUpInside" id="06W-m3-lkp"/>
-                    </connections>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="资产编号：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VpH-r7-EAg">
                     <rect key="frame" x="162" y="81" width="90" height="21"/>
                     <constraints>
@@ -80,6 +68,15 @@
                         <outlet property="delegate" destination="-1" id="FuQ-VF-wpW"/>
                     </connections>
                 </scrollView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmP-pz-xsp">
+                    <rect key="frame" x="8" y="485" width="584" height="40"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="gIS-52-yrV"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <state key="normal" title="读取数据"/>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
