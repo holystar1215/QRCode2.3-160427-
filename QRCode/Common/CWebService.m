@@ -114,6 +114,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                         message:(NSString *)message {
     NSString *uri = @"/netcx-config/api/configController/securi_config";
     self.client.baseURL = [NSURL URLWithString:[[Configuration sharedInstance] totalUrl]];
+    
     return [self.client postHttpRequestWithURI:uri
                                     parameters:nil
                                        success:^(NSData *responseObject) {
@@ -152,6 +153,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                      @"passwd" : password//wuwen929
                      };
     NSString *param = [dict dictionaryToJSON];
+    param = [param URLEncode];
     param = [param encodeToBase64];
     uri = [NSString stringWithFormat:@"%@%@", uri, param];
     return [self.client postHttpRequestWithURI:uri
@@ -200,8 +202,9 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                            @"cfdd" : cfdd
                            };
     NSString *param = [dict dictionaryToJSON];
-    param = [param encodeToBase64];
     param = [param URLEncode];
+    param = [param encodeToBase64];
+    
     uri = [NSString stringWithFormat:@"%@%@", uri, param];
     return [self.client postHttpRequestWithURI:uri
                                     parameters:nil
@@ -278,6 +281,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                            @"pddw" : pddw
                            };
     NSString *param = [dict dictionaryToJSON];
+    param = [param URLEncode];
     param = [param encodeToBase64];
     uri = [NSString stringWithFormat:@"%@%@", uri, param];
     return [self.client postHttpRequestWithURI:uri
@@ -322,6 +326,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                            @"mc" : mc
                            };
     NSString *param = [dict dictionaryToJSON];
+    param = [param URLEncode];
     param = [param encodeToBase64];
     uri = [NSString stringWithFormat:@"%@%@", uri, param];
     return [self.client postHttpRequestWithURI:uri
@@ -366,6 +371,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                            @"mc" : mc
                            };
     NSString *param = [dict dictionaryToJSON];
+    param = [param URLEncode];
     param = [param encodeToBase64];
     uri = [NSString stringWithFormat:@"%@%@", uri, param];
     return [self.client postHttpRequestWithURI:uri
@@ -404,6 +410,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                            @"dw" : dw
                            };
     NSString *param = [dict dictionaryToJSON];
+    param = [param URLEncode];
     param = [param encodeToBase64];
     uri = [NSString stringWithFormat:@"%@%@", uri, param];
     return [self.client postHttpRequestWithURI:uri
@@ -442,6 +449,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                            @"workno" : workno
                            };
     NSString *param = [dict dictionaryToJSON];
+    param = [param URLEncode];
     param = [param encodeToBase64];
     uri = [NSString stringWithFormat:@"%@%@", uri, param];
     return [self.client postHttpRequestWithURI:uri
@@ -482,6 +490,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                            @"pddw" : pddw
                            };
     NSString *param = [dict dictionaryToJSON];
+    param = [param URLEncode];
     param = [param encodeToBase64];
     uri = [NSString stringWithFormat:@"%@%@", uri, param];
     return [self.client postHttpRequestWithURI:uri
@@ -526,6 +535,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                            @"mc" : mc
                            };
     NSString *param = [dict dictionaryToJSON];
+    param = [param URLEncode];
     param = [param encodeToBase64];
     uri = [NSString stringWithFormat:@"%@%@", uri, param];
     return [self.client postHttpRequestWithURI:uri
@@ -570,6 +580,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                            @"mc" : mc
                            };
     NSString *param = [dict dictionaryToJSON];
+    param = [param URLEncode];
     param = [param encodeToBase64];
     uri = [NSString stringWithFormat:@"%@%@", uri, param];
     return [self.client postHttpRequestWithURI:uri

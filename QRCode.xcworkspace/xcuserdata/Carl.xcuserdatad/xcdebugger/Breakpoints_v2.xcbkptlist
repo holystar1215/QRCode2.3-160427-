@@ -10,22 +10,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QRCode/Common/CWebService.m"
-            timestampString = "479402496.715016"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
-            landmarkName = "-record_currentpage:company:type:lyr:zcbh:cfdd:success:failure:animated:message:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QRCode/Common/CWebService.m"
             timestampString = "479283975.045614"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -42,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QRCode/Common/CWebService.m"
-            timestampString = "479283975.045614"
+            timestampString = "479614316.201583"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "-school_list_success:failure:animated:message:"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,12 +42,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QRCode/Common/CWebService.m"
-            timestampString = "479283975.045614"
+            timestampString = "479614316.201583"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "-school_list_success:failure:animated:message:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QRCode/Common/CAPIClient.m"
+            timestampString = "478149483.456634"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "-postHttpRequestWithURI:parameters:success:failure:animated:message:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QRCode/Common/CAPIClient.m"
+            timestampString = "478149486.031046"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "-postHttpRequestWithURI:parameters:success:failure:animated:message:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -74,12 +90,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QRCode/Classes/CustomCodeInventory/CCustomCodeInventoryViewController.m"
-            timestampString = "479402193.176412"
+            timestampString = "479239480.948281"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "-onReadCode:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QRCode/Common/CWebService.m"
+            timestampString = "479614316.201583"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "242"
+            endingLineNumber = "242"
+            landmarkName = "-modify_record:success:failure:animated:message:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -106,13 +138,172 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QRCode/Common/CWebService.m"
-            timestampString = "479402496.715016"
+            timestampString = "479614316.201583"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "504"
-            endingLineNumber = "504"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
+            landmarkName = "-modify_record:success:failure:animated:message:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[CWebService modify_record:success:failure:animated:message:]"
+                  moduleName = "QRCode"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Carl/Projects/ScanCode/Source/QRCode/Common/CWebService.m"
+                  timestampString = "479614316.326325"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "248"
+                  endingLineNumber = "248"
+                  offsetFromSymbolStart = "704">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__62-[CWebService modify_record:success:failure:animated:message:]_block_invoke"
+                  moduleName = "QRCode"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Carl/Projects/ScanCode/Source/QRCode/Common/CWebService.m"
+                  timestampString = "479614316.326625"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "248"
+                  endingLineNumber = "248"
+                  offsetFromSymbolStart = "68">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QRCode/Common/CWebService.m"
+            timestampString = "479614316.201583"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "491"
+            endingLineNumber = "491"
             landmarkName = "-manual_code:pddw:success:failure:animated:message:"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QRCode/Common/CWebService.m"
+            timestampString = "479614316.201583"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "498"
+            endingLineNumber = "498"
+            landmarkName = "-manual_code:pddw:success:failure:animated:message:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[CWebService manual_code:pddw:success:failure:animated:message:]"
+                  moduleName = "QRCode"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Carl/Projects/ScanCode/Source/QRCode/Common/CWebService.m"
+                  timestampString = "479614316.330207"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "498"
+                  endingLineNumber = "498"
+                  offsetFromSymbolStart = "908">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__65-[CWebService manual_code:pddw:success:failure:animated:message:]_block_invoke"
+                  moduleName = "QRCode"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Carl/Projects/ScanCode/Source/QRCode/Common/CWebService.m"
+                  timestampString = "479614316.330447"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "498"
+                  endingLineNumber = "498"
+                  offsetFromSymbolStart = "68">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QRCode/Common/CWebService.m"
+            timestampString = "479614316.201583"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "511"
+            endingLineNumber = "511"
+            landmarkName = "-manual_code:pddw:success:failure:animated:message:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__65-[CWebService manual_code:pddw:success:failure:animated:message:]_block_invoke"
+                  moduleName = "QRCode"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Carl/Projects/ScanCode/Source/QRCode/Common/CWebService.m"
+                  timestampString = "479614316.345926"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "511"
+                  endingLineNumber = "511"
+                  offsetFromSymbolStart = "596">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__copy_helper_block_228"
+                  moduleName = "QRCode"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Carl/Projects/ScanCode/Source/QRCode/Common/CWebService.m"
+                  timestampString = "479614316.346168"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_229"
+                  moduleName = "QRCode"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Carl/Projects/ScanCode/Source/QRCode/Common/CWebService.m"
+                  timestampString = "479614316.346316"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
