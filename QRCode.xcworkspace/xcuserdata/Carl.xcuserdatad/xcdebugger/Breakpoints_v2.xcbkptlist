@@ -86,22 +86,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "QRCode/Common/CWebService.m"
-            timestampString = "479614316.201583"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
-            landmarkName = "-modify_record:success:failure:animated:message:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -122,45 +106,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "QRCode/Common/CWebService.m"
-            timestampString = "479614316.201583"
+            timestampString = "479634273.904932"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "248"
-            endingLineNumber = "248"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
             landmarkName = "-modify_record:success:failure:animated:message:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[CWebService modify_record:success:failure:animated:message:]"
-                  moduleName = "QRCode"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Carl/Projects/ScanCode/Source/QRCode/Common/CWebService.m"
-                  timestampString = "479617885.585149"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "248"
-                  endingLineNumber = "248"
-                  offsetFromSymbolStart = "704">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__62-[CWebService modify_record:success:failure:animated:message:]_block_invoke"
-                  moduleName = "QRCode"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Carl/Projects/ScanCode/Source/QRCode/Common/CWebService.m"
-                  timestampString = "479617885.585382"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "248"
-                  endingLineNumber = "248"
-                  offsetFromSymbolStart = "68">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -202,12 +154,12 @@
                   moduleName = "QRCode"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Carl/Projects/ScanCode/Source/QRCode/Common/CWebService.m"
-                  timestampString = "479617885.587273"
+                  timestampString = "479639999.004349"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "498"
                   endingLineNumber = "498"
-                  offsetFromSymbolStart = "908">
+                  offsetFromSymbolStart = "945">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -217,12 +169,12 @@
                   moduleName = "QRCode"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Carl/Projects/ScanCode/Source/QRCode/Common/CWebService.m"
-                  timestampString = "479617885.587412"
+                  timestampString = "479639999.004582"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "498"
                   endingLineNumber = "498"
-                  offsetFromSymbolStart = "68">
+                  offsetFromSymbolStart = "48">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -250,12 +202,12 @@
                   moduleName = "QRCode"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Carl/Projects/ScanCode/Source/QRCode/Common/CWebService.m"
-                  timestampString = "479617885.588158"
+                  timestampString = "479639999.036497"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "511"
                   endingLineNumber = "511"
-                  offsetFromSymbolStart = "596">
+                  offsetFromSymbolStart = "581">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -265,12 +217,12 @@
                   moduleName = "QRCode"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Carl/Projects/ScanCode/Source/QRCode/Common/CWebService.m"
-                  timestampString = "479617885.588297"
+                  timestampString = "479639999.036763"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "24">
+                  offsetFromSymbolStart = "21">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -280,12 +232,12 @@
                   moduleName = "QRCode"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Carl/Projects/ScanCode/Source/QRCode/Common/CWebService.m"
-                  timestampString = "479617885.588408"
+                  timestampString = "479639999.036967"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "20">
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -296,13 +248,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "QRCode/Classes/InventoryRecord/CRecordViewController.m"
-            timestampString = "479318322.681152"
+            filePath = "QRCode/Common/CWebService.m"
+            timestampString = "479634270.133291"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
-            landmarkName = "-onSubmit:"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
+            landmarkName = "-modify_record:success:failure:animated:message:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -74,11 +74,11 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
             
             offset = [[NSString stringWithFormat:@"资产编号：%@\n领用人：%@\n使用单位号：%@\n使用单位名：%@\n存放地点：", model.zcbh, model.lyr, model.sydwh, model.syfxm] length];
             len = [model.cfdd length];
-            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor groupTableViewBackgroundColor] range:NSMakeRange(offset, len)];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor] range:NSMakeRange(offset, len)];
             
             offset = [[NSString stringWithFormat:@"资产编号：%@\n领用人：%@\n使用单位号：%@\n使用单位名：%@\n存放地点：%@\n入库时间：%@\n使用方向名：%@\n经费科目名：%@\n", model.zcbh, model.lyr, model.sydwh, model.syfxm, model.cfdd, model.rksj, model.syfxm, model.jfkmm] length];
             len = [[NSString stringWithFormat:@"名称：%@\n型号：%@\n规格：%@\n金额：%@\n厂家：%@\n经销商：%@\n资产内容：%@", model.mc, model.xh, model.gg, model.jine, model.changjia, model.jxs, model.zcnr] length];
-            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor groupTableViewBackgroundColor] range:NSMakeRange(offset, len)];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor] range:NSMakeRange(offset, len)];
             
             break;
         }
@@ -96,7 +96,7 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
             
             offset = [[NSString stringWithFormat:@"资产编号：%@\n名称：%@\n单位名称：%@\n", model.zcbh, model.mc, model.sydwm] length];
             len = [[NSString stringWithFormat:@"盘点人：%@\n盘点时间：%@", model.lyr, model.rksj] length];
-            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(offset, len)];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor] range:NSMakeRange(offset, len)];
             
             break;
         }
@@ -118,11 +118,11 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
             
             offset = [[NSString stringWithFormat:@"资产编号：%@\n领用人：%@\n使用单位号：%@\n使用单位名：%@\n存放地点：", model.zcbh, model.lyr, model.sydwh, model.syfxm] length];
             len = [model.cfdd length];
-            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor groupTableViewBackgroundColor] range:NSMakeRange(offset, len)];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor] range:NSMakeRange(offset, len)];
             
             offset = [[NSString stringWithFormat:@"资产编号：%@\n领用人：%@\n使用单位号：%@\n使用单位名：%@\n存放地点：%@\n入库时间：%@\n使用方向名：%@\n经费科目名：%@\n", model.zcbh, model.lyr, model.sydwh, model.syfxm, model.cfdd, model.rksj, model.syfxm, model.jfkmm] length];
             len = [[NSString stringWithFormat:@"名称：%@\n型号：%@\n规格：%@\n金额：%@\n厂家：%@\n经销商：%@\n资产内容：%@", model.mc, model.xh, model.gg, model.jine, model.changjia, model.jxs, model.zcnr] length];
-            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(offset, len)];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor] range:NSMakeRange(offset, len)];
             
             break;
         }
@@ -154,7 +154,7 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
                            @"x_lyr":@"",
                            @"x_lyrgh":@"",
                            @"x_sydwh":@"",
-                           @"xgrgh":[[CDataSource sharedInstance].loginModel yhmc],
+                           @"xgrgh":[self.xlyrghTextField text],
                            @"zcbh":[model zcbh]
                            };
     NSError *modelError;
@@ -199,7 +199,7 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
     [[CWebService sharedInstance] search_workno:no success:^(NSString *lyr) {
         self.xlyrTextField.text = lyr;
     } failure:^(CWebServiceError *error) {
-        [MBProgressHUD showError:error.errorMessage];
+        [MBProgressHUD showError:@"领用人工号错误，请重新输入"];
     } animated:NO message:@""];
 }
 
@@ -278,7 +278,7 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
     self.currentSchool = index;
     
     CCompanyModel *school = self.resultArray[self.currentSchool];
-    self.xsydwhTextField.text = school.dwmc;
+    self.xsydwhTextField.text = [NSString stringWithFormat:@"%@ %@", school.dwdm, school.dwmc];
 }
 
 - (void)didChangeSearchText:(NSString *)searchText {
