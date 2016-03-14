@@ -26,6 +26,8 @@
 // User Default
 #define kUserNameDefault @"kUserNameDefault"
 #define kPasswordDefault @"kPasswordDefault"
+#define kCompanyDefault @"kCompanyDefault"
+#define kServerDefault @"kServerDefault"
 
 @interface Configuration : NSObject
 @property (nonatomic, strong) NSString *serverAddr;
@@ -37,5 +39,10 @@ DEFINE_SINGLETON_FOR_HEADER(Configuration)
 
 - (NSString *)serverUrl;
 - (NSString *)totalUrl;
+
+- (void)saveServerAddr:(NSString *)addr;
+
+- (void)saveCompanyName:(NSString *)name;
+- (NSString *)companyName;
 
 @end

@@ -74,17 +74,27 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
         return;
     }
     
-    [USER_DEFAULT setObject:userName forKey:kUserNameDefault];
-    [USER_DEFAULT setObject:passWord forKey:kPasswordDefault];
+    
     
     [[CWebService sharedInstance] login_username:userName password:passWord success:^(NSDictionary *models) {
         NSError *jsonError;
         [[CDataSource sharedInstance] setLoginModel:[MTLJSONAdapter modelOfClass:[CLoginModel class] fromJSONDictionary:models error:&jsonError]];
         CSchoolModel *school = self.resultArray[self.currentSchool];
     	[[CDataSource sharedInstance] setSchoolModel:school];
+        [USER_DEFAULT setObject:userName forKey:kUserNameDefault];
+        [USER_DEFAULT setObject:passWord forKey:kPasswordDefault];
+        [USER_DEFAULT synchronize];
         [APP_DELEGATE setupHomeViewController];
     } failure:^(CWebServiceError *error) {
-        [MBProgressHUD showError:error.errorMessage];
+        if (error.errorCode == eWebServiceErrorTimeout) {
+            UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"请重新选择学校名称或修改账户信息"];
+            [alertView bk_addButtonWithTitle:@"确定" handler:^{
+                
+            }];
+            [MBProgressHUD hideHUD];
+        } else {
+            [MBProgressHUD showError:error.errorMessage];
+        }
     } animated:YES message:@""];
 }
 
@@ -121,6 +131,10 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
             cell.imageView.image = [UIImage imageNamed:@"school"];
             cell.textField.placeholder = @"学校";
             cell.textField.enabled = NO;
+            NSString *schoolName = [USER_DEFAULT objectForKey:kCompanyDefault];
+            if (schoolName) {
+                cell.textField.text = schoolName;
+            }
             break;
         }
         case 1: {
@@ -207,7 +221,8 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
     CSchoolModel *school = self.resultArray[self.currentSchool];
     [[CDataSource sharedInstance] setSchoolModel:school];
     cell.textField.text = school.schoolName;
-    [[Configuration sharedInstance] setServerAddr:school.serverAddr];
+    [[Configuration sharedInstance] saveCompanyName:school.schoolName];
+    [[Configuration sharedInstance] saveServerAddr:school.serverAddr];
     
     if ([school.isDelete isEqualToString:@"0"]) {
         UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"抱歉，贵校目前无此授权，不能使用！"];

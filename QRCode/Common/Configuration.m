@@ -37,7 +37,23 @@ DEFINE_SINGLETON_FOR_CLASS(Configuration)
 }
 
 - (NSString *)serverUrl {
+    self.serverAddr = [USER_DEFAULT objectForKey:kServerDefault];
 	return [NSString stringWithFormat:@"http://%@", self.serverAddr];
+}
+
+- (void)saveServerAddr:(NSString *)addr {
+    self.serverAddr = addr;
+    [USER_DEFAULT setObject:addr forKey:kServerDefault];
+    [USER_DEFAULT synchronize];
+}
+
+- (void)saveCompanyName:(NSString *)name {
+    [USER_DEFAULT setObject:name forKey:kCompanyDefault];
+    [USER_DEFAULT synchronize];
+}
+
+- (NSString *)companyName {
+    return [USER_DEFAULT objectForKey:kCompanyDefault];
 }
 
 - (NSString *)totalUrl {

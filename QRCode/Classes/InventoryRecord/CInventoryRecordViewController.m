@@ -198,15 +198,15 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
             
             offset = [[NSString stringWithFormat:@"资产编号：%@\n领用人：", model.zcbh] length];
             len = [model.lyr length];
-            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(offset, len)];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor] range:NSMakeRange(offset, len)];
             
             offset = [[NSString stringWithFormat:@"资产编号：%@\n领用人：%@\n使用单位号：%@\n使用单位名：%@\n存放地点：", model.zcbh, model.lyr, model.sydwh, model.syfxm] length];
             len = [model.cfdd length];
-            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor brownColor] range:NSMakeRange(offset, len)];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor] range:NSMakeRange(offset, len)];
             
             offset = [[NSString stringWithFormat:@"资产编号：%@\n领用人：%@\n使用单位号：%@\n使用单位名：%@\n存放地点：%@\n入库时间：%@\n使用方向名：%@\n经费科目名：%@\n", model.zcbh, model.lyr, model.sydwh, model.syfxm, model.cfdd, model.rksj, model.syfxm, model.jfkmm] length];
             len = [[NSString stringWithFormat:@"名称：%@\n型号：%@\n规格：%@\n金额：%@\n厂家：%@\n经销商：%@\n资产内容：%@", model.mc, model.xh, model.gg, model.jine, model.changjia, model.jxs, model.zcnr] length];
-            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(offset, len)];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor] range:NSMakeRange(offset, len)];
             
             break;
         }
@@ -224,7 +224,7 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
             
             offset = [[NSString stringWithFormat:@"资产编号：%@\n名称：%@\n单位名称：%@\n", model.zcbh, model.mc, model.sydwm] length];
             len = [[NSString stringWithFormat:@"盘点人：%@\n盘点时间：%@", model.lyr, model.rksj] length];
-            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(offset, len)];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor] range:NSMakeRange(offset, len)];
             
             break;
         }
@@ -246,11 +246,11 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
             
             offset = [[NSString stringWithFormat:@"资产编号：%@\n领用人：%@\n使用单位号：%@\n使用单位名：%@\n存放地点：", model.zcbh, model.lyr, model.sydwh, model.syfxm] length];
             len = [model.cfdd length];
-            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(offset, len)];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor] range:NSMakeRange(offset, len)];
             
             offset = [[NSString stringWithFormat:@"资产编号：%@\n领用人：%@\n使用单位号：%@\n使用单位名：%@\n存放地点：%@\n入库时间：%@\n使用方向名：%@\n经费科目名：%@\n", model.zcbh, model.lyr, model.sydwh, model.syfxm, model.cfdd, model.rksj, model.syfxm, model.jfkmm] length];
             len = [[NSString stringWithFormat:@"名称：%@\n型号：%@\n规格：%@\n金额：%@\n厂家：%@\n经销商：%@\n资产内容：%@", model.mc, model.xh, model.gg, model.jine, model.changjia, model.jxs, model.zcnr] length];
-            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor lightGrayColor] range:NSMakeRange(offset, len)];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor] range:NSMakeRange(offset, len)];
             
             break;
         }
