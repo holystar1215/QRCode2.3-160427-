@@ -57,6 +57,28 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
     
 }
 
+- (IBAction)onDemo:(id)sender {
+    [Configuration sharedInstance].serverAddr = @"";
+    [[CWebService sharedInstance] login_username:@"" password:@"" success:^(NSDictionary *models) {
+        NSError *jsonError;
+        [[CDataSource sharedInstance] setLoginModel:[MTLJSONAdapter modelOfClass:[CLoginModel class] fromJSONDictionary:models error:&jsonError]];
+        CSchoolModel *school = self.resultArray[self.currentSchool];
+        [[CDataSource sharedInstance] setSchoolModel:school];
+
+        [APP_DELEGATE setupHomeViewController];
+    } failure:^(CWebServiceError *error) {
+        if (error.errorCode == eWebServiceErrorTimeout) {
+            UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"请重新选择学校名称或修改账户信息"];
+            [alertView bk_addButtonWithTitle:@"确定" handler:^{
+                
+            }];
+            [MBProgressHUD hideHUD];
+        } else {
+            [MBProgressHUD showError:error.errorMessage];
+        }
+    } animated:YES message:@""];
+}
+
 - (IBAction)onLogin:(id)sender {
     CLoginViewCell *cell;
     
@@ -73,8 +95,6 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
         [MBProgressHUD showError:@"信息输入不完整！"];
         return;
     }
-    
-    
     
     [[CWebService sharedInstance] login_username:userName password:passWord success:^(NSDictionary *models) {
         NSError *jsonError;

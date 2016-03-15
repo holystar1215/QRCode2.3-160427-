@@ -154,7 +154,7 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
                            @"x_lyr":@"",
                            @"x_lyrgh":@"",
                            @"x_sydwh":@"",
-                           @"xgrgh":[self.xlyrghTextField text],
+                           @"xgrgh":[USER_DEFAULT objectForKey:kUserNameDefault],
                            @"zcbh":[model zcbh]
                            };
     NSError *modelError;

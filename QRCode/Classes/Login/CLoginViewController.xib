@@ -19,7 +19,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kgR-ab-DuE">
-                    <rect key="frame" x="0.0" y="215" width="600" height="132"/>
+                    <rect key="frame" x="0.0" y="214" width="600" height="132"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="132" id="rFN-AC-kf2"/>
@@ -30,7 +30,7 @@
                     </connections>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FM6-8i-ct4">
-                    <rect key="frame" x="10" y="367" width="580" height="42"/>
+                    <rect key="frame" x="10" y="366" width="580" height="42"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="42" id="MrH-GK-W0i"/>
                     </constraints>
@@ -42,7 +42,7 @@
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrP-sG-89z">
-                    <rect key="frame" x="506" y="417" width="84" height="30"/>
+                    <rect key="frame" x="506" y="416" width="84" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="d0s-9N-mJM"/>
                         <constraint firstAttribute="width" constant="84" id="lZ5-XI-5Bb"/>
@@ -53,23 +53,38 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_account" translatesAutoresizingMaskIntoConstraints="NO" id="fXc-ZR-iMH">
-                    <rect key="frame" x="263" y="106" width="75" height="75"/>
+                    <rect key="frame" x="263" y="105" width="75" height="75"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="75" id="kIm-iZ-YCS"/>
                         <constraint firstAttribute="width" constant="75" id="ldK-aB-0Ir"/>
                     </constraints>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GhY-TL-tYy">
+                    <rect key="frame" x="10" y="448" width="580" height="42"/>
+                    <color key="backgroundColor" red="0.24705882352941178" green="0.43137254901960786" blue="0.45490196078431372" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="登录体验账户">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onDemo:" destination="-1" eventType="touchUpInside" id="0La-OX-JTe"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="kgR-ab-DuE" secondAttribute="trailing" id="07T-eb-dar"/>
+                <constraint firstItem="GhY-TL-tYy" firstAttribute="height" secondItem="FM6-8i-ct4" secondAttribute="height" id="63z-1d-Y9g"/>
                 <constraint firstAttribute="bottom" secondItem="kgR-ab-DuE" secondAttribute="top" multiplier="2.8" id="ScQ-LD-dFJ"/>
                 <constraint firstItem="kgR-ab-DuE" firstAttribute="top" secondItem="fXc-ZR-iMH" secondAttribute="bottom" constant="34" id="Vo0-iK-VWP"/>
                 <constraint firstItem="kgR-ab-DuE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="b0p-Al-VcJ"/>
                 <constraint firstItem="zrP-sG-89z" firstAttribute="trailing" secondItem="FM6-8i-ct4" secondAttribute="trailing" id="bDF-r8-z7v"/>
                 <constraint firstItem="FM6-8i-ct4" firstAttribute="top" secondItem="kgR-ab-DuE" secondAttribute="bottom" constant="20" id="bLb-OE-fHe"/>
                 <constraint firstItem="zrP-sG-89z" firstAttribute="top" secondItem="FM6-8i-ct4" secondAttribute="bottom" constant="8" id="gTg-Lq-4pd"/>
+                <constraint firstItem="GhY-TL-tYy" firstAttribute="width" secondItem="FM6-8i-ct4" secondAttribute="width" id="gc7-dw-Skp"/>
                 <constraint firstItem="fXc-ZR-iMH" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="mIs-sc-9Z5"/>
+                <constraint firstItem="GhY-TL-tYy" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="roW-Jg-qdg"/>
+                <constraint firstItem="GhY-TL-tYy" firstAttribute="top" secondItem="FM6-8i-ct4" secondAttribute="bottom" constant="40" id="uGF-d0-Efk"/>
                 <constraint firstItem="FM6-8i-ct4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="v2g-S3-0R5"/>
                 <constraint firstAttribute="trailing" secondItem="FM6-8i-ct4" secondAttribute="trailing" constant="10" id="xG9-f6-7nU"/>
             </constraints>
