@@ -9,6 +9,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CLoginViewController">
             <connections>
                 <outlet property="contentTableView" destination="kgR-ab-DuE" id="MVQ-aw-80E"/>
+                <outlet property="demoButton" destination="GhY-TL-tYy" id="Uv0-Pk-sqD"/>
+                <outlet property="loadImageView" destination="63b-Se-H3k" id="SRX-6A-suG"/>
                 <outlet property="logoImageView" destination="fXc-ZR-iMH" id="ADu-TE-YRT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -70,18 +72,25 @@
                         <action selector="onDemo:" destination="-1" eventType="touchUpInside" id="0La-OX-JTe"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waiting" translatesAutoresizingMaskIntoConstraints="NO" id="63b-Se-H3k">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="kgR-ab-DuE" secondAttribute="trailing" id="07T-eb-dar"/>
                 <constraint firstItem="GhY-TL-tYy" firstAttribute="height" secondItem="FM6-8i-ct4" secondAttribute="height" id="63z-1d-Y9g"/>
+                <constraint firstAttribute="trailing" secondItem="63b-Se-H3k" secondAttribute="trailing" id="A9B-t5-o4W"/>
+                <constraint firstItem="63b-Se-H3k" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="CIn-X6-aLz"/>
                 <constraint firstAttribute="bottom" secondItem="kgR-ab-DuE" secondAttribute="top" multiplier="2.8" id="ScQ-LD-dFJ"/>
                 <constraint firstItem="kgR-ab-DuE" firstAttribute="top" secondItem="fXc-ZR-iMH" secondAttribute="bottom" constant="34" id="Vo0-iK-VWP"/>
+                <constraint firstAttribute="bottom" secondItem="63b-Se-H3k" secondAttribute="bottom" id="a8j-f6-d3a"/>
                 <constraint firstItem="kgR-ab-DuE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="b0p-Al-VcJ"/>
                 <constraint firstItem="zrP-sG-89z" firstAttribute="trailing" secondItem="FM6-8i-ct4" secondAttribute="trailing" id="bDF-r8-z7v"/>
                 <constraint firstItem="FM6-8i-ct4" firstAttribute="top" secondItem="kgR-ab-DuE" secondAttribute="bottom" constant="20" id="bLb-OE-fHe"/>
                 <constraint firstItem="zrP-sG-89z" firstAttribute="top" secondItem="FM6-8i-ct4" secondAttribute="bottom" constant="8" id="gTg-Lq-4pd"/>
                 <constraint firstItem="GhY-TL-tYy" firstAttribute="width" secondItem="FM6-8i-ct4" secondAttribute="width" id="gc7-dw-Skp"/>
+                <constraint firstItem="63b-Se-H3k" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jD4-a1-G0M"/>
                 <constraint firstItem="fXc-ZR-iMH" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="mIs-sc-9Z5"/>
                 <constraint firstItem="GhY-TL-tYy" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="roW-Jg-qdg"/>
                 <constraint firstItem="GhY-TL-tYy" firstAttribute="top" secondItem="FM6-8i-ct4" secondAttribute="bottom" constant="40" id="uGF-d0-Efk"/>
@@ -93,5 +102,6 @@
     <resources>
         <image name="login_account" width="43" height="49"/>
         <image name="login_button" width="347" height="42"/>
+        <image name="waiting" width="414" height="736"/>
     </resources>
 </document>

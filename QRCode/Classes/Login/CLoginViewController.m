@@ -18,6 +18,9 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
 @property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
 @property (weak, nonatomic) IBOutlet UITableView *contentTableView;
 
+@property (weak, nonatomic) IBOutlet UIImageView *loadImageView;
+@property (weak, nonatomic) IBOutlet UIButton *demoButton;
+
 @property (strong, nonatomic) CListPopoverView *popupListView;
 @property (strong, nonatomic) NSArray *schoolArray;
 @property (strong, nonatomic) NSArray *resultArray;
@@ -37,6 +40,24 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
     
     self.logoImageView.image = [UIImage imageNamed:@"login_account"];
     
+    [[CWebService sharedInstance] school_list_success:^(NSArray *models) {
+        NSError *jsonError;
+        self.schoolArray = [MTLJSONAdapter modelsOfClass:[CSchoolModel class] fromJSONArray:models error:&jsonError];
+        self.resultArray = [NSArray arrayWithArray:self.schoolArray];
+        self.demoButton.hidden = YES;
+        [self.resultArray enumerateObjectsUsingBlock:^(CSchoolModel *obj, NSUInteger idx, BOOL * stop) {
+            if ([obj.schoolName isEqualToString:@"雁南师范学院"]) {
+                self.demoButton.hidden = NO;
+                
+                *stop = YES;
+            }
+        }];
+        self.loadImageView.hidden = YES;
+    } failure:^(CWebServiceError *error) {
+        self.demoButton.hidden = YES;
+        self.loadImageView.hidden = YES;
+        [MBProgressHUD showError:error.errorMessage];
+    } animated:YES message:@""];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -58,7 +79,7 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
 }
 
 - (IBAction)onDemo:(id)sender {
-    [Configuration sharedInstance].serverAddr = @"http://202.119.81.163:8080";
+    [Configuration sharedInstance].serverAddr = @"http://202.119.81.162:8080";
     [[CWebService sharedInstance] login_username:@"22875-SJPD" password:@"1234" success:^(NSDictionary *models) {
         NSError *jsonError;
         [[CDataSource sharedInstance] setLoginModel:[MTLJSONAdapter modelOfClass:[CLoginModel class] fromJSONDictionary:models error:&jsonError]];
@@ -119,16 +140,16 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
 }
 
 - (void)showPopList {
-    [[CWebService sharedInstance] school_list_success:^(NSArray *models) {
-        NSError *jsonError;
-        self.schoolArray = [MTLJSONAdapter modelsOfClass:[CSchoolModel class] fromJSONArray:models error:&jsonError];
-        self.resultArray = [NSArray arrayWithArray:self.schoolArray];
+//    [[CWebService sharedInstance] school_list_success:^(NSArray *models) {
+//        NSError *jsonError;
+//        self.schoolArray = [MTLJSONAdapter modelsOfClass:[CSchoolModel class] fromJSONArray:models error:&jsonError];
+//        self.resultArray = [NSArray arrayWithArray:self.schoolArray];
         self.popupListView = [[CListPopoverView alloc] initWithFrame:CGRectZero andTarget:self];
         self.popupListView.autoHidden = YES;
         [self.popupListView showPopoverView];
-    } failure:^(CWebServiceError *error) {
-        [MBProgressHUD showError:error.errorMessage];
-    } animated:YES message:@""];
+//    } failure:^(CWebServiceError *error) {
+//        [MBProgressHUD showError:error.errorMessage];
+//    } animated:YES message:@""];
 }
 
 #pragma mark - <UITableViewDataSource>
