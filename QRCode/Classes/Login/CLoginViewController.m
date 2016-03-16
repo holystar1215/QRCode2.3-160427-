@@ -58,8 +58,8 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
 }
 
 - (IBAction)onDemo:(id)sender {
-    [Configuration sharedInstance].serverAddr = @"";
-    [[CWebService sharedInstance] login_username:@"" password:@"" success:^(NSDictionary *models) {
+    [Configuration sharedInstance].serverAddr = @"http://202.119.81.163:8080";
+    [[CWebService sharedInstance] login_username:@"22875-SJPD" password:@"1234" success:^(NSDictionary *models) {
         NSError *jsonError;
         [[CDataSource sharedInstance] setLoginModel:[MTLJSONAdapter modelOfClass:[CLoginModel class] fromJSONDictionary:models error:&jsonError]];
         CSchoolModel *school = self.resultArray[self.currentSchool];
