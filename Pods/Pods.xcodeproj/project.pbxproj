@@ -963,7 +963,7 @@
 			children = (
 				B3D1D13E0C6553800746CB8FD61CF946 /* Pods */,
 			);
-			path = "Targets Support Files";
+			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
 		04827CCB3A63707F135191AC8ACBBAF5 /* Support Files */ = {
