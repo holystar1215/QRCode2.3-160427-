@@ -184,7 +184,7 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
 
 #pragma mark - <UICollectionViewDelegateFlowLayout>
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(318 / 3, 70);
+    return CGSizeMake((SCREEN_WIDTH - 2) / 3, 70);
 }
 
 - (CGFloat )collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {

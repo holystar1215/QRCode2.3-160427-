@@ -63,7 +63,7 @@ typedef NS_ENUM(NSInteger, ScanType) {
         switch (wSelf.scanType) {
             case eQRCode: {
                 NSString *tmp = [resultAsString stringByReplacingOccurrencesOfString:@"×Ê²ú±àºÅ£º" withString:@""];
-                tmp = [tmp stringByReplacingOccurrencesOfString:@"£»Ãû³Æ£º" withString:@"#"];
+                tmp = [tmp stringByReplacingOccurrencesOfString:@"£»" withString:@"#"];
                 tmp = [tmp substringToCharacter:'#'];
                 wSelf.codeInfo = tmp;
                 
