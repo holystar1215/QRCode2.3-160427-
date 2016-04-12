@@ -20,16 +20,11 @@
 
 @implementation CCustomCodeInventoryViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"back-arrow"] style:UIBarButtonItemStylePlain handler:^(id sender) {
-        [self.navigationController popViewControllerAnimated:YES];
-    }];
+- (void)resetPage {
+    self.readCodeButton.titleLabel.text = @"读取数据";
+    self.resultLabel.text = @"";
     
-    [self.readCodeButton createBordersWithColor:[UIColor groupTableViewBackgroundColor] withCornerRadius:6 andWidth:1];
-    
-    self.readCodeButton.titleLabel.text = @"读取编码";
+    [self.readCodeButton bk_removeEventHandlersForControlEvents:UIControlEventTouchUpInside];
     [self.readCodeButton bk_addEventHandler:^(id sender) {
         [[CWebService sharedInstance] manual_code:self.codeTextField.text pddw:[[CDataSource sharedInstance].loginModel pddw] success:^(NSString *obj, NSInteger code) {
             switch (code) {
@@ -40,16 +35,20 @@
                 case 1006: {
                     self.resultLabel.text = @"资产编号不存在";
                     self.readCodeButton.titleLabel.text = @"点击盘点";
+                    [self.readCodeButton bk_removeEventHandlersForControlEvents:UIControlEventTouchUpInside];
                     [self.readCodeButton bk_addEventHandler:^(id sender) {
-                        UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"该资产不在本次清查的记录中,请确认是否标记为盘盈资产"];
+                        UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"该资产不在本次清查的记录中,请确认是否标记为盘盈资产?"];
                         [alertView bk_addButtonWithTitle:@"取消" handler:^{
-//                            self.readCodeButton.titleLabel.text = @"读取数据";
-//                            self.codeTextField.text = @"";
-//                            self.resultLabel.text = @"";
+                            self.codeTextField.text = @"";
+                            [self.codeTextField becomeFirstResponder];
+                            
+                            [self resetPage];
                         }];
                         [alertView bk_addButtonWithTitle:@"确定" handler:^{
                             [[CWebService sharedInstance] manual_profit_code:self.codeTextField.text dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
                                 [MBProgressHUD showSuccess:msg];
+                                
+                                [self resetPage];
                             } failure:^(CWebServiceError *error) {
                                 [MBProgressHUD showError:error.errorMessage];
                             } animated:YES message:@""];
@@ -62,31 +61,37 @@
                     NSInteger chartIndex = [obj indexOfCharacter:'@'] == -1 ? 0 : [obj indexOfCharacter:'@'] + 1;
                     self.resultLabel.text = [obj substringFromIndex:chartIndex];
                     self.readCodeButton.titleLabel.text = @"点击盘点";
+                    [self.readCodeButton bk_removeEventHandlersForControlEvents:UIControlEventTouchUpInside];
                     [self.readCodeButton bk_addEventHandler:^(id sender) {
                         if ([[obj substringToCharacter:'@'] isEqualToString:[[CDataSource sharedInstance].loginModel pddw]]) {
                             UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"是否盘盈?"];
                             [alertView bk_addButtonWithTitle:@"取消" handler:^{
-//                                self.readCodeButton.titleLabel.text = @"读取数据";
-//                                self.codeTextField.text = @"";
-//                                self.resultLabel.text = @"";
-//                                [self.codeTextField becomeFirstResponder];
+                                self.codeTextField.text = @"";
+                                [self.codeTextField becomeFirstResponder];
+                                
+                                [self resetPage];
                             }];
                             [alertView bk_addButtonWithTitle:@"确定" handler:^{
                                 [[CWebService sharedInstance] manual_profit_code:self.codeTextField.text dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
-                                    
+                                    [self resetPage];
                                 } failure:^(CWebServiceError *error) {
-                                    
+                                    [MBProgressHUD showError:error.errorMessage];
                                 } animated:YES message:@""];
                             }];
                             [alertView show];
                         } else {
                             UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"该资产的隶属单位,与您的隶属单位不一样,请确认是否标记为您单位的盘盈资产?"];
                             [alertView bk_addButtonWithTitle:@"取消" handler:^{
+                                self.codeTextField.text = @"";
+                                [self.codeTextField becomeFirstResponder];
                                 
+                                [self resetPage];
                             }];
                             [alertView bk_addButtonWithTitle:@"确定" handler:^{
                                 [[CWebService sharedInstance] manual_confirm_code:self.codeTextField.text dlmc:[[CDataSource sharedInstance].loginModel dlmc] pddw:[[CDataSource sharedInstance].loginModel pddw] mc:@"人工" success:^(NSString *msg, NSInteger code) {
                                     [MBProgressHUD showSuccess:msg];
+                                    
+                                    [self resetPage];
                                 } failure:^(CWebServiceError *error) {
                                     [MBProgressHUD showError:error.errorMessage];
                                 } animated:YES message:@""];
@@ -94,8 +99,6 @@
                             [alertView show];
                         }
                     } forControlEvents:UIControlEventTouchUpInside];
-                    
-                    
                     break;
                 }
                 case 2002: {
@@ -116,6 +119,22 @@
             [MBProgressHUD showError:error.errorMessage];
         } animated:YES message:@""];
     } forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] bk_initWithImage:[UIImage imageNamed:@"back-arrow"] style:UIBarButtonItemStylePlain handler:^(id sender) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
+    
+    [self.readCodeButton createBordersWithColor:[UIColor groupTableViewBackgroundColor] withCornerRadius:6 andWidth:1];
+    
+    [self resetPage];
+    
+    [self.codeTextField bk_addEventHandler:^(id sender) {
+        [self resetPage];
+    } forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)didReceiveMemoryWarning {

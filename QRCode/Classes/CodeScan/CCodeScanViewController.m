@@ -88,7 +88,7 @@ typedef NS_ENUM(NSInteger, ScanType) {
                 break;
             }
             case eBarCode: {
-                wSelf.codeInfo = resultAsString;
+                wSelf.codeInfo = [resultAsString stringByReplacingOccurrencesOfString:@"*" withString:@""];
                 
                 wSelf.infoView.codeLabel.text = [NSString stringWithFormat:@"编码：%@", wSelf.codeInfo];
                 NSLog(@"Completion with result: %@", resultAsString);
@@ -335,7 +335,18 @@ typedef NS_ENUM(NSInteger, ScanType) {
 }
 
 #pragma mark - <CCodeInfoViewDelegate>
-- (void)didCheckedButton:(UIButton *)sender {
+- (void)didClickedButtonAtIndex:(NSInteger)btnIndex {
+    switch (btnIndex) {
+        case 0: {
+            break;
+        }
+        case 1: {
+            break;
+        }
+        default:
+            break;
+    }
+    
     switch (self.serverCode) {
         case 1002: {
             [MBProgressHUD showError:@"服务器异常"];

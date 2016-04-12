@@ -15,6 +15,7 @@
 #import "COverageRecordModel.h"
 
 @interface CDataSource : NSObject
+@property (nonatomic, assign) BOOL isDemoAccount;
 @property (nonatomic, strong) CLoginModel *loginModel;
 @property (nonatomic, strong) CSchoolModel *schoolModel;
 

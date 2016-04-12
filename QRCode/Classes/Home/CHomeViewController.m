@@ -89,7 +89,7 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
     NSDictionary *dict = self.itemsArray[indexPath.section][indexPath.row];
     switch (indexPath.row) {
         case 0: {
-            if ([QRCodeReader supportsMetadataObjectTypes:@[AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code, AVMetadataObjectTypeCode39Code, AVMetadataObjectTypeCode39Mod43Code]]) {
+            if ([QRCodeReader supportsMetadataObjectTypes:@[AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode39Code, AVMetadataObjectTypeCode128Code, AVMetadataObjectTypeCode39Code, AVMetadataObjectTypeCode39Mod43Code]]) {
                 static CCodeScanViewController *vc = nil;
                 static dispatch_once_t onceToken;
                 

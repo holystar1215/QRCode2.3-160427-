@@ -8,5 +8,9 @@
 	<string>QRCode.sqlite</string>
 	<key>totalUrl</key>
 	<string>http://202.119.81.162:8080</string>
+	<key>demoAccount</key>
+	<string>22875-SJPD</string>
+	<key>demoPassword</key>
+	<string>1234</string>
 </dict>
 </plist>

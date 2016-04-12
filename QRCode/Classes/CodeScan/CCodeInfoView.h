@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @protocol CCodeInfoViewDelegate <NSObject>
-- (void)didCheckedButton:(UIButton *)sender;
+- (void)didClickedButtonAtIndex:(NSInteger)btnIndex;
 
 @end
 

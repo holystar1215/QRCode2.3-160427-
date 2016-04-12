@@ -60,4 +60,12 @@ DEFINE_SINGLETON_FOR_CLASS(Configuration)
     return [[[self.class sharedInstance] info] objectForKey:@"totalUrl"];
 }
 
+- (NSString *)demoAccount {
+    return [[[self.class sharedInstance] info] objectForKey:@"demoAccount"];
+}
+
+- (NSString *)demoPassword {
+    return [[[self.class sharedInstance] info] objectForKey:@"demoPassword"];
+}
+
 @end

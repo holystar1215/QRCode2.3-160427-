@@ -80,7 +80,10 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
 
 - (IBAction)onDemo:(id)sender {
     [[Configuration sharedInstance] saveServerAddr:@"202.119.81.162:8080"];
-    [[CWebService sharedInstance] login_username:@"22875-SJPD" password:@"1234" success:^(NSDictionary *models) {
+    [USER_DEFAULT setObject:[[Configuration sharedInstance] demoAccount] forKey:kUserNameDefault];
+    [USER_DEFAULT synchronize];
+    [[CDataSource sharedInstance] setIsDemoAccount:YES];
+    [[CWebService sharedInstance] login_username:[[Configuration sharedInstance] demoAccount] password:[[Configuration sharedInstance] demoPassword] success:^(NSDictionary *models) {
         NSError *jsonError;
         [[CDataSource sharedInstance] setLoginModel:[MTLJSONAdapter modelOfClass:[CLoginModel class] fromJSONDictionary:models error:&jsonError]];
         CSchoolModel *school = self.resultArray[self.currentSchool];
@@ -125,6 +128,7 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
         [USER_DEFAULT setObject:userName forKey:kUserNameDefault];
         [USER_DEFAULT setObject:passWord forKey:kPasswordDefault];
         [USER_DEFAULT synchronize];
+        [[CDataSource sharedInstance] setIsDemoAccount:NO];
         [APP_DELEGATE setupHomeViewController];
     } failure:^(CWebServiceError *error) {
         if (error.errorCode == eWebServiceErrorTimeout) {
@@ -183,7 +187,11 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
             cell.textField.placeholder = @"用户";
             NSString *userName = [USER_DEFAULT objectForKey:kUserNameDefault];
             if (userName) {
-                cell.textField.text = userName;
+                if ([userName isEqualToString:[[Configuration sharedInstance] demoAccount]]) {
+                    cell.textField.text = @"";
+                } else {
+                    cell.textField.text = userName;
+                }
             }
             break;
         }

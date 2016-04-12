@@ -40,6 +40,8 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
         [self.navigationController popViewControllerAnimated:YES];
     }];
     
+    [self setCount:@"" andAmount:@""];
+    
     self.lyr = @"";
     self.zcbh = @"";
     self.cfdd = @"";
@@ -167,9 +169,9 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
 - (NSInteger)formatStatusMsg:(NSString *)msg {
     NSString *cj = msg;
     cj = [cj stringByReplacingOccurrencesOfString:@"记录数:" withString:@""];
-    cj = [cj stringByReplacingOccurrencesOfString:@"、金额合计:" withString:@","];
+    cj = [cj stringByReplacingOccurrencesOfString:@"、金额合计:" withString:@"~"];
 
-    NSArray *cjArray = [cj componentsSeparatedByString:@","];
+    NSArray *cjArray = [cj componentsSeparatedByString:@"~"];
     if (cjArray && [cjArray count] > 0) {
         [self setCount:cjArray[0] andAmount:cjArray[1]];
         return [cjArray[0] integerValue];
@@ -276,7 +278,7 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
     // Configure the cell...
     cell.recordLabel.attributedText = [self type:self.recordType recordIndex:indexPath.section];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if (self.recordType == 3) {
+    if (self.recordType == 3 || self.recordType == 1) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -313,7 +315,11 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (self.recordType) {
         case 1: {
-            
+            CRecordViewController *vc = [[CRecordViewController alloc] initWithNibName:@"CRecordViewController" bundle:nil];
+            vc.title = @"数据修改";
+            vc.modelSelected = self.itemsArray[indexPath.row];
+            vc.recordType = self.recordType;
+            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 2: {

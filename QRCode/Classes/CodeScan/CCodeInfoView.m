@@ -35,10 +35,13 @@
 
 }
 
-- (IBAction)onCheck:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(didCheckedButton:)]) {
-        [self.delegate didCheckedButton:self.checkButton];
+- (IBAction)onCancel:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(didClickedButtonAtIndex:)]) {
+        [self.delegate didClickedButtonAtIndex:0];
     }
+}
+
+- (IBAction)onOverage:(id)sender {
 }
 
 @end

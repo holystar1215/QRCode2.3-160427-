@@ -45,4 +45,7 @@ DEFINE_SINGLETON_FOR_HEADER(Configuration)
 - (void)saveCompanyName:(NSString *)name;
 - (NSString *)companyName;
 
+- (NSString *)demoAccount;
+- (NSString *)demoPassword;
+
 @end

@@ -198,7 +198,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                            @"pddw" : company,
                            @"type" : type,
                            @"lyr" : lyr,
-                           @"zcbh" : zcbh,
+                           @"zcbhs" : zcbh,
                            @"cfdd" : cfdd
                            };
     NSString *param = [dict dictionaryToJSON];

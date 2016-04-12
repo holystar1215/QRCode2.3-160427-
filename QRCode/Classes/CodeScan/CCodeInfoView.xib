@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -37,16 +37,21 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dXn-9v-OKl">
-                    <rect key="frame" x="76" y="408" width="168" height="48"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="168" id="UOB-Ph-qs8"/>
-                        <constraint firstAttribute="height" constant="48" id="cFR-SJ-yjv"/>
-                    </constraints>
-                    <state key="normal" title="点击盘点/盘盈" image="money" backgroundImage="box_button"/>
-                    <connections>
-                        <action selector="onCheck:" destination="iN0-l3-epB" eventType="touchUpInside" id="VQo-QW-U9N"/>
-                    </connections>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsa-7n-4u1">
+                    <rect key="frame" x="8" y="442" width="65" height="30"/>
+                    <color key="backgroundColor" red="0.3185290404040404" green="0.3185290404040404" blue="0.3185290404040404" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <state key="normal" title="取消盘点">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ngc-df-PID">
+                    <rect key="frame" x="89" y="442" width="223" height="30"/>
+                    <color key="backgroundColor" red="0.31852904040000002" green="0.31852904040000002" blue="0.31852904040000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <state key="normal" title="该资产不是你单位的资产，点击盘盈">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -58,13 +63,10 @@
                 <constraint firstItem="sej-Nh-SDB" firstAttribute="top" secondItem="VTq-oY-d96" secondAttribute="top" id="Nw9-Gr-cWs"/>
                 <constraint firstItem="eJ3-wD-jmT" firstAttribute="centerX" secondItem="VTq-oY-d96" secondAttribute="centerX" id="V15-nT-SOP"/>
                 <constraint firstItem="eJ3-wD-jmT" firstAttribute="width" secondItem="VTq-oY-d96" secondAttribute="width" id="dte-gl-PA4"/>
-                <constraint firstAttribute="bottom" secondItem="dXn-9v-OKl" secondAttribute="bottom" constant="24" id="fYh-C1-OBd"/>
                 <constraint firstItem="VTq-oY-d96" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="42" id="svd-gM-kGu"/>
-                <constraint firstItem="dXn-9v-OKl" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="we1-Wn-z3m"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="checkButton" destination="dXn-9v-OKl" id="0p3-8w-OD0"/>
                 <outlet property="codeImageView" destination="VTq-oY-d96" id="Bva-iC-NdC"/>
                 <outlet property="codeLabel" destination="eJ3-wD-jmT" id="dqJ-Yb-tWX"/>
                 <outlet property="infoHeight" destination="6pA-2c-meZ" id="PRu-fV-6gs"/>
@@ -74,8 +76,6 @@
         </view>
     </objects>
     <resources>
-        <image name="box_button" width="168" height="48"/>
         <image name="code_frame" width="126" height="126"/>
-        <image name="money" width="27" height="27"/>
     </resources>
 </document>
