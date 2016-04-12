@@ -8,18 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol CCodeInfoViewDelegate <NSObject>
-- (void)didClickedButtonAtIndex:(NSInteger)btnIndex;
-
-@end
-
 @interface CCodeInfoView : UIView
+@property (nonatomic, strong) IBOutlet UIImageView *codeImageView;
 @property (nonatomic, strong) IBOutlet UILabel *codeLabel;
 @property (nonatomic, strong) IBOutlet UILabel *infoLabel;
-@property (nonatomic, strong) IBOutlet UIImageView *codeImageView;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *infoWidth;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *infoHeight;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (weak, nonatomic) IBOutlet UIButton *overageButton;
 
-@property (nonatomic, weak) id<CCodeInfoViewDelegate> delegate;
+- (void)showInfo:(NSString *)info andCode:(NSString *)code toView:(UIView *)toView;
+- (void)closeInfoView;
+
 @end

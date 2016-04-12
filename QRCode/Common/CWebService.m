@@ -270,7 +270,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
 
 - (AFHTTPRequestOperation *)scan_code:(NSString *)code
                                  pddw:(NSString *)pddw
-                              success:(void (^)(NSString *obj, NSInteger code))success
+                              success:(void (^)(NSString *obj, NSInteger code, NSString *msg))success
                               failure:(WebServiceErrorRespondBlock)failure
                              animated:(BOOL)animated
                               message:(NSString *)message {
@@ -292,7 +292,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                            if (!jsonError) {
                                                CWebServiceError *webError = [CWebServiceError checkRespondDict:resultDic];
                                                if (webError.errorType == eWebServiceErrorSuccess) {
-                                                   success(resultDic[@"obj"], [resultDic[@"code"] integerValue]);
+                                                   success(resultDic[@"obj"], [resultDic[@"code"] integerValue], resultDic[@"msg"]);
                                                } else {
                                                    failure(webError);
                                                }
@@ -479,7 +479,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
 
 - (AFHTTPRequestOperation *)manual_code:(NSString *)code
                                    pddw:(NSString *)pddw
-                                success:(void (^)(NSString *obj, NSInteger code))success
+                                success:(void (^)(NSString *obj, NSInteger code, NSString *msg))success
                                 failure:(WebServiceErrorRespondBlock)failure
                                animated:(BOOL)animated
                                 message:(NSString *)message {
@@ -501,7 +501,7 @@ DEFINE_SINGLETON_FOR_CLASS(CWebService);
                                            if (!jsonError) {
                                                CWebServiceError *webError = [CWebServiceError checkRespondDict:resultDic];
                                                if (webError.errorType == eWebServiceErrorSuccess) {
-                                                   success(resultDic[@"obj"], [resultDic[@"code"] integerValue]);
+                                                   success(resultDic[@"obj"], [resultDic[@"code"] integerValue], resultDic[@"msg"]);
                                                } else {
                                                    failure(webError);
                                                }

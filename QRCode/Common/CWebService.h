@@ -73,7 +73,7 @@ DEFINE_SINGLETON_FOR_HEADER(CWebService);
 
 - (AFHTTPRequestOperation *)scan_code:(NSString *)code
                                  pddw:(NSString *)pddw
-                              success:(void (^)(NSString *obj, NSInteger code))success
+                              success:(void (^)(NSString *obj, NSInteger code, NSString *msg))success
                               failure:(WebServiceErrorRespondBlock)failure
                              animated:(BOOL)animated
                               message:(NSString *)message;
@@ -110,7 +110,7 @@ DEFINE_SINGLETON_FOR_HEADER(CWebService);
 
 - (AFHTTPRequestOperation *)manual_code:(NSString *)code
                                    pddw:(NSString *)pddw
-                                success:(void (^)(NSString *obj, NSInteger code))success
+                                success:(void (^)(NSString *obj, NSInteger code, NSString *msg))success
                                 failure:(WebServiceErrorRespondBlock)failure
                                animated:(BOOL)animated
                                 message:(NSString *)message;

@@ -12,14 +12,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="code_frame" translatesAutoresizingMaskIntoConstraints="NO" id="VTq-oY-d96">
-                    <rect key="frame" x="42" y="144" width="126" height="126"/>
+                    <rect key="frame" x="97" y="84" width="126" height="126"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="126" id="R5M-tU-yeJ"/>
                         <constraint firstAttribute="width" constant="126" id="gEP-PS-d5W"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJ3-wD-jmT">
-                    <rect key="frame" x="42" y="289" width="126" height="21"/>
+                    <rect key="frame" x="97" y="229" width="126" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="jR5-lo-KIF"/>
                     </constraints>
@@ -27,51 +27,59 @@
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="136" translatesAutoresizingMaskIntoConstraints="NO" id="sej-Nh-SDB">
-                    <rect key="frame" x="176" y="144" width="136" height="176"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="176" id="6pA-2c-meZ"/>
-                        <constraint firstAttribute="width" constant="136" id="BEo-ex-Iej"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsa-7n-4u1">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsa-7n-4u1">
                     <rect key="frame" x="8" y="442" width="65" height="30"/>
                     <color key="backgroundColor" red="0.3185290404040404" green="0.3185290404040404" blue="0.3185290404040404" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="QFs-hG-vWM"/>
+                        <constraint firstAttribute="width" constant="65" id="Tho-Dd-kzY"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <state key="normal" title="取消盘点">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ngc-df-PID">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ngc-df-PID">
                     <rect key="frame" x="89" y="442" width="223" height="30"/>
                     <color key="backgroundColor" red="0.31852904040000002" green="0.31852904040000002" blue="0.31852904040000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="vJO-72-gIx"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <state key="normal" title="该资产不是你单位的资产，点击盘盈">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="136" translatesAutoresizingMaskIntoConstraints="NO" id="sej-Nh-SDB">
+                    <rect key="frame" x="0.0" y="258" width="320" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="sej-Nh-SDB" firstAttribute="leading" secondItem="VTq-oY-d96" secondAttribute="trailing" constant="8" id="8eU-zB-c7I"/>
+                <constraint firstAttribute="bottom" secondItem="Ngc-df-PID" secondAttribute="bottom" constant="8" id="3rN-to-9m3"/>
                 <constraint firstItem="eJ3-wD-jmT" firstAttribute="top" secondItem="VTq-oY-d96" secondAttribute="bottom" constant="19" id="9rQ-hQ-ki2"/>
-                <constraint firstAttribute="trailing" secondItem="sej-Nh-SDB" secondAttribute="trailing" constant="8" id="DhL-JY-AU3"/>
-                <constraint firstItem="VTq-oY-d96" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="144" id="GKl-YW-HiS"/>
-                <constraint firstItem="sej-Nh-SDB" firstAttribute="top" secondItem="VTq-oY-d96" secondAttribute="top" id="Nw9-Gr-cWs"/>
+                <constraint firstItem="VTq-oY-d96" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="BLT-LH-MuY"/>
+                <constraint firstItem="sej-Nh-SDB" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Nx8-Oi-7AS"/>
+                <constraint firstAttribute="trailing" secondItem="Ngc-df-PID" secondAttribute="trailing" constant="8" id="Uf8-hd-Tfe"/>
                 <constraint firstItem="eJ3-wD-jmT" firstAttribute="centerX" secondItem="VTq-oY-d96" secondAttribute="centerX" id="V15-nT-SOP"/>
+                <constraint firstItem="Ngc-df-PID" firstAttribute="leading" secondItem="fsa-7n-4u1" secondAttribute="trailing" constant="16" id="aMe-yg-rwH"/>
+                <constraint firstItem="VTq-oY-d96" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="84" id="b25-hR-Hkt"/>
+                <constraint firstAttribute="bottom" secondItem="fsa-7n-4u1" secondAttribute="bottom" constant="8" id="byi-a6-hIr"/>
                 <constraint firstItem="eJ3-wD-jmT" firstAttribute="width" secondItem="VTq-oY-d96" secondAttribute="width" id="dte-gl-PA4"/>
-                <constraint firstItem="VTq-oY-d96" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="42" id="svd-gM-kGu"/>
+                <constraint firstItem="fsa-7n-4u1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="fnH-QV-eEB"/>
+                <constraint firstItem="sej-Nh-SDB" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="nUg-FQ-Ypd"/>
+                <constraint firstItem="sej-Nh-SDB" firstAttribute="top" secondItem="eJ3-wD-jmT" secondAttribute="bottom" constant="8" id="v0B-Rg-9VX"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="cancelButton" destination="fsa-7n-4u1" id="D1c-UO-gvB"/>
                 <outlet property="codeImageView" destination="VTq-oY-d96" id="Bva-iC-NdC"/>
                 <outlet property="codeLabel" destination="eJ3-wD-jmT" id="dqJ-Yb-tWX"/>
-                <outlet property="infoHeight" destination="6pA-2c-meZ" id="PRu-fV-6gs"/>
                 <outlet property="infoLabel" destination="sej-Nh-SDB" id="Z1L-jt-O3b"/>
-                <outlet property="infoWidth" destination="BEo-ex-Iej" id="zBg-e9-xCE"/>
+                <outlet property="overageButton" destination="Ngc-df-PID" id="x1B-g8-iiE"/>
             </connections>
         </view>
     </objects>

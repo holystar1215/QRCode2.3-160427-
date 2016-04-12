@@ -7,10 +7,9 @@
 //
 
 #import "CCodeInfoView.h"
-#import <UIControl+BlocksKit.h>
+#import "MBProgressHUD+UIView.h"
 
 @interface CCodeInfoView ()
-@property (nonatomic, strong) IBOutlet UIButton *checkButton;
 
 
 @end
@@ -32,16 +31,20 @@
 }
 
 - (void)awakeFromNib {
-
+    [self.cancelButton setTitle:@"取消盘点" forState:UIControlStateNormal];
 }
 
-- (IBAction)onCancel:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(didClickedButtonAtIndex:)]) {
-        [self.delegate didClickedButtonAtIndex:0];
-    }
+- (void)showInfo:(NSString *)info andCode:(NSString *)code toView:(UIView *)toView {
+    self.infoLabel.text = info;
+    self.codeLabel.text = code;
+    
+    [toView addSubview:self];
+    [self autoCenterInSuperview];
+    [self autoSetDimensionsToSize:self.bounds.size];
 }
 
-- (IBAction)onOverage:(id)sender {
+- (void)closeInfoView {
+    [self removeFromSuperview];
 }
 
 @end
