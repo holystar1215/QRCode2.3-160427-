@@ -29,6 +29,8 @@
 #define kCompanyDefault @"kCompanyDefault"
 #define kServerDefault @"kServerDefault"
 
+#define kDemoLogin @"kDemoLogin"
+
 @interface Configuration : NSObject
 @property (nonatomic, strong) NSString *serverAddr;
 

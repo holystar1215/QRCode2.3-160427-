@@ -162,6 +162,9 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
             break;
         }
         case 4: {
+            if ([[CDataSource sharedInstance].schoolModel.gbpy isEqualToString:@"1"]) {
+                break;
+            }
             CInventoryRecordViewController *vc = [[CInventoryRecordViewController alloc] initWithNibName:@"CInventoryRecordViewController" bundle:nil];
             vc.title = dict[@"kItemName"];
             vc.recordType = 2;
@@ -184,7 +187,8 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
 
 #pragma mark - <UICollectionViewDelegateFlowLayout>
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake((SCREEN_WIDTH - 2) / 3, 70);
+    return CGSizeMake((SCREEN_WIDTH - 2) / 3, 70);//tcy 每行高宽
+    
 }
 
 - (CGFloat )collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {

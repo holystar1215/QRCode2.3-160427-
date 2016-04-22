@@ -84,9 +84,9 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
         }
         case 2: {
             COverageRecordModel *model = aModel;
-            recordString = [NSString stringWithFormat:@"资产编号：%@\n名称：%@\n单位名称：%@\n盘点人：%@\n盘点时间：%@", model.zcbh, model.mc, model.sydwm, model.lyr, model.rksj];
+            recordString = [NSString stringWithFormat:@"资产编号：%@\n\n\n名称：%@\n\n\n单位名称：%@\n\n\n盘点人：%@\n\n\n盘点时间：%@", model.zcbh, model.mc, model.sydwm, model.lyr, model.rksj];
             attributedString = [[NSMutableAttributedString alloc] initWithString:recordString];
-            [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, recordString.length)];
+            [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0] range:NSMakeRange(0, recordString.length)];
             
             NSInteger offset = 0, len = 0;
             
@@ -97,6 +97,7 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
             offset = [[NSString stringWithFormat:@"资产编号：%@\n名称：%@\n单位名称：%@\n", model.zcbh, model.mc, model.sydwm] length];
             len = [[NSString stringWithFormat:@"盘点人：%@\n盘点时间：%@", model.lyr, model.rksj] length];
             [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor] range:NSMakeRange(offset, len)];
+            
             
             break;
         }
@@ -144,19 +145,60 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
         return;
     }
     
-    CLogRecordModel *model = self.modelSelected;
-    NSDictionary *dict = @{
-                           @"cfdd":[model cfdd],
-                           @"fjmc":@"",
-                           @"lyr":[model lyr],
-                           @"sydwh":[model sydwh],
-                           @"x_cfdd":@"",
-                           @"x_lyr":@"",
-                           @"x_lyrgh":@"",
-                           @"x_sydwh":@"",
-                           @"xgrgh":[USER_DEFAULT objectForKey:kUserNameDefault],
-                           @"zcbh":[model zcbh]
-                           };
+    NSDictionary *dict;
+    switch (self.recordType) {
+        case 1: {
+            CLogRecordModel *model = self.modelSelected;
+            dict = @{
+                     @"cfdd":[model cfdd],
+                     @"fjmc":@"",
+                     @"lyr":[model lyr],
+                     @"sydwh":[model sydwh],
+                     @"x_cfdd":@"",
+                     @"x_lyr":@"",
+                     @"x_lyrgh":@"",
+                     @"x_sydwh":@"",
+                     @"xgrgh":[USER_DEFAULT objectForKey:kUserNameDefault],
+                     @"zcbh":[model zcbh]
+                     };
+            break;
+        }
+        case 2: {
+            COverageRecordModel *model = self.modelSelected;
+            dict = @{
+                     @"cfdd":@"",
+                     @"fjmc":@"",
+                     @"lyr":@"",
+                     @"sydwh":[model sydwm],
+                     @"x_cfdd":@"",
+                     @"x_lyr":@"",
+                     @"x_lyrgh":@"",
+                     @"x_sydwh":@"",
+                     @"xgrgh":[USER_DEFAULT objectForKey:kUserNameDefault],
+                     @"zcbh":[model zcbh]
+                     };
+            break;
+        }
+        case 3: {
+            CLogRecordModel *model = self.modelSelected;
+            dict = @{
+                     @"cfdd":[model cfdd],
+                     @"fjmc":@"",
+                     @"lyr":[model lyr],
+                     @"sydwh":[model sydwh],
+                     @"x_cfdd":@"",
+                     @"x_lyr":@"",
+                     @"x_lyrgh":@"",
+                     @"x_sydwh":@"",
+                     @"xgrgh":[USER_DEFAULT objectForKey:kUserNameDefault],
+                     @"zcbh":[model zcbh]
+                     };
+            break;
+        }
+        default:
+            break;
+    }
+    
     NSError *modelError;
     CModifyRecordModel *modifyModel = [[CModifyRecordModel alloc] initWithDictionary:dict error:&modelError];
     if (!modelError) {
@@ -214,7 +256,17 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
         self.resultArray = [NSArray arrayWithArray:self.schoolArray];
         self.popupListView = [[CListPopoverView alloc] initWithFrame:CGRectZero andTarget:self];
         self.popupListView.autoHidden = YES;
-        [self.popupListView showPopoverView];
+//        [self.resultArray enumerateObjectsUsingBlock:^(CCompanyModel *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//            if ([obj.dwmc isEqualToString:[CDataSource sharedInstance].schoolModel.schoolName]) {
+//                self.popupListView.defaultIndex = idx;
+//                *stop = YES;
+//            }
+//        }];
+        
+        [self.popupListView showPopoverViewWithBlock:^(void) {
+            self.popupListView.defaultIndex = self.currentSchool;
+            [self.popupListView reloadData];
+        }];
     } failure:^(CWebServiceError *error) {
         [MBProgressHUD showError:error.errorMessage];
     } animated:YES message:@""];

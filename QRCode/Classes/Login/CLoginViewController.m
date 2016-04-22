@@ -26,6 +26,8 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
 @property (strong, nonatomic) NSArray *resultArray;
 @property (assign, nonatomic) NSInteger currentSchool;
 
+@property (strong, nonatomic) CSchoolModel *demoSchoolModel;
+
 @end
 
 @implementation CLoginViewController
@@ -48,7 +50,8 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
         [self.resultArray enumerateObjectsUsingBlock:^(CSchoolModel *obj, NSUInteger idx, BOOL * stop) {
             if ([obj.schoolName isEqualToString:@"雁南师范学院"]) {
                 self.demoButton.hidden = NO;
-                
+
+                self.demoSchoolModel = obj;
                 *stop = YES;
             }
         }];
@@ -86,9 +89,9 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
     [[CWebService sharedInstance] login_username:[[Configuration sharedInstance] demoAccount] password:[[Configuration sharedInstance] demoPassword] success:^(NSDictionary *models) {
         NSError *jsonError;
         [[CDataSource sharedInstance] setLoginModel:[MTLJSONAdapter modelOfClass:[CLoginModel class] fromJSONDictionary:models error:&jsonError]];
-        CSchoolModel *school = self.resultArray[self.currentSchool];
-        [[CDataSource sharedInstance] setSchoolModel:school];
-
+        [[CDataSource sharedInstance] setSchoolModel:self.demoSchoolModel];
+        [USER_DEFAULT setObject:@"YES" forKey:kDemoLogin];
+        [USER_DEFAULT synchronize];
         [APP_DELEGATE setupHomeViewController];
     } failure:^(CWebServiceError *error) {
         if (error.errorCode == eWebServiceErrorTimeout) {
@@ -143,14 +146,16 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
     } animated:YES message:@""];
 }
 
-- (void)showPopList {
+- (void)showPopListWithBlock:(void (^)(void))block {
 //    [[CWebService sharedInstance] school_list_success:^(NSArray *models) {
 //        NSError *jsonError;
 //        self.schoolArray = [MTLJSONAdapter modelsOfClass:[CSchoolModel class] fromJSONArray:models error:&jsonError];
 //        self.resultArray = [NSArray arrayWithArray:self.schoolArray];
         self.popupListView = [[CListPopoverView alloc] initWithFrame:CGRectZero andTarget:self];
         self.popupListView.autoHidden = YES;
-        [self.popupListView showPopoverView];
+        [self.popupListView showPopoverViewWithBlock:^(void) {
+            block();
+        }];
 //    } failure:^(CWebServiceError *error) {
 //        [MBProgressHUD showError:error.errorMessage];
 //    } animated:YES message:@""];
@@ -177,15 +182,26 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
             cell.textField.placeholder = @"学校";
             cell.textField.enabled = NO;
             NSString *schoolName = [USER_DEFAULT objectForKey:kCompanyDefault];
+            if ([[USER_DEFAULT objectForKey:kDemoLogin] isEqualToString:@"YES"]) {
+//                [USER_DEFAULT removeObjectForKey:kDemoLogin];
+                
+                schoolName = nil;
+            }
             if (schoolName) {
                 cell.textField.text = schoolName;
             }
             break;
         }
         case 1: {
-            cell.imageView.image = [UIImage imageNamed:@"password"];
+            cell.imageView.image = [UIImage imageNamed:@"username"];
             cell.textField.placeholder = @"用户";
             NSString *userName = [USER_DEFAULT objectForKey:kUserNameDefault];
+            if ([[USER_DEFAULT objectForKey:kDemoLogin] isEqualToString:@"YES"]) {
+//                [USER_DEFAULT removeObjectForKey:kDemoLogin];
+                
+                userName = nil;
+            }
+            
             if (userName) {
                 if ([userName isEqualToString:[[Configuration sharedInstance] demoAccount]]) {
                     cell.textField.text = @"";
@@ -196,10 +212,17 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
             break;
         }
         case 2: {
-            cell.imageView.image = [UIImage imageNamed:@"username"];
+            cell.imageView.image = [UIImage imageNamed:@"password"];
             cell.textField.placeholder = @"密码";
             cell.textField.secureTextEntry = YES;
             NSString *passWord = [USER_DEFAULT objectForKey:kPasswordDefault];
+            if ([[USER_DEFAULT objectForKey:kDemoLogin] isEqualToString:@"YES"]) {
+                [USER_DEFAULT removeObjectForKey:kDemoLogin];
+                [USER_DEFAULT removeObjectForKey:kCompanyDefault];
+                [USER_DEFAULT removeObjectForKey:kUserNameDefault];
+                [USER_DEFAULT removeObjectForKey:kPasswordDefault];
+                passWord = nil;
+            }
             if (passWord) {
                 cell.textField.text = passWord;
             }
@@ -228,7 +251,9 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
             cell.imageView.image = [UIImage imageNamed:@"password"];
             cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 2)];
             cell.imageView.image = [UIImage imageNamed:@"username"];
-            [self showPopList];
+            [self showPopListWithBlock:^{
+                
+            }];
             break;
         }
         case 1: {

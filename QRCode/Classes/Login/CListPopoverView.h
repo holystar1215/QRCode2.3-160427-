@@ -20,6 +20,7 @@
 @end
 
 @interface CListPopoverView : CPopoverView
+@property (nonatomic, assign) NSInteger defaultIndex;
 @property (nonatomic, weak) id<CListPopoverViewDelegate> delegate;
 
 - (instancetype)initWithFrame:(CGRect)frame andTarget:(id<CListPopoverViewDelegate>)target;

@@ -22,7 +22,7 @@ typedef void(^dismiss_block)();
 /**
  *  展示
  */
-- (void)showPopoverView;
+- (void)showPopoverViewWithBlock:(void (^)(void))block;
 
 /**
  *  收起

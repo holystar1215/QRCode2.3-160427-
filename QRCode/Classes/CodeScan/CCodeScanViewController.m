@@ -312,6 +312,14 @@ typedef NS_ENUM(NSInteger, ScanType) {
             break;
         }
         case 1006: {
+            if ([[CDataSource sharedInstance].schoolModel.gbpy isEqualToString:@"1"]) {
+                UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"不能盘点"];
+                [alertView bk_addButtonWithTitle:@"确定" handler:^{
+                    [self gotoScanView];
+                }];
+                [alertView show];
+                break;
+            }
             [self.infoView.overageButton bk_removeEventHandlersForControlEvents:UIControlEventTouchUpInside];
             [self.infoView.overageButton setTitle:@"无此资产的实物账信息,点击盘盈" forState:UIControlStateNormal];
             [self.infoView.overageButton bk_addEventHandler:^(id sender) {
@@ -333,6 +341,15 @@ typedef NS_ENUM(NSInteger, ScanType) {
             break;
         }
         case 2000: case 2002: {
+            if ([serverInfo indexOfCharacter:'#'] != -1) {
+                UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"当前资产不在本次盘点范围内，不能盘点。"];
+                [alertView bk_addButtonWithTitle:@"确定" handler:^{
+                    [self gotoScanView];
+                }];
+                [alertView show];
+                break;
+            }
+            serverInfo = [serverInfo stringByReplacingOccurrencesOfString:@"#" withString:@""];
             NSString *serverPddw = [serverInfo substringToCharacter:'@'];
             NSInteger chartIndex = [serverInfo indexOfCharacter:'@'] == -1 ? 0 : [serverInfo indexOfCharacter:'@'] + 1;
             NSString *info = [serverInfo substringFromIndex:chartIndex];

@@ -47,9 +47,7 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
     self.cfdd = @"";
     
     switch (self.recordType) {
-        case 2: {
-            break;
-        }
+        case 2:
         case 1:
         case 3: {
             self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] bk_initWithTitle:@"筛选" style:UIBarButtonItemStylePlain handler:^(id sender) {
@@ -214,7 +212,7 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
         }
         case 2: {
             COverageRecordModel *model = self.itemsArray[recordIndex];
-            recordString = [NSString stringWithFormat:@"资产编号：%@\n名称：%@\n单位名称：%@\n盘点人：%@\n盘点时间：%@", model.zcbh, model.mc, model.sydwm, model.lyr, model.rksj];
+            recordString = [NSString stringWithFormat:@"资产编号：%@\n名称：%@\n单位名称：%@\n领用人：%@\n盘点时间：%@", model.zcbh, model.mc, model.sydwm, model.lyr, model.rksj];
             attributedString = [[NSMutableAttributedString alloc] initWithString:recordString];
             [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11.0] range:NSMakeRange(0, recordString.length)];
             
@@ -278,11 +276,11 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
     // Configure the cell...
     cell.recordLabel.attributedText = [self type:self.recordType recordIndex:indexPath.section];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if (self.recordType == 3 || self.recordType == 1) {
+//    if (self.recordType == 3 || self.recordType == 1) {
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
-    }
+//    } else {
+//        cell.accessoryType = UITableViewCellAccessoryNone;
+//    }
     
     
     return cell;
@@ -317,19 +315,23 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
         case 1: {
             CRecordViewController *vc = [[CRecordViewController alloc] initWithNibName:@"CRecordViewController" bundle:nil];
             vc.title = @"数据修改";
-            vc.modelSelected = self.itemsArray[indexPath.row];
+            vc.modelSelected = self.itemsArray[indexPath.section];
             vc.recordType = self.recordType;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 2: {
-            
+            CRecordViewController *vc = [[CRecordViewController alloc] initWithNibName:@"CRecordViewController" bundle:nil];
+            vc.title = @"数据修改";
+            vc.modelSelected = self.itemsArray[indexPath.section];
+            vc.recordType = self.recordType;
+            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 3: {
             CRecordViewController *vc = [[CRecordViewController alloc] initWithNibName:@"CRecordViewController" bundle:nil];
             vc.title = @"数据修改";
-            vc.modelSelected = self.itemsArray[indexPath.row];
+            vc.modelSelected = self.itemsArray[indexPath.section];
             vc.recordType = self.recordType;
             [self.navigationController pushViewController:vc animated:YES];
             break;

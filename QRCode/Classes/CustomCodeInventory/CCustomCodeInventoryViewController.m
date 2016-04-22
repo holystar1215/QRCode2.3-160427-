@@ -33,6 +33,16 @@
                     break;
                 }
                 case 1006: {
+                    if ([[CDataSource sharedInstance].schoolModel.gbpy isEqualToString:@"1"]) {
+                        UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"不能盘点"];
+                        [alertView bk_addButtonWithTitle:@"确定" handler:^{
+                            self.codeTextField.text = @"";
+                            [self.codeTextField becomeFirstResponder];
+                            [self resetPage];
+                        }];
+                        [alertView show];
+                        break;
+                    }
                     self.resultLabel.text = @"资产编号不存在";
                     self.readCodeButton.titleLabel.text = @"点击盘点";
                     [self.readCodeButton bk_removeEventHandlersForControlEvents:UIControlEventTouchUpInside];
@@ -58,6 +68,17 @@
                     break;
                 }
                 case 2000: case 2002: {
+                    if ([obj indexOfCharacter:'#'] != -1) {
+                        UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"当前资产不在本次盘点范围内，不能盘点。"];
+                        [alertView bk_addButtonWithTitle:@"确定" handler:^{
+                            self.codeTextField.text = @"";
+                            [self.codeTextField becomeFirstResponder];
+                            [self resetPage];
+                        }];
+                        [alertView show];
+                        break;
+                    }
+                    obj = [obj stringByReplacingOccurrencesOfString:@"#" withString:@""];
                     NSInteger chartIndex = [obj indexOfCharacter:'@'] == -1 ? 0 : [obj indexOfCharacter:'@'] + 1;
                     self.resultLabel.text = [obj substringFromIndex:chartIndex];
                     self.readCodeButton.titleLabel.text = @"点击盘点";

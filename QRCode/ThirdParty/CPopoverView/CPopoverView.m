@@ -120,7 +120,7 @@
 }
 
 #pragma mark - Method
-- (void)showPopoverView {
+- (void)showPopoverViewWithBlock:(void (^)(void))block {
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     [window addSubview:self];
     
@@ -138,7 +138,9 @@
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.08f delay:0.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.containerView.transform = CGAffineTransformIdentity;
-        } completion:nil];
+        } completion:^(BOOL finished) {
+            block();
+        }];
     }];
 }
 

@@ -18,5 +18,6 @@
 @property (nonatomic, strong) NSString *unifiedCode;
 @property (nonatomic, strong) NSString *property;
 @property (nonatomic, strong) NSString *isDelete;
+@property (nonatomic, strong) NSString *gbpy;
 
 @end

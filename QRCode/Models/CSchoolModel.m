@@ -35,7 +35,8 @@
              @"schoolName" : @"schoolName",
              @"schoolCode" : @"schoolcode",
              @"serverAddr" : @"serverAddr",
-             @"unifiedCode" : @"unifiedCode"
+             @"unifiedCode" : @"unifiedCode",
+             @"gbpy" : @"gbpy"
     };
 }
 

@@ -11,6 +11,7 @@
 static NSString * const reuseIdentifier = @"UITableViewCell";
 
 @interface CListPopoverView () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@property (nonatomic, assign) NSInteger listCount;
 @property (nonatomic, strong) UISearchBar *headerView;
 @property (nonatomic, strong) UITableView *contentTableView;
 
@@ -38,6 +39,11 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
 
 - (void)reloadData {
     [self.contentTableView reloadData];
+    if (self.defaultIndex > 0 && self.defaultIndex < self.listCount) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.defaultIndex inSection:0];
+        [self.contentTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+    
 }
 
 #pragma mark - <UITableViewDataSource>
@@ -47,7 +53,8 @@ static NSString * const reuseIdentifier = @"UITableViewCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if ([self.delegate respondsToSelector:@selector(numberOfItems)]) {
-        return [self.delegate numberOfItems];
+        self.listCount = [self.delegate numberOfItems];
+        return self.listCount;
     }
     return 0;
 }
