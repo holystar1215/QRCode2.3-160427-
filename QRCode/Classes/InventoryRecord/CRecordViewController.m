@@ -84,7 +84,7 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
         }
         case 2: {
             COverageRecordModel *model = aModel;
-            recordString = [NSString stringWithFormat:@"资产编号：%@\n\n\n名称：%@\n\n\n单位名称：%@\n\n\n盘点人：%@\n\n\n盘点时间：%@", model.zcbh, model.mc, model.sydwm, model.lyr, model.rksj];
+            recordString = [NSString stringWithFormat:@"资产编号：%@\n\n\n名称：%@\n\n\n单位名称：%@\n\n\n领用人：%@\n\n\n盘点时间：%@", model.zcbh, model.mc, model.sydwm, model.lyr, model.rksj];
             attributedString = [[NSMutableAttributedString alloc] initWithString:recordString];
             [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14.0] range:NSMakeRange(0, recordString.length)];
             
@@ -94,8 +94,8 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
             len = model.zcbh.length;
             [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(offset, len)];
             
-            offset = [[NSString stringWithFormat:@"资产编号：%@\n名称：%@\n单位名称：%@\n", model.zcbh, model.mc, model.sydwm] length];
-            len = [[NSString stringWithFormat:@"盘点人：%@\n盘点时间：%@", model.lyr, model.rksj] length];
+            offset = [[NSString stringWithFormat:@"资产编号：%@\n\n\n名称：%@\n\n\n单位名称：%@\n\n\n", model.zcbh, model.mc, model.sydwm] length];
+            len = [[NSString stringWithFormat:@"领用人：%@\n\n\n盘点时间：%@", model.lyr, model.rksj] length];
             [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor] range:NSMakeRange(offset, len)];
             
             
@@ -264,6 +264,14 @@ static NSString * const reuseIdentifier = @"CRecordTableViewCell";
 //        }];
         
         [self.popupListView showPopoverViewWithBlock:^(void) {
+            if (self.currentSchool == 0) {
+                [self.resultArray enumerateObjectsUsingBlock:^(CCompanyModel *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if ([obj.dwdm isEqualToString:[[CDataSource sharedInstance].loginModel pddw]]) {
+                        self.currentSchool = idx;
+                        *stop = YES;
+                    }
+                }];
+            }
             self.popupListView.defaultIndex = self.currentSchool;
             [self.popupListView reloadData];
         }];

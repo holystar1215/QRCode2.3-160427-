@@ -12,6 +12,9 @@
 #import "CSchoolModel.h"
 #import "CLoginModel.h"
 
+#import <BlocksKit/UITextField+BlocksKit.h>
+#import <BlocksKit/UIControl+BlocksKit.h>
+
 static NSString * const reuseIdentifier = @"CLoginViewCell";
 
 @interface CLoginViewController () <UITableViewDelegate, UITableViewDataSource, CListPopoverViewDelegate, CLoginViewCellDelegate>
@@ -52,6 +55,13 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
                 self.demoButton.hidden = NO;
 
                 self.demoSchoolModel = obj;
+                *stop = YES;
+            }
+        }];
+        [self.resultArray enumerateObjectsUsingBlock:^(CSchoolModel *obj, NSUInteger idx, BOOL * stop) {
+            NSString *name = [USER_DEFAULT objectForKey:kCompanyDefault];
+            if ([obj.schoolName isEqualToString:name]) {
+                self.currentSchool = idx;
                 *stop = YES;
             }
         }];
@@ -171,16 +181,17 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CLoginViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+    CLoginViewCell *cell1 = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     
     // Configure the cell...
-    cell.delegate = self;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell1.delegate = self;
+    cell1.selectionStyle = UITableViewCellSelectionStyleNone;
     switch (indexPath.row) {
         case 0: {
-            cell.imageView.image = [UIImage imageNamed:@"school"];
-            cell.textField.placeholder = @"学校";
-            cell.textField.enabled = NO;
+            cell1.imageView.image = [UIImage imageNamed:@"school"];
+            cell1.textField.placeholder = @"学校";
+            cell1.textField.enabled = NO;
+            
             NSString *schoolName = [USER_DEFAULT objectForKey:kCompanyDefault];
             if ([[USER_DEFAULT objectForKey:kDemoLogin] isEqualToString:@"YES"]) {
 //                [USER_DEFAULT removeObjectForKey:kDemoLogin];
@@ -188,13 +199,14 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
                 schoolName = nil;
             }
             if (schoolName) {
-                cell.textField.text = schoolName;
+                cell1.textField.text = schoolName;
             }
             break;
         }
         case 1: {
-            cell.imageView.image = [UIImage imageNamed:@"username"];
-            cell.textField.placeholder = @"用户";
+            cell1.imageView.image = [UIImage imageNamed:@"username"];
+            cell1.textField.placeholder = @"用户";
+
             NSString *userName = [USER_DEFAULT objectForKey:kUserNameDefault];
             if ([[USER_DEFAULT objectForKey:kDemoLogin] isEqualToString:@"YES"]) {
 //                [USER_DEFAULT removeObjectForKey:kDemoLogin];
@@ -204,17 +216,18 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
             
             if (userName) {
                 if ([userName isEqualToString:[[Configuration sharedInstance] demoAccount]]) {
-                    cell.textField.text = @"";
+                    cell1.textField.text = @"";
                 } else {
-                    cell.textField.text = userName;
+                    cell1.textField.text = userName;
                 }
             }
             break;
         }
         case 2: {
-            cell.imageView.image = [UIImage imageNamed:@"password"];
-            cell.textField.placeholder = @"密码";
-            cell.textField.secureTextEntry = YES;
+            cell1.imageView.image = [UIImage imageNamed:@"password"];
+            cell1.textField.placeholder = @"密码";
+            cell1.textField.secureTextEntry = YES;
+
             NSString *passWord = [USER_DEFAULT objectForKey:kPasswordDefault];
             if ([[USER_DEFAULT objectForKey:kDemoLogin] isEqualToString:@"YES"]) {
                 [USER_DEFAULT removeObjectForKey:kDemoLogin];
@@ -224,16 +237,16 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
                 passWord = nil;
             }
             if (passWord) {
-                cell.textField.text = passWord;
+                cell1.textField.text = passWord;
             }
-            cell.lineView.hidden = YES;
+            cell1.lineView.hidden = YES;
             break;
         }
         default:
             break;
     }
     
-    return cell;
+    return cell1;
 }
 
 #pragma mark - <UITableViewDelegate>
@@ -242,36 +255,36 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    CLoginViewCell *cell;
+//    CLoginViewCell *cell;
     switch (indexPath.row) {
         case 0: {
-            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 0)];
-            cell.imageView.image = [UIImage imageNamed:@"school_selected"];
-            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 1)];
-            cell.imageView.image = [UIImage imageNamed:@"password"];
-            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 2)];
-            cell.imageView.image = [UIImage imageNamed:@"username"];
+//            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 0)];
+//            cell.imageView.image = [UIImage imageNamed:@"school_selected"];
+//            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 1)];
+//            cell.imageView.image = [UIImage imageNamed:@"username"];
+//            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 2)];
+//            cell.imageView.image = [UIImage imageNamed:@"password"];
             [self showPopListWithBlock:^{
                 
             }];
             break;
         }
         case 1: {
-            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 0)];
-            cell.imageView.image = [UIImage imageNamed:@"school"];
-            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 1)];
-            cell.imageView.image = [UIImage imageNamed:@"password_selected"];
-            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 2)];
-            cell.imageView.image = [UIImage imageNamed:@"username"];
+//            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 0)];
+//            cell.imageView.image = [UIImage imageNamed:@"school"];
+//            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 1)];
+//            cell.imageView.image = [UIImage imageNamed:@"username_selected"];
+//            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 2)];
+//            cell.imageView.image = [UIImage imageNamed:@"password"];
             break;
         }
         case 2: {
-            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 0)];
-            cell.imageView.image = [UIImage imageNamed:@"school"];
-            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 1)];
-            cell.imageView.image = [UIImage imageNamed:@"password"];
-            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 2)];
-            cell.imageView.image = [UIImage imageNamed:@"username_selected"];
+//            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 0)];
+//            cell.imageView.image = [UIImage imageNamed:@"school"];
+//            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 1)];
+//            cell.imageView.image = [UIImage imageNamed:@"username"];
+//            cell = [tableView cellForRowAtIndexPath:INDEX_PATH(0, 2)];
+//            cell.imageView.image = [UIImage imageNamed:@"password_selected"];
             break;
         }
         default:
@@ -330,9 +343,9 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
             cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 0)];
             cell.imageView.image = [UIImage imageNamed:@"school_selected"];
             cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 1)];
-            cell.imageView.image = [UIImage imageNamed:@"password"];
-            cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 2)];
             cell.imageView.image = [UIImage imageNamed:@"username"];
+            cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 2)];
+            cell.imageView.image = [UIImage imageNamed:@"password"];
             
             break;
         }
@@ -340,18 +353,18 @@ static NSString * const reuseIdentifier = @"CLoginViewCell";
             cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 0)];
             cell.imageView.image = [UIImage imageNamed:@"school"];
             cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 1)];
-            cell.imageView.image = [UIImage imageNamed:@"password_selected"];
+            cell.imageView.image = [UIImage imageNamed:@"username_selected"];
             cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 2)];
-            cell.imageView.image = [UIImage imageNamed:@"username"];
+            cell.imageView.image = [UIImage imageNamed:@"password"];
             break;
         }
         case 2: {
             cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 0)];
             cell.imageView.image = [UIImage imageNamed:@"school"];
             cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 1)];
-            cell.imageView.image = [UIImage imageNamed:@"password"];
+            cell.imageView.image = [UIImage imageNamed:@"username"];
             cell = [self.contentTableView cellForRowAtIndexPath:INDEX_PATH(0, 2)];
-            cell.imageView.image = [UIImage imageNamed:@"username_selected"];
+            cell.imageView.image = [UIImage imageNamed:@"password_selected"];
             break;
         }
         default:
