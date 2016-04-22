@@ -58,6 +58,10 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
 
 #pragma mark - Activity Method
 - (IBAction)onLogout:(id)sender {
+    [USER_DEFAULT removeObjectForKey:kDemoLogin];
+    [USER_DEFAULT removeObjectForKey:kCompanyDefault];
+    [USER_DEFAULT removeObjectForKey:kUserNameDefault];
+    [USER_DEFAULT removeObjectForKey:kPasswordDefault];
     [APP_DELEGATE setupSignInViewController];
 }
 
@@ -163,6 +167,11 @@ static NSString * const reuseIdentifier = @"CHomeViewCollectionViewCell";
         }
         case 4: {
             if ([[CDataSource sharedInstance].schoolModel.gbpy isEqualToString:@"1"]) {
+                UIAlertView *alertView = [UIAlertView bk_alertViewWithTitle:@"提示" message:@"抱歉，贵校未开通查询盘盈记录功能。"];
+                [alertView bk_addButtonWithTitle:@"知道了" handler:^{
+                    
+                }];
+                [alertView show];
                 break;
             }
             CInventoryRecordViewController *vc = [[CInventoryRecordViewController alloc] initWithNibName:@"CInventoryRecordViewController" bundle:nil];
